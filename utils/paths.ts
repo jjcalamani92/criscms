@@ -1,4 +1,10 @@
-import { Page, Site } from "../interfaces";
+import { Page, Product, Site } from "../interfaces";
+
+export const getPathByProducts = (products: Product[]) =>
+products.map((data) => ({asPath:`/dashboard/sites/${data.site}/product/${data.type}=${data._id}`, seo: data.data.seo}));
+export const getPathByProduct = (products: Product[], asPath:string) =>
+getPathByProducts(products).map((data) => data.asPath).find(data => data === asPath);
+
 
 export const getPathBySites = (sites: Site[]) =>
 sites.map((data) => ({asPath:`/dashboard/sites/${data._id}`, seo: data.data.seo}));

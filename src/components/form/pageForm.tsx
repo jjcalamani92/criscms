@@ -115,6 +115,7 @@ export const PageForm: FC<PageForm> = ({ setOpenMCD, uid, page, type }) => {
                 </label>
                 <input
                   type="text"
+                  autoComplete="off"
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm"
                   {...register("title", {
                     required: 'Title required!!',

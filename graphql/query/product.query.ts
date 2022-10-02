@@ -21,6 +21,7 @@ export const FIND_ALL_PRODUCTS_BY_PARENT = gql`
     findAllProductsByParent(parentId: $parentId) {
       _id
       site
+      parent
       type
       data {
         name
@@ -58,6 +59,7 @@ export const FIND_PRODUCT = gql`
   query FindProduct($id: ID!, $type: String!) {
     findProduct(id: $id, type: $type) {
       _id
+      type
       data {
         name
         slug
@@ -66,6 +68,10 @@ export const FIND_PRODUCT = gql`
         price
         discountPrice
         description
+        featured{
+          name
+          href
+        }
         image {
           uid
           src
@@ -73,6 +79,7 @@ export const FIND_PRODUCT = gql`
         }
         seo{
           title
+          href
           description
         }
       }

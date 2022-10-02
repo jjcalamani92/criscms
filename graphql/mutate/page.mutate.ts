@@ -6,6 +6,7 @@ export const CREATE_PAGE_0 = gql`
     createPage0(input: $input) {
 			_id
       slug
+      site
       parent
       data{
         type
@@ -44,6 +45,7 @@ export const CREATE_PAGE_1 = gql`
     createPage1(input: $input) {
 			_id
       slug
+      site
       parent
       data{
         type
@@ -82,6 +84,7 @@ export const CREATE_PAGE_2 = gql`
     createPage2(input: $input) {
 			_id
       slug
+      site
       parent
       data{
         type
@@ -120,6 +123,7 @@ export const CREATE_PAGE_3 = gql`
     createPage3(input: $input) {
 			_id
       slug
+      site
       parent
       data{
         type

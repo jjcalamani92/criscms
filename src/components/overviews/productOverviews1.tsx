@@ -65,23 +65,13 @@ const reviews = { href: '#', average: 4, totalCount: 117 }
 
 export const ProductOverviews1 = () => {
   const { asPath } = useRouter()
-  // const query = getQuery(asPath)
-  // const type = query.at(-1)?.split('=')[0]!
-  // console.log(type);
-  // const productId = query.at(-1)?.split('=')[1]!
-  // console.log(productId);
-  
   const { data:product } = useProduct(asPath)
-  // console.log(productt);
-  console.log(product);
-  
-  
   const [selectedColor, setSelectedColor] = useState(products.colors[0])
   const [selectedSize, setSelectedSize] = useState(products.sizes[2])
 
   return (
     <>
-      <HeadingDashboard title="Detail Product" />
+      <HeadingDashboard title="Detail Product" product={product} />
       <div className="bg-white">
         <div className="py-6">
 
@@ -103,7 +93,7 @@ export const ProductOverviews1 = () => {
               
               <div className="mt-4 lg:row-span-3 lg:mt-0">
                 <h2 className="sr-only">Product information</h2>
-                {/* <p className="text-3xl tracking-tight text-gray-900">Bs. {data?.data.price},00 </p> */}
+                <p className="text-3xl tracking-tight text-gray-900">Bs. {product?.data.price},00 </p>
 
                 {/* Reviews */}
                 <div className="mt-6">

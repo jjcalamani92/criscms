@@ -12,6 +12,8 @@ export const GridPage1: FC<GridPage1> = () => {
   const { query, asPath } = useRouter()
   const { data: page0 } = usePage0(asPath)
   const { data: pages1 } = usePages1ByParent(asPath)
+  
+  
   return (
     <Fragment>
       <HeadingDashboard title={page0?.data.seo.title!} page={page0}/>

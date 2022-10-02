@@ -8,6 +8,7 @@ export interface Product {
   _id: string
   data: DataProduct
   site: string
+  parent: string
   type: string
   page: string
 }
@@ -44,7 +45,6 @@ export interface Data {
 export interface ImageProduct extends Image {}
 
 export interface CreateProduct {
-  type: string
   input:{
     name: string
     mark: string
@@ -55,11 +55,13 @@ export interface CreateProduct {
     discountPrice: number
     site: string
     parent: string
+    uid: string
+    change: string
   }
+  type: string
 }
 export interface UpdateProduct {
   id:string
-  type: string
   input:{
     name: string
     mark: string
@@ -68,7 +70,21 @@ export interface UpdateProduct {
     inStock: number
     price: number
     discountPrice: number
+    change: string
+    uid: string
   }
+  type: string
+}
+export interface UpdateProductImage {
+  id:string
+  input: UpdateImage[]
+  type: string
+  uid: string
+}
+export interface UpdateImage {
+  uid: string
+  src: string
+  alt: string
 }
 export interface DeleteProduct {
   id:string

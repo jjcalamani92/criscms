@@ -6,7 +6,7 @@ import { CreateSite, Site, UpdateSite } from "../../../interfaces";
 export const useCreateSite = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    async (input:CreateSite) => {
+    async (input: CreateSite) => {
       const { createSite } = await graphQLClient.request(CREATE_SITE, {
         input,
       });

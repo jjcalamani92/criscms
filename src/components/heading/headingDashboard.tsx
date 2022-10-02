@@ -1,5 +1,4 @@
-/* eslint-disable react/no-children-prop */
-/* This example requires Tailwind CSS v2.0+ */
+
 import { FC, Fragment, useState } from 'react'
 import {
   BriefcaseIcon,
@@ -13,21 +12,12 @@ import {
 } from '@heroicons/react/20/solid'
 import { Menu, Transition } from '@headlessui/react'
 import { classNames, getQuery } from '../../../utils/function'
-
-// import { Modal } from '../modal'
-
-// import { SiteForm } from '../form/siteForm'
-// import { ProductForm } from '../form/productForm'
-// import { PageForm } from '../form/pageForm'
 import { useRouter } from 'next/router'
-import { Page, Site } from '../../../interfaces'
+import { Page, Product, Site } from '../../../interfaces'
 import { Button, Text } from '../polymorphic'
 import { Modal } from '../utils'
-import { SiteForm } from '../form'
-import { TabFormPage, TabFormSite } from '../tabs'
-import { StringDecoder } from 'string_decoder'
-// import { Text } from '../../polymorphic/text'
-// import { Button } from '../../polymorphic/button'
+import { TabFormPage, TabFormProduct, TabFormSite } from '../tabs'
+import { typePageEcommerceCategory, typeSite } from '../../../utils'
 
 
 
@@ -35,23 +25,23 @@ interface HeadingDashboard {
   title: string
   page?: Page
   site?: Site
+  product?:Product
 }
-export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site }) => {
+export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, product }) => {
   const { asPath } = useRouter()
   const query = getQuery(asPath)
   const [openMCD, setOpenMCD] = useState(false)
-  const [children, setChildren] = useState<any>()
-
-
-
-
+  const [children, setChildren] = useState<React.ReactNode>()
   const editHandle = (type: string) => {
     if (type === "site") {
       setOpenMCD(true)
       setChildren(<TabFormSite setOpenMCD={setOpenMCD} site={site} />)
     } else if (type === "page") {
       setOpenMCD(true)
-      setChildren(<TabFormPage setOpenMCD={setOpenMCD} page={page} type={page?.data.type}/>)
+      setChildren(<TabFormPage setOpenMCD={setOpenMCD} page={page} type={page?.data.type} />)
+    } else if (type === "product") {
+      setOpenMCD(true)
+      setChildren(<TabFormProduct setOpenMCD={setOpenMCD} type={product?.type} product={product}/>)
     }
   }
   const addHandle = (type: string) => {
@@ -61,11 +51,11 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site }) =>
     }
     else if (type === 'page') {
       setOpenMCD(true)
-      setChildren(<TabFormPage setOpenMCD={setOpenMCD} type={site ? site?.data.type : page?.data.type} uid={site ? site?._id : page?._id}/>)
+      setChildren(<TabFormPage setOpenMCD={setOpenMCD} type={site ? site?.data.type : page?.data.type} uid={site ? site?._id : page?._id} />)
     }
     else if (type === 'product') {
       setOpenMCD(true)
-      // setChildren(<ProductForm />)
+      setChildren(<TabFormProduct setOpenMCD={setOpenMCD} type={page?.data.type} uid={page?._id} />)
     }
     else if (type === 'article') {
       console.log('article add');
@@ -73,13 +63,17 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site }) =>
       // setOpenMCD(true)
       // setChildren(<ProductForm />)
     }
+    else if (type === 'category') {
+      setOpenMCD(true)
+      setChildren(<TabFormPage setOpenMCD={setOpenMCD} type={page?.data.type} uid={page?._id} />)
+    }
   }
   return (
     <div className="flex lg:items-center lg:justify-between py-6 sm:py-10">
       <div className="min-w-0 flex-1">
         <div className='flex'>
           <Text as="h2" className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">{title}</Text>
-          
+
           {
             site &&
             <span className="hidden sm:block ml-3">
@@ -98,8 +92,17 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site }) =>
               </Button>
             </span>
           }
+          {
+            product &&
+            <span className="hidden sm:block ml-3">
+              <Button className="btn-default" onClick={() => editHandle('product')}>
+                <PencilIcon className="-ml-1 mr-2 h-5 w-5 text-gray-500" aria-hidden="true" />
+                Edit
+              </Button>
+            </span>
+          }
         </div>
-        
+
       </div>
       <div className="flex lg:mt-0 lg:ml-4">
 
@@ -121,23 +124,30 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site }) =>
                     </Button>
 
                   </span>}
-                <span className="sm:ml-3 hidden sm:block">
-                  <Button className="btn-primary" onClick={() => addHandle('product')}>
-                    {/* <AppstoreAddOutlined className='mr-2' style={{ fontSize: '20px' }} /> */}
-                    Add Product
-                  </Button>
-
-                </span>
               </>
             }
-            <span className="sm:ml-3">
-              <Button className="btn-primary" onClick={() => addHandle('page')}>
-                {/* <FileAddOutlined className='mr-2' style={{ fontSize: '20px' }} /> */}
-                Add Page
-              </Button>
-
-            </span>
+            
           </>
+        }
+        {['category'].includes(page?.data.type!) &&
+          <span className="sm:ml-3 hidden sm:block">
+            <Button className="btn-primary" onClick={() => addHandle('category')}>
+              Add Category
+            </Button>
+          </span>}
+        {typePageEcommerceCategory.map(data => data.value).includes(page?.data.type!) &&
+          <span className="sm:ml-3 hidden sm:block">
+            <Button className="btn-primary" onClick={() => addHandle('product')}>
+              Add Product
+            </Button>
+          </span>}
+        {
+         ( typeSite.map(data => data.value).includes(site?.data.type!) || page?.data.type === 'page') &&
+          <span className="sm:ml-3 hidden sm:block">
+            <Button className="btn-primary" onClick={() => addHandle('page')}>
+              Add Page
+            </Button>
+          </span>
         }
         {
           query.length === 2 &&
@@ -148,7 +158,7 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site }) =>
           </span>
         }
 
-        
+
 
         {/* Dropdown */}
         <Menu as="div" className="relative ml-3 sm:hidden">
@@ -191,7 +201,9 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site }) =>
           </Transition>
         </Menu>
       </div>
-      <Modal openMCD={openMCD} setOpenMCD={setOpenMCD} children={children} />
+      <Modal openMCD={openMCD} setOpenMCD={setOpenMCD} >
+        {children}
+      </Modal>
     </div>
   )
 }

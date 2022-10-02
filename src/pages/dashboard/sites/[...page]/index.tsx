@@ -59,6 +59,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
       const pageId = query[1].split('=')[1]!; const parentId = pageId
       await queryClient.prefetchQuery(["find-page1", pageId], async () => await findPage1(pageId))
       await queryClient.prefetchQuery(["find-pages2-by-parent", parentId], async () => await findPages2ByParent(parentId))
+      await queryClient.prefetchQuery(["find-all-products-by-parent", parentId], async () => await findAllProductsByParent(parentId))
+
     } else if(query.at(-1)?.split('=')[0] === 'page2' ) {
       const pageId = query[1].split('=')[1]!; const parentId = pageId
       await queryClient.prefetchQuery(["find-page2", pageId], async () => await findPage2(pageId))

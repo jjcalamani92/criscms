@@ -4,14 +4,15 @@ import Image from "next/image";
 import { Page, Product, Site } from "../../../interfaces";
 import { Button } from "../polymorphic";
 import Swal from 'sweetalert2';
-import { useDeleteSite } from "../../hooks";
+import { useDeleteProduct, useDeleteSite } from "../../hooks";
 interface CardProduct {
   product?: Product 
   
 }
 export const CardProduct: FC<CardProduct> = ({ product }) => {
-  const { mutate: deleteSite } = useDeleteSite()
-
+  const { mutate: deleteProduct } = useDeleteProduct(product?.parent!)
+  console.log(product?.parent);
+  
   const onDelete = (id:string) => {
     Swal.fire({
 			title: 'Are you sure?',
@@ -30,7 +31,7 @@ export const CardProduct: FC<CardProduct> = ({ product }) => {
 						timer: 1000,
 						showConfirmButton: false,
 					})
-        deleteSite(id)
+          deleteProduct({id: id, type: product?.type!})
 			}
 		})
   }

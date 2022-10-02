@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
+import { oAUthToDbUser } from "../../../../graphql";
 
 
 
@@ -28,7 +29,7 @@ export default NextAuth({
     // ...add more providers here
   ],
   pages:{
-    // signIn: '/auth/login',
+    signIn: '/auth/login',
     // newUser: '/auth/register'
   },
   session: {
@@ -43,9 +44,9 @@ export default NextAuth({
         token.accessToken = account.access_token;
         switch( account.type ){
           case 'oauth':
-            // const data = await oAUthToDbUser(user?.email || '', user?.name || '', user?.image|| '', account?.provider|| '')
-            // token.user = data
-            // token.role = data.role
+            const data = await oAUthToDbUser(user?.email || '', user?.name || '', user?.image|| '', account?.provider|| '')
+            token.user = data
+            token.role = data.role
           break
           case 'credentials':
             token.user = user;

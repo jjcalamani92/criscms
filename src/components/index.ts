@@ -1,8 +1,10 @@
 export * from './card'
 export * from './headerDashboard'
 export * from './headerPage'
+export * from './hero'
 export * from './main'
 export * from './grid'
+export * from './login'
 
 // export * from './card'
 export * from './grids'

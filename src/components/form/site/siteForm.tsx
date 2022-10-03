@@ -2,12 +2,12 @@ import { UseMutateFunction, useMutation, useQueryClient } from '@tanstack/react-
 import { useRouter } from 'next/router';
 import { FC, useRef } from 'react';
 import { useForm, Resolver, SubmitHandler } from 'react-hook-form';
-import { classNames, getQuery, typeSite } from '../../../utils';
+import { classNames, getQuery, typeSite } from '../../../../utils';
 import { useSession } from 'next-auth/react';
 
 import Swal from 'sweetalert2';
-import { Site } from '../../../interfaces';
-import { useCreateSite, useUpdateSite } from '../../hooks';
+import { Site } from '../../../../interfaces';
+import { useCreateSite, useUpdateSite } from '../../../hooks';
 interface SiteForm {
   setOpenMCD: React.Dispatch<React.SetStateAction<boolean>>
   site?: Site

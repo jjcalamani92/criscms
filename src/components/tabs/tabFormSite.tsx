@@ -1,14 +1,15 @@
 import { FC, useState } from 'react'
 import { Tab } from '@headlessui/react'
 import { classNames } from '../../../utils/function'
-import { SiteForm } from '../form'
+import { DataBaseForm, SiteForm } from '../form'
 import { Site } from '../../../interfaces'
+import { ImageSiteForm } from '../form';
 interface TabFormSite {
   setOpenMCD: React.Dispatch<React.SetStateAction<boolean>>
   site?: Site
 }
 
-export const TabFormSite:FC<TabFormSite> = ({setOpenMCD, site}) => {
+export const TabFormSite: FC<TabFormSite> = ({ setOpenMCD, site }) => {
 
   return (
     <div className="w-full max-w-lg">
@@ -60,14 +61,14 @@ export const TabFormSite:FC<TabFormSite> = ({setOpenMCD, site}) => {
               'rounded-xl bg-white'
             )}
           >
-            <SiteForm setOpenMCD={setOpenMCD} site={site}/>
+            <SiteForm setOpenMCD={setOpenMCD} site={site} />
           </Tab.Panel>
           <Tab.Panel
             className={classNames(
               'rounded-xl bg-white'
             )}
           >
-            <h1>2</h1>
+            <DataBaseForm setOpenMCD={setOpenMCD} site={site} />
 
           </Tab.Panel>
           <Tab.Panel
@@ -75,7 +76,7 @@ export const TabFormSite:FC<TabFormSite> = ({setOpenMCD, site}) => {
               'rounded-xl bg-white'
             )}
           >
-            <h1>2</h1>
+            <ImageSiteForm setOpenMCD={setOpenMCD} site={site} />
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>

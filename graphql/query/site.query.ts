@@ -23,11 +23,24 @@ export const FIND_SITE = gql`
         type
         seo{
           title
+          description
         }
         dataBase{
           uid
           label
           value
+        }
+        image{
+          src
+          alt
+        }
+        logo{
+          src
+          alt
+        }
+        icon{
+          src
+          alt
         }
       }
       client

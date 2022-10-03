@@ -115,3 +115,18 @@ export interface UpdateSite {
     uid: string
   }
 }
+export interface UpdateSiteDB {
+  id:string
+  input:{
+    type: string
+  }[]
+}
+export interface UpdateSiteImage {
+  id:string
+  input: {
+    src: string
+    alt: string
+  }
+  type: string
+  uid: string
+}

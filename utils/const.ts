@@ -14,15 +14,15 @@ export const typePageEcommerce = [
 ]
 
 export const typePageEcommerceCategory = [
-  { label:"Clothing", value:"clothing" },
-  { label:"Handbag", value:"handbag" },
-  { label:"Backpack", value:"backpack" },
-  { label:"Furniture", value:"furniture" },
-  { label:"Teddy", value:"teddy" },
-  { label:"Jeweler", value:"jeweler" },
-  { label:"Gift", value:"gift" },
-  { label:"Book", value:"book" },
-  { label:"Paint", value:"paint" },
+  { label:"Clothing", value:"clothing", categories: "Chamarras, Poleras, ..." },
+  { label:"Handbag", value:"handbag", categories: "Bolsos, bolso de mano"},
+  { label:"Backpack", value:"backpack", categories: "Mochilas" },
+  { label:"Furniture", value:"furniture", categories: "Muebles, estantes" },
+  { label:"Teddy", value:"teddy", categories: "Peluches, ..." },
+  { label:"Jeweler", value:"jeweler", categories: "Joyeros, ..." },
+  { label:"Gift", value:"gift" , categories: "Regalos"},
+  { label:"Book", value:"book" , categories: "Libros"},
+  { label:"Paint", value:"paint" , categories: "Pintura"},
   ]
 
   //TODO: SITE PORTFOLIO

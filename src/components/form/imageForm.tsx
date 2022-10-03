@@ -25,7 +25,7 @@ interface ImageForm {
   image?: ImageProduct[]
 }
 export const ImageForm: FC<ImageForm> = ({ setOpenMCD, product, image }) => {
-  console.log(product);
+  // console.log(product);
   const { data: session } = useSession()
 
   const { asPath, replace } = useRouter()

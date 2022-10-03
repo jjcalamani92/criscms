@@ -15,7 +15,7 @@ export const useCreateProduct = (parentId: string) => {
     },
     {
       onSuccess: async (createProduct) => {
-        console.log(createProduct);
+        // console.log(createProduct);
         
         queryClient.setQueryData<Product[]>(['find-all-products-by-parent', parentId], (old) => [...old!, createProduct]);
       },

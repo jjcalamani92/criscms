@@ -11,7 +11,7 @@ interface CardProduct {
 }
 export const CardProduct: FC<CardProduct> = ({ product }) => {
   const { mutate: deleteProduct } = useDeleteProduct(product?.parent!)
-  console.log(product?.parent);
+  // console.log(product?.parent);
   
   const onDelete = (id:string) => {
     Swal.fire({

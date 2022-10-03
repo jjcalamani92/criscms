@@ -17,6 +17,9 @@ interface Data {
   domain: string;
   location: string;
   type: string
+  icon: Image
+  image: Image
+  logo: Image
   seo: Seo;
 }
 

@@ -20,7 +20,7 @@ interface DataBaseForm {
   site?: Site
 }
 export const DataBaseForm: FC<DataBaseForm> = ({ setOpenMCD, site }) => {
-  console.log(site);
+  // console.log(site);
 
   const { asPath, replace } = useRouter()
   const query = getQuery(asPath)

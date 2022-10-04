@@ -5,8 +5,6 @@ import { createRef, FC, useRef, useState } from 'react';
 import { useForm, Resolver, SubmitHandler } from 'react-hook-form';
 
 import { classNames, getQuery } from '../../../utils/function';
-import { Button } from '../polymorphic';
-
 const product = {
   name: 'Basic Tee 6-Pack',
   price: '$192',

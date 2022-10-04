@@ -1,5 +1,4 @@
 import { useRouter } from "next/router"
-import { Button } from "./polymorphic"
 
 export const Hero = () => {
   const { push } = useRouter()

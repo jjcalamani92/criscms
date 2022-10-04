@@ -13,7 +13,6 @@ import { DataProduct, ImageProduct, Product, Site } from '../../../../interfaces
 
 import { getQuery, uuidv3 } from '../../../../utils/function';
 import { useUpdateProductImage, useUpdateSiteImage } from '../../../hooks';
-import { Button } from '../../polymorphic';
 
 interface FormValues {
   id: string

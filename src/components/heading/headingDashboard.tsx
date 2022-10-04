@@ -17,6 +17,7 @@ import { Page, Product, Site } from '../../../interfaces'
 import { Modal } from '../utils'
 import { TabFormPage, TabFormProduct, TabFormSite } from '../tabs'
 import { typePageEcommerceCategory, typeSite } from '../../../utils'
+import { Text } from '../polymorphic'
 
 
 

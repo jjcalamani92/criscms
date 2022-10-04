@@ -71,7 +71,7 @@ export const User2 = () => {
                           type="radio"
                           className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
                         />
-                        <label htmlFor="push-everything" className="ml-3 block text-sm font-medium text-gray-700">
+                        <label htmlFor="push-everything" className="ml-3 label-form">
                           Everything
                         </label>
                       </div>
@@ -82,7 +82,7 @@ export const User2 = () => {
                           type="radio"
                           className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
                         />
-                        <label htmlFor="push-email" className="ml-3 block text-sm font-medium text-gray-700">
+                        <label htmlFor="push-email" className="ml-3 label-form">
                           Same as email
                         </label>
                       </div>
@@ -93,7 +93,7 @@ export const User2 = () => {
                           type="radio"
                           className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
                         />
-                        <label htmlFor="push-nothing" className="ml-3 block text-sm font-medium text-gray-700">
+                        <label htmlFor="push-nothing" className="ml-3 label-form">
                           No push notifications
                         </label>
                       </div>

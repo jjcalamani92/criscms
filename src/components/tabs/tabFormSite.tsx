@@ -10,7 +10,7 @@ interface TabFormSite {
 }
 
 export const TabFormSite: FC<TabFormSite> = ({ setOpenMCD, site }) => {
-
+  // console.log(site);
   return (
     <div className="w-full max-w-lg">
       <Tab.Group>
@@ -19,20 +19,23 @@ export const TabFormSite: FC<TabFormSite> = ({ setOpenMCD, site }) => {
             className={({ selected }) =>
               classNames(
                 'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-indigo-700',
-                'ring-white ring-opacity-60 ring-offset-2 ring-offset-indigo-400 focus:outline-none focus:ring-2',
+                // 'ring-white ring-opacity-60 ring-offset-2 ring-offset-indigo-400 focus:outline-none focus:ring-2',
                 selected
                   ? 'bg-white shadow'
                   : 'text-indigo-900 hover:bg-white/[0.12] '
               )
             }
           >
-            New Site
+            {site ? "Update" : "Create"}
           </Tab>
           <Tab
+            disabled={site ? false : true}
             className={({ selected }) =>
               classNames(
-                'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-indigo-700',
-                'ring-white ring-opacity-60 ring-offset-2 ring-offset-indigo-400 focus:outline-none focus:ring-2',
+                'w-full rounded-lg py-2.5 text-sm font-medium leading-5',
+                site ? "text-indigo-700" : "text-gray-200 opacity-40",
+
+                // 'ring-white ring-opacity-60 ring-offset-2 ring-offset-indigo-400 focus:outline-none focus:ring-2',
                 selected
                   ? 'bg-white shadow'
                   : 'text-blue-900 hover:bg-white/[0.12] '
@@ -42,10 +45,13 @@ export const TabFormSite: FC<TabFormSite> = ({ setOpenMCD, site }) => {
             Data Base
           </Tab>
           <Tab
+            disabled={site ? false : true}
             className={({ selected }) =>
               classNames(
-                'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-indigo-700',
-                'ring-white ring-opacity-60 ring-offset-2 ring-offset-indigo-400 focus:outline-none focus:ring-2',
+                'w-full rounded-lg py-2.5 text-sm font-medium leading-5',
+                site ? "text-indigo-700" : "text-gray-200 opacity-40",
+
+                // 'ring-white ring-opacity-60 ring-offset-2 ring-offset-indigo-400 focus:outline-none focus:ring-2',
                 selected
                   ? 'bg-white shadow'
                   : 'text-blue-900 hover:bg-white/[0.12] '

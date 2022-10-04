@@ -1,10 +1,11 @@
 import { RadioGroup } from '@headlessui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
-import { FC, useRef, useState } from 'react';
+import { createRef, FC, useRef, useState } from 'react';
 import { useForm, Resolver, SubmitHandler } from 'react-hook-form';
 
 import { classNames, getQuery } from '../../../utils/function';
+import { Button } from '../polymorphic';
 
 const product = {
   name: 'Basic Tee 6-Pack',
@@ -117,6 +118,8 @@ export const MoreForm: FC<MoreForm> = ({ setOpenMCD }) => {
     // mutate(form)
   };
   const cancelButtonRef = useRef(null)
+  const ref = createRef();
+
   const [selectedColor, setSelectedColor] = useState(product.colors[0])
   const [selectedSize, setSelectedSize] = useState(product.sizes[2])
   return (
@@ -229,19 +232,17 @@ export const MoreForm: FC<MoreForm> = ({ setOpenMCD }) => {
           </div>
         </div>
         <div className="bg-gray-50 px-4 py-6 sm:flex sm:flex-row-reverse sm:px-6">
-          <button
+        <button
             type="submit"
             className="inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
           // onClick={() => setOpen(false)}
           >
-            Update
+            {'Update'}
           </button>
           <button
-            type="button"
-            className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+            className="btn-default"
             onClick={() => setOpenMCD(false)}
-            ref={cancelButtonRef}
-          >
+            ref={cancelButtonRef}>
             Cancel
           </button>
         </div>

@@ -24,6 +24,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppPropsWith
     },
   }))
   const getLayout = Component.getLayout ?? ((page) => page)
+  
   return (
     <SessionProvider session={session}>
       <QueryClientProvider client={queryClient}>

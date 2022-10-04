@@ -6,7 +6,7 @@ export const User = () => {
           <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
             <div className="grid grid-cols-3 gap-6">
               <div className="col-span-3 sm:col-span-2">
-                <label htmlFor="company-website" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="company-website" className="label-form">
                   Website
                 </label>
                 <div className="mt-1 flex rounded-md shadow-sm">
@@ -25,7 +25,7 @@ export const User = () => {
             </div>
 
             <div>
-              <label htmlFor="about" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="about" className="label-form">
                 About
               </label>
               <div className="mt-1">
@@ -44,7 +44,7 @@ export const User = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">Photo</label>
+              <label className="label-form">Photo</label>
               <div className="mt-1 flex items-center">
                 <span className="inline-block h-12 w-12 overflow-hidden rounded-full bg-gray-100">
                   <svg className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
@@ -61,7 +61,7 @@ export const User = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">Cover photo</label>
+              <label className="label-form">Cover photo</label>
               <div className="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
                 <div className="space-y-1 text-center">
                   <svg

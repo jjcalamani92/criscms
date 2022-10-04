@@ -68,7 +68,6 @@ export const ProductOverviews1 = () => {
   const { data:product } = useProduct(asPath)
   const [selectedColor, setSelectedColor] = useState(products.colors[0])
   const [selectedSize, setSelectedSize] = useState(products.sizes[2])
-
   return (
     <>
       <HeadingDashboard title="Detail Product" product={product} />

@@ -7,6 +7,10 @@ export const FIND_SITES = gql`
       data{
         seo{
           title
+          image{
+            src
+            alt
+          }
         }
       }
     }

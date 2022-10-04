@@ -10,6 +10,6 @@ export const findAllProductsByParent = async (parentId:string) => {
 
 export function useAllProductsByParent(asPath: string) {
   const query = getQuery(asPath)
-  const parentId = query.at(-1)?.split('=')[1]!
+  const parentId = query[3]?.split('=')[1]!
   return useQuery<[Product]>(["find-all-products-by-parent", parentId], () => findAllProductsByParent(parentId));
 }

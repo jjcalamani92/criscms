@@ -13,6 +13,7 @@ import { DataProduct, ImageProduct, Product, Site } from '../../../../interfaces
 
 import { getQuery, uuidv3 } from '../../../../utils/function';
 import { useUpdateProductImage, useUpdateSiteImage } from '../../../hooks';
+import { Button } from '../../polymorphic';
 
 interface FormValues {
   id: string
@@ -49,7 +50,7 @@ export const ImageSiteForm: FC<ImageSiteForm> = ({ setOpenMCD, site, image }) =>
   const query = getQuery(asPath)
   // console.log(query.at(-2));
 
-  const { register, handleSubmit, formState: { errors }, getValues, setValue, watch } = useForm<FormValues>({ defaultValues: {logo: {src: site?.data.logo ? site?.data.logo.src : "https://res.cloudinary.com/dqsbh2kn0/image/upload/v1663014890/zawkgpyjvvxrfwp9j7w1.jpg"}, site: {src: site?.data.image ? site?.data.image.src : "https://res.cloudinary.com/dqsbh2kn0/image/upload/v1663014890/zawkgpyjvvxrfwp9j7w1.jpg"}, icon: {src: site?.data.icon ? site?.data.icon.src : "https://res.cloudinary.com/dqsbh2kn0/image/upload/v1663014890/zawkgpyjvvxrfwp9j7w1.jpg"}} });
+  const { register, handleSubmit, formState: { errors }, getValues, setValue, watch } = useForm<FormValues>({ defaultValues: { logo: { src: site?.data.logo ? site?.data.logo.src : "https://res.cloudinary.com/dqsbh2kn0/image/upload/v1663014890/zawkgpyjvvxrfwp9j7w1.jpg" }, site: { src: site?.data.image ? site?.data.image.src : "https://res.cloudinary.com/dqsbh2kn0/image/upload/v1663014890/zawkgpyjvvxrfwp9j7w1.jpg" }, icon: { src: site?.data.icon ? site?.data.icon.src : "https://res.cloudinary.com/dqsbh2kn0/image/upload/v1663014890/zawkgpyjvvxrfwp9j7w1.jpg" } } });
   // console.log('image', getValues('article.image'));
   // const {mutate: updateProductImage} = useUpdateProductImage()
   const { mutate: updateSiteImage } = useUpdateSiteImage()
@@ -99,10 +100,10 @@ export const ImageSiteForm: FC<ImageSiteForm> = ({ setOpenMCD, site, image }) =>
               </h3>
             </div> */}
             <div className='pb-3'>
-              <h2 className="block text-sm font-medium text-gray-700">Icon</h2>
+              <h2 className="label-form">Icon</h2>
               <div className="mt-1 flex items-center">
-                <span className="inline-block h-12 w-12 overflow-hidden rounded-full bg-gray-100">
-                  <img className="h-full w-full text-gray-300"  src={getValues('icon.src')} alt={""} />
+                <span className="inline-block h-28 w-28 overflow-hidden rounded-full bg-gray-100 border">
+                  <img className="p-2 bg-white object-center h-28 w-28 text-gray-300" src={getValues('icon.src')} alt={""} />
                   {/* <svg className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
                   </svg> */}
@@ -121,11 +122,11 @@ export const ImageSiteForm: FC<ImageSiteForm> = ({ setOpenMCD, site, image }) =>
               </div>
             </div>
             <div className='pb-3'>
-              <h2 className="block text-sm font-medium text-gray-700">Logo
+              <h2 className="label-form">Logo
               </h2>
               <div className="mt-1 flex items-center">
                 <span className="inline-block  rounded-sm bg-gray-100 border border-indigo-90">
-                <img className="object-cover h-48 w-96" src={getValues('logo.src')} alt={""} />
+                  <img className="object-contain bg-white h-32 w-96" src={getValues('logo.src')} alt={""} />
 
                   {/* <img className='object-cover h-48 w-96' src="https://res.cloudinary.com/dqsbh2kn0/image/upload/v1663014890/zawkgpyjvvxrfwp9j7w1.jpg" alt="" /> */}
                 </span>
@@ -144,11 +145,11 @@ export const ImageSiteForm: FC<ImageSiteForm> = ({ setOpenMCD, site, image }) =>
               </div>
             </div>
             <div className='pb-3'>
-              <h2 className="block text-sm font-medium text-gray-700">Image
+              <h2 className="label-form">Image
               </h2>
               <div className="mt-1 flex items-center">
                 <span className="inline-block  rounded-sm bg-gray-100 border border-indigo-90">
-                <img className="object-cover h-48 w-48"  src={getValues('site.src')} alt={""} />
+                  <img className="object-contain bg-white px-2 h-32 w-32" src={getValues('site.src')} alt={""} />
                 </span>
                 <label htmlFor="file-upload" className="ml-5 rounded-md border border-gray-300 bg-white py-2 px-3 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   onClick={() => setType('site')}
@@ -171,14 +172,13 @@ export const ImageSiteForm: FC<ImageSiteForm> = ({ setOpenMCD, site, image }) =>
             </div>
           </div>
         </div>
-        <div className="bg-gray-50 px-4 py-6 sm:flex sm:flex-row-reverse sm:px-6">
+        <div className="group-button-form">
 
+          
           <button
-            type="button"
-            className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+            className="btn-default"
             onClick={() => setOpenMCD(false)}
-            ref={cancelButtonRef}
-          >
+            ref={cancelButtonRef}>
             Cancel
           </button>
         </div>

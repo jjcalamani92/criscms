@@ -25,9 +25,9 @@ export const Hero = () => {
         <div className="flex flex-wrap justify-center">
           {/* <button className="px-8 py-3 m-2 text-lg font-semibold rounded bg-indigo-600 text-gray-50"></button> */}
           
-          <Button className="btn-primary text-lg" onClick={() => push('/dashboard/sites')}>
+          <button className="btn-primary text-lg" onClick={() => push('/dashboard/sites')}>
           Get started
-          </Button>
+          </button>
           {/* <MenuHeadless /> */}
           {/* <Dropdown /> */}
         </div>

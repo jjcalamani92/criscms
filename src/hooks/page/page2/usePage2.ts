@@ -13,6 +13,6 @@ export const findPage2 = async (pageId:string) => {
 
 export function usePage2(asPath:string) {
   const query = getQuery(asPath)
-  const pageId = query.at(-1)?.split('=')[1]!
+  const pageId = query[3]?.split('=')[1]!
   return useQuery<Page>(["find-page2", pageId], () => findPage2(pageId));
 }

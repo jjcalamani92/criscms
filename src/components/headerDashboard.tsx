@@ -57,6 +57,7 @@ export const HeaderDashboard: FC<HeaderDashboard> = ({ }) => {
                       </Link>
                     </div>
                     <div className="hidden md:block">
+
                       <div className="ml-10 flex items-baseline space-x-4">
                         {navigation.map((item) => (
                           <Link
@@ -71,7 +72,7 @@ export const HeaderDashboard: FC<HeaderDashboard> = ({ }) => {
                                 'px-3 py-2 rounded-md text-sm font-medium'
                               )}
                               aria-current={item.current ? 'page' : undefined}
-                            >
+                              >
                               {item.name}
                             </a>
                           </Link>

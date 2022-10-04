@@ -1,5 +1,5 @@
 
-import { FC, Fragment, useState } from 'react'
+import { createRef, FC, Fragment, useState } from 'react'
 import {
   BriefcaseIcon,
   CalendarIcon,
@@ -28,6 +28,8 @@ interface HeadingDashboard {
   product?:Product
 }
 export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, product }) => {
+  
+
   const { asPath } = useRouter()
   const query = getQuery(asPath)
   const [openMCD, setOpenMCD] = useState(false)
@@ -77,28 +79,28 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, prod
           {
             site &&
             <span className="hidden sm:block ml-3">
-              <Button className="btn-default" onClick={() => editHandle('site')}>
+              <button className="btn-default" onClick={() => editHandle('site')} >
                 <PencilIcon className="-ml-1 mr-2 h-5 w-5 text-gray-500" aria-hidden="true" />
                 Edit
-              </Button>
+              </button>
             </span>
           }
           {
             page &&
             <span className="hidden sm:block ml-3">
-              <Button className="btn-default" onClick={() => editHandle('page')}>
+              <button className="btn-default" onClick={() => editHandle('page')} >
                 <PencilIcon className="-ml-1 mr-2 h-5 w-5 text-gray-500" aria-hidden="true" />
                 Edit
-              </Button>
+              </button>
             </span>
           }
           {
             product &&
             <span className="hidden sm:block ml-3">
-              <Button className="btn-default" onClick={() => editHandle('product')}>
+              <button className="btn-default" onClick={() => editHandle('product')} >
                 <PencilIcon className="-ml-1 mr-2 h-5 w-5 text-gray-500" aria-hidden="true" />
                 Edit
-              </Button>
+              </button>
             </span>
           }
         </div>
@@ -108,53 +110,33 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, prod
 
 
 
-        {
-          query.length > 2 &&
-          <>
-            {
-              query.length > 3 &&
-              <>
-
-                {
-                  page?.data.type === 'blog' &&
-                  <span className="sm:ml-3 hidden sm:block">
-                    <Button className="btn-primary" onClick={() => addHandle('blog')}>
-                      {/* <BlockOutlined className='mr-2' style={{ fontSize: '20px' }} /> */}
-                      Add Blog
-                    </Button>
-
-                  </span>}
-              </>
-            }
-            
-          </>
-        }
+        
         {['category'].includes(page?.data.type!) &&
           <span className="sm:ml-3 hidden sm:block">
-            <Button className="btn-primary" onClick={() => addHandle('category')}>
+            <button className="btn-primary" onClick={() => addHandle('category')} >
               Add Category
-            </Button>
+            </button>
           </span>}
         {typePageEcommerceCategory.map(data => data.value).includes(page?.data.type!) &&
           <span className="sm:ml-3 hidden sm:block">
-            <Button className="btn-primary" onClick={() => addHandle('product')}>
+            <button className="btn-primary" onClick={() => addHandle('product')} >
               Add Product
-            </Button>
+            </button>
           </span>}
         {
          ( typeSite.map(data => data.value).includes(site?.data.type!) || page?.data.type === 'page') &&
           <span className="sm:ml-3 hidden sm:block">
-            <Button className="btn-primary" onClick={() => addHandle('page')}>
+            <button className="btn-primary" onClick={() => addHandle('page')} >
               Add Page
-            </Button>
+            </button>
           </span>
         }
         {
           query.length === 2 &&
           <span className="sm:ml-3 hidden sm:block">
-            <Button className="btn-primary" onClick={() => addHandle('site')}>
+            <button className="btn-primary" onClick={() => addHandle('site')} >
               Add Site
-            </Button>
+            </button>
           </span>
         }
 

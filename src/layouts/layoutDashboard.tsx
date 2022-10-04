@@ -1,5 +1,5 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { FC, Fragment } from 'react'
+import { createRef, FC, Fragment } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head';
 import { HeaderDashboard, Main } from '../components';
@@ -12,6 +12,7 @@ interface LayoutDashboard {
 export const LayoutDashboard: FC<LayoutDashboard> = ({ children }) => {
   const { query, asPath } = useRouter()
   
+  const ref = createRef();
  
   const seo = {
     title: "criscrm",
@@ -20,7 +21,7 @@ export const LayoutDashboard: FC<LayoutDashboard> = ({ children }) => {
 
   return (
     <>
-      <div className="min-h-full">
+      <div className="min-h-full" >
         <Head>
         <title>{`criscrm ${seo ? `| ${seo?.title}`: ''}`}</title>
 

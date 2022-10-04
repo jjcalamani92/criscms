@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import React, { Fragment } from 'react'
 import { useRouter } from 'next/router'
 import { LayoutDashboard, LayoutPages } from '../../../../layouts'
 import { GridPage0, GridPage1, GridPage2, GridPage3, ProductOverviews1 } from '../../../../components'
@@ -17,6 +17,7 @@ function Page() {
   const { data: pages1 } = usePages1();
   const { data: pages2 } = usePages2();
   const { data: allProducts } = useAllProducts();
+  // console.log(pages0);
   
   
 
@@ -50,26 +51,26 @@ export const getStaticProps: GetStaticProps = async (context) => {
     await queryClient.prefetchQuery(["find-site", siteId], async () => await findSite(siteId))
     await queryClient.prefetchQuery(["find-pages0-by-parent", parentId], async () => await findPages0ByParent(parentId))
   } else if (query.length === 2) {
-    if (query.at(-1)?.split('=')[0] === 'page0') {
+    if (query[1]?.split('=')[0] === 'page0') {
       
       const pageId = query[1].split('=')[1]!; const parentId = pageId
       await queryClient.prefetchQuery(["find-page0", pageId], async () => await findPage0(pageId))
       await queryClient.prefetchQuery(["find-pages1-by-parent", parentId], async () => await findPages1ByParent(parentId))
-    } else if(query.at(-1)?.split('=')[0] === 'page1' ) {
+    } else if(query[1]?.split('=')[0] === 'page1' ) {
       const pageId = query[1].split('=')[1]!; const parentId = pageId
       await queryClient.prefetchQuery(["find-page1", pageId], async () => await findPage1(pageId))
       await queryClient.prefetchQuery(["find-pages2-by-parent", parentId], async () => await findPages2ByParent(parentId))
       await queryClient.prefetchQuery(["find-all-products-by-parent", parentId], async () => await findAllProductsByParent(parentId))
 
-    } else if(query.at(-1)?.split('=')[0] === 'page2' ) {
+    } else if(query[1]?.split('=')[0] === 'page2' ) {
       const pageId = query[1].split('=')[1]!; const parentId = pageId
       await queryClient.prefetchQuery(["find-page2", pageId], async () => await findPage2(pageId))
       await queryClient.prefetchQuery(["find-pages3-by-parent", parentId], async () => await findPages3ByParent(parentId))
       await queryClient.prefetchQuery(["find-all-products-by-parent", parentId], async () => await findAllProductsByParent(parentId))
     }
   } else if (query.length === 3) {
-    const id = query.at(-1)?.split('=')[1]!
-    const type = query.at(-1)?.split('=')[0]!
+    const id = query[2]?.split('=')[1]!
+    const type = query[2]?.split('=')[0]!
     await queryClient.prefetchQuery(["find-product", id, type], async () => await findProduct(id, type))
 
   }

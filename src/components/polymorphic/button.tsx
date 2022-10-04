@@ -1,4 +1,4 @@
-import { ComponentPropsWithRef, ElementType } from "react";
+import React, { ComponentPropsWithRef, ElementType } from "react";
 
 type ButtonProps<C extends ElementType> = {
   as?: C
@@ -13,3 +13,4 @@ export const Button = <C extends ElementType >({
   const Component = as || "button";
   return <Component {...restProps}>{children}</Component>
 }
+

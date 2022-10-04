@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { FC } from 'react'
+import React, { createRef, FC, forwardRef } from 'react'
 import { useRouter } from 'next/router';
 interface LinkURL {
   label: string
@@ -25,21 +25,12 @@ export const LinkURL:FC<LinkURL> = ({label, href, type}) => {
     </Link>
   )
 }
-// interface Button {
-//   label: string
-//   href?: string
-//   type: string
-// }
-// export const Button:FC<Button> = ({label, href = '#', type}) => {
-//   const {push} = useRouter()
-//   let style
-//   if (type === 'primary') {
-//     style="px-8 py-3 m-2 text-lg font-semibold rounded bg-indigo-600 text-gray-50"
-//   } else
-//   if (type === 'link') {
-//     style="px-8 py-3 m-2 text-lg border rounded text-gray-900 border-gray-300"
-//   }
-//   return (
-//     <button className={style} onClick={() => push(`${href}`)}>{label}</button>
-//   )
-// }
+
+interface Button {
+  children: React.ReactNode;
+}
+export const Button:FC<Button> = ({ children, ...restProps}) => {
+  return (
+    <button {...restProps} >{children}</button>
+  )
+}

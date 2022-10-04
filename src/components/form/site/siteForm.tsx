@@ -8,6 +8,7 @@ import { useSession } from 'next-auth/react';
 import Swal from 'sweetalert2';
 import { Site } from '../../../../interfaces';
 import { useCreateSite, useUpdateSite } from '../../../hooks';
+
 interface SiteForm {
   setOpenMCD: React.Dispatch<React.SetStateAction<boolean>>
   site?: Site
@@ -77,7 +78,7 @@ export const SiteForm: FC<SiteForm> = ({ setOpenMCD, site }) => {
             <div className="grid grid-cols-6 gap-6">
               <div className="col-span-6">
                 <label
-                  className="block text-sm font-medium text-gray-700">
+                  className="label-form">
                   Name
                 </label>
                 <input
@@ -96,7 +97,7 @@ export const SiteForm: FC<SiteForm> = ({ setOpenMCD, site }) => {
               <div className="col-span-6">
                 <label
                   // htmlFor="company-website" 
-                  className="block text-sm font-medium text-gray-700">
+                  className="label-form">
                   Website
                 </label>
                 <div className="mt-1 flex rounded-md shadow-sm">
@@ -105,8 +106,6 @@ export const SiteForm: FC<SiteForm> = ({ setOpenMCD, site }) => {
                   </span>
                   <input
                     type="text"
-                    // name="company-website"
-                    // id="company-website"
                     className="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 text-sm"
                     placeholder="example.com"
                     {...register("domain")}
@@ -115,7 +114,7 @@ export const SiteForm: FC<SiteForm> = ({ setOpenMCD, site }) => {
                 </div>
               </div>
               <div className="col-span-6">
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="label-form">
                   Description
                 </label>
                 <div className="mt-1">
@@ -138,7 +137,7 @@ export const SiteForm: FC<SiteForm> = ({ setOpenMCD, site }) => {
                 query.length === 2 &&
                 <div className="col-span-6">
                   <label
-                    className="block text-sm font-medium text-gray-700">
+                    className="label-form">
                     Client name
                   </label>
                   <input
@@ -151,7 +150,7 @@ export const SiteForm: FC<SiteForm> = ({ setOpenMCD, site }) => {
 
               <div className="col-span-6">
                 <fieldset>
-                  <legend className="contents text-sm font-medium text-gray-700">Type </legend>
+                  <legend className="label-form">Type </legend>
                   {/* <p className="text-sm text-gray-500">These are delivered via SMS to your mobile phone.</p> */}
                   <div className=" grid grid-cols-2 ">
                     {
@@ -183,20 +182,17 @@ export const SiteForm: FC<SiteForm> = ({ setOpenMCD, site }) => {
           </div>
 
         </div>
-        <div className="bg-gray-50 px-4 py-4 sm:flex sm:flex-row-reverse sm:px-4">
+        <div className="group-button-form">
           <button
             type="submit"
-            className="inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-          // onClick={() => setOpen(false)}
+            className="btn-primary "
           >
             {site ? 'Update' : 'Created'}
           </button>
           <button
-            type="button"
-            className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+            className="btn-default"
             onClick={() => setOpenMCD(false)}
-            ref={cancelButtonRef}
-          >
+            ref={cancelButtonRef}>
             Cancel
           </button>
         </div>

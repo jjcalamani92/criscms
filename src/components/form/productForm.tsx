@@ -1,12 +1,13 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { FC, useRef } from 'react';
+import { createRef, FC, useRef } from 'react';
 import { useForm, Resolver, SubmitHandler } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import { Product } from '../../../interfaces';
 import { getQuery } from '../../../utils';
 import { useCreateProduct, useUpdateProduct } from '../../hooks';
+import { Button } from '../polymorphic';
 
 
 interface FormValues {
@@ -62,6 +63,7 @@ export const ProductForm:FC<ProductForm> = ({setOpenMCD, uid, type, product}) =>
     setOpenMCD(false)
   };
   const cancelButtonRef = useRef(null)
+  const ref = createRef();
 
   return (
     <div className="">
@@ -76,13 +78,13 @@ export const ProductForm:FC<ProductForm> = ({setOpenMCD, uid, type, product}) =>
             <div className="grid grid-cols-6 gap-6">
               <div className="col-span-6">
                 <label
-                  className="block text-sm font-medium text-gray-700">
+                  className="label-form">
                   Name
                 </label>
                 <input
                   type="text"
                   autoComplete="off"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm"
+                  className="input-form"
                   {...register("name", {
                     required: 'Name required!!',
                     minLength: {value: 2, message: 'min 2 characters'}
@@ -91,7 +93,7 @@ export const ProductForm:FC<ProductForm> = ({setOpenMCD, uid, type, product}) =>
                 {errors.name && <p className='text-red-600 text-sm'>This is required!!</p>}
               </div>
               <div className="col-span-6 sm:col-span-3">
-                <label htmlFor="country" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="country" className="label-form">
                   Mark
                 </label>
                 <select
@@ -107,7 +109,7 @@ export const ProductForm:FC<ProductForm> = ({setOpenMCD, uid, type, product}) =>
                 {errors.mark && <p className='text-red-600 text-sm'>This is required!!</p>}
               </div>
               <div className="col-span-6 sm:col-span-3">
-                <label htmlFor="country" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="country" className="label-form">
                   Featured
                 </label>
                 <select
@@ -124,13 +126,13 @@ export const ProductForm:FC<ProductForm> = ({setOpenMCD, uid, type, product}) =>
               </div>
               
               <div className="col-span-6">
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="label-form">
                   Description
                 </label>
                 <div className="mt-1">
                   <textarea
                     rows={5}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm"
+                    className="input-form"
                     {...register("description", {
                       required: "Description required!!"
                     })}
@@ -140,35 +142,35 @@ export const ProductForm:FC<ProductForm> = ({setOpenMCD, uid, type, product}) =>
               </div>
               
               <div className="col-span-3 sm:col-span-2">
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="label-form">
                   Price [Bs]
                 </label>
                 <input
                   type="number"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm"
+                  className="input-form"
                   {...register("price", { required :"Price required!!", min:0})}
                 />
                 {errors.price && <p className='text-red-600 text-sm'>This is required!!</p>}
 
               </div>
               <div className="col-span-3 sm:col-span-2">
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="label-form">
                   Discount price [Bs]
                 </label>
                 <input
                   type="number"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm"
+                  className="input-form"
                   {...register("discountPrice", { required :"Discount price required!!", min:0})}
                 />
                 {errors.discountPrice && <p className='text-red-600 text-sm'>This is required!!</p>}
               </div>
               <div className="col-span-3 sm:col-span-2">
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="label-form">
                   Stock [#]
                 </label>
                 <input
                   type="number"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm"
+                  className="input-form"
                   {...register("inStock", { required :"Stock required!!", min:1})}
                 />
                 {errors.inStock && <p className='text-red-600 text-sm'>This is required!!</p>}
@@ -177,19 +179,18 @@ export const ProductForm:FC<ProductForm> = ({setOpenMCD, uid, type, product}) =>
           </div>
           
         </div>
-        <div className="bg-gray-50 p-4 sm:flex sm:flex-row-reverse">
-          <button
+        <div className="bg-gray-50 px-4 py-6 sm:flex sm:flex-row-reverse sm:px-6">
+        <button
             type="submit"
             className="inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
+          // onClick={() => setOpen(false)}
           >
-            {product ? "Update" : "Create"}
+            {product ? 'Update' : 'Created'}
           </button>
           <button
-            type="button"
-            className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+            className="btn-default"
             onClick={() => setOpenMCD(false)}
-            ref={cancelButtonRef}
-          >
+            ref={cancelButtonRef}>
             Cancel
           </button>
         </div>

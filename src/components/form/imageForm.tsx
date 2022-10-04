@@ -13,6 +13,7 @@ import { DataProduct, ImageProduct, Product } from '../../../interfaces';
 
 import { getQuery, uuidv3 } from '../../../utils/function';
 import { useUpdateProductImage } from '../../hooks/product/useUpdateProductImage';
+import { Button } from '../polymorphic';
 
 interface FormValues {
   // _id:string
@@ -93,7 +94,7 @@ export const ImageForm: FC<ImageForm> = ({ setOpenMCD, product, image }) => {
                 ))
               }
 
-              {/* <label className="block text-sm font-medium text-gray-700">Cover photo</label> */}
+              {/* <label className="label-form">Cover photo</label> */}
               <div className="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 p-3">
                 <div className="space-y-1 text-center">
                   <svg
@@ -130,19 +131,11 @@ export const ImageForm: FC<ImageForm> = ({ setOpenMCD, product, image }) => {
           </div>
         </div>
         <div className="bg-gray-50 px-4 py-6 sm:flex sm:flex-row-reverse sm:px-6">
-          {/* <button
-            type="submit"
-            className="inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-          // onClick={() => setOpen(false)}
-          >
-            Update
-          </button> */}
+          
           <button
-            type="button"
-            className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+            className="btn-default"
             onClick={() => setOpenMCD(false)}
-            ref={cancelButtonRef}
-          >
+            ref={cancelButtonRef}>
             Cancel
           </button>
         </div>

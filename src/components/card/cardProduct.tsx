@@ -53,11 +53,11 @@ export const CardProduct: FC<CardProduct> = ({ product }) => {
         </a>
       </Link>
       <div className="flex flex-col justify-between p-4 space-y-8">
-        <Button className="justify-center btn-primary"
+        <button className="justify-center btn-primary"
         onClick={() => onDelete(product?._id!)}
         >
           Delete
-        </Button>
+        </button>
         
       </div>
     </div>

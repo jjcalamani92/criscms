@@ -13,6 +13,6 @@ export const findPages2ByParent = async (parentId:string) => {
 
 export function usePages2ByParent(asPath: string) {
   const query = getQuery(asPath)
-  const parentId = query.at(-1)?.split('=')[1]!
+  const parentId = query[3]?.split('=')[1]!
   return useQuery<[Page]>(["find-pages2-by-parent", parentId], () => findPages2ByParent(parentId));
 }

@@ -6,7 +6,7 @@ export const User1 = () => {
                 <div className="bg-white px-4 py-5 sm:p-6">
                   <div className="grid grid-cols-6 gap-6">
                     <div className="col-span-6 sm:col-span-3">
-                      <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
+                      <label htmlFor="first-name" className="label-form">
                         First name
                       </label>
                       <input
@@ -19,7 +19,7 @@ export const User1 = () => {
                     </div>
 
                     <div className="col-span-6 sm:col-span-3">
-                      <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
+                      <label htmlFor="last-name" className="label-form">
                         Last name
                       </label>
                       <input
@@ -32,7 +32,7 @@ export const User1 = () => {
                     </div>
 
                     <div className="col-span-6 sm:col-span-4">
-                      <label htmlFor="email-address" className="block text-sm font-medium text-gray-700">
+                      <label htmlFor="email-address" className="label-form">
                         Email address
                       </label>
                       <input
@@ -45,7 +45,7 @@ export const User1 = () => {
                     </div>
 
                     <div className="col-span-6 sm:col-span-3">
-                      <label htmlFor="country" className="block text-sm font-medium text-gray-700">
+                      <label htmlFor="country" className="label-form">
                         Country
                       </label>
                       <select
@@ -61,7 +61,7 @@ export const User1 = () => {
                     </div>
 
                     <div className="col-span-6">
-                      <label htmlFor="street-address" className="block text-sm font-medium text-gray-700">
+                      <label htmlFor="street-address" className="label-form">
                         Street address
                       </label>
                       <input
@@ -74,7 +74,7 @@ export const User1 = () => {
                     </div>
 
                     <div className="col-span-6 sm:col-span-6 lg:col-span-2">
-                      <label htmlFor="city" className="block text-sm font-medium text-gray-700">
+                      <label htmlFor="city" className="label-form">
                         City
                       </label>
                       <input
@@ -87,7 +87,7 @@ export const User1 = () => {
                     </div>
 
                     <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                      <label htmlFor="region" className="block text-sm font-medium text-gray-700">
+                      <label htmlFor="region" className="label-form">
                         State / Province
                       </label>
                       <input
@@ -100,7 +100,7 @@ export const User1 = () => {
                     </div>
 
                     <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                      <label htmlFor="postal-code" className="block text-sm font-medium text-gray-700">
+                      <label htmlFor="postal-code" className="label-form">
                         ZIP / Postal code
                       </label>
                       <input

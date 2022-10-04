@@ -2,7 +2,6 @@ import Link from "next/link"
 import { FC } from "react";
 import Image from "next/image";
 import { Page, Product, Site } from "../../../interfaces";
-import { Button } from "../polymorphic";
 import Swal from 'sweetalert2';
 import { useDeleteProduct, useDeleteSite } from "../../hooks";
 interface CardProduct {

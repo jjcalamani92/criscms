@@ -8,7 +8,8 @@ interface GridSite {
 }
 
 export const GridSite: FC<GridSite> = () => {
-  const { data: sites } = useSites();
+  const { data: sites, isError, isLoading, isFetching } = useSites();
+
   return (
     <Fragment>
       <HeadingDashboard title={"Sites"} />

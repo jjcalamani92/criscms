@@ -20,20 +20,23 @@ export const TabFormProduct:FC<TabFormProduct> = ({setOpenMCD, product, type, ui
             className={({ selected }) =>
               classNames(
                 'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-indigo-700',
-                // 'ring-white ring-opacity-60 ring-offset-2 ring-offset-indigo-400 focus:outline-none focus:ring-2',
                 selected
                   ? 'bg-white shadow'
                   : 'text-indigo-900 hover:bg-white/[0.12] '
               )
             }
           >
-            {product ? "Updated Product" : "New Product"}
+            {product ? "Updated" : "Created"}
             
           </Tab>
           <Tab
+            disabled={product ? false : true}
+
             className={({ selected }) =>
               classNames(
                 'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-indigo-700',
+                product ? "text-indigo-700" : "text-gray-200 opacity-40",
+
                 // 'ring-white ring-opacity-60 ring-offset-2 ring-offset-indigo-400 focus:outline-none focus:ring-2',
                 selected
                   ? 'bg-white shadow'
@@ -41,12 +44,16 @@ export const TabFormProduct:FC<TabFormProduct> = ({setOpenMCD, product, type, ui
               )
             }
           >
-            Update Images
+            Images
           </Tab>
           <Tab
+            disabled={product ? false : true}
+
             className={({ selected }) =>
               classNames(
                 'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-indigo-700',
+                product ? "text-indigo-700" : "text-gray-200 opacity-40",
+
                 // 'ring-white ring-opacity-60 ring-offset-2 ring-offset-indigo-400 focus:outline-none focus:ring-2',
                 selected
                   ? 'bg-white shadow'

@@ -6,6 +6,7 @@ import {
   CheckIcon,
   ChevronDownIcon,
   CurrencyDollarIcon,
+  DocumentPlusIcon,
   LinkIcon,
   MapPinIcon,
   PencilIcon,
@@ -18,6 +19,7 @@ import { Modal } from '../utils'
 import { TabFormPage, TabFormProduct, TabFormSite } from '../tabs'
 import { typePageEcommerceCategory, typeSite } from '../../../utils'
 import { Text } from '../polymorphic'
+import { CubeIcon, FolderPlusIcon, SquaresPlusIcon } from '@heroicons/react/24/outline'
 
 
 
@@ -74,32 +76,38 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, prod
     <div className="flex lg:items-center lg:justify-between py-6 sm:py-10">
       <div className="min-w-0 flex-1">
         <div className='flex'>
-          <Text as="h2" className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">{title}</Text>
+          <Text as="h2" className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight mr-3">{title}</Text>
 
           {
             site &&
-            <span className="hidden sm:block ml-3">
-              <button className="btn-default" onClick={() => editHandle('site')} >
-                <PencilIcon className="-ml-1 mr-2 h-5 w-5 text-gray-500" aria-hidden="true" />
-                Edit
+            <span className="block">
+              <button className="btn-default space-x-3" onClick={() => editHandle('site')} >
+                <PencilIcon className=" h-5 w-5 text-gray-500" aria-hidden="true" />
+                <p className='hidden sm:block'>
+                  Edit
+                </p> 
               </button>
             </span>
           }
           {
             page &&
-            <span className="hidden sm:block ml-3">
-              <button className="btn-default" onClick={() => editHandle('page')} >
-                <PencilIcon className="-ml-1 mr-2 h-5 w-5 text-gray-500" aria-hidden="true" />
-                Edit
+            <span className="block">
+              <button className="btn-default space-x-3" onClick={() => editHandle('page')} >
+                <PencilIcon className="h-5 w-5 text-gray-500" aria-hidden="true" />
+                <p className='hidden sm:block'>
+                  Edit
+                </p> 
               </button>
             </span>
           }
           {
             product &&
-            <span className="hidden sm:block ml-3">
-              <button className="btn-default" onClick={() => editHandle('product')} >
-                <PencilIcon className="-ml-1 mr-2 h-5 w-5 text-gray-500" aria-hidden="true" />
-                Edit
+            <span className="block">
+              <button className="btn-default space-x-3" onClick={() => editHandle('product')} >
+              <PencilIcon className="h-5 w-5 text-gray-500" aria-hidden="true" />
+              <p className='hidden sm:block'>
+                  Edit
+                </p> 
               </button>
             </span>
           }
@@ -112,30 +120,53 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, prod
 
         
         {['category'].includes(page?.data.type!) &&
-          <span className="sm:ml-3 hidden sm:block">
-            <button className="btn-primary" onClick={() => addHandle('category')} >
+          <span className="block">
+            <button className="btn-primary space-x-3" onClick={() => addHandle('category')} >
+            <DocumentPlusIcon className="h-6 w-6" aria-hidden="true" />
+            <p className='hidden sm:block'>
               Add Category
+                </p>
             </button>
           </span>}
         {typePageEcommerceCategory.map(data => data.value).includes(page?.data.type!) &&
-          <span className="sm:ml-3 hidden sm:block">
-            <button className="btn-primary" onClick={() => addHandle('product')} >
-              Add Product
+          <span className="block">
+            <button className="btn-primary space-x-3" onClick={() => addHandle('product')} >
+            <DocumentPlusIcon className="h-6 w-6" aria-hidden="true" />
+              <p className='hidden sm:block'>
+                  Add Product
+                </p>
             </button>
           </span>}
         {
          ( typeSite.map(data => data.value).includes(site?.data.type!) || page?.data.type === 'page') &&
-          <span className="sm:ml-3 hidden sm:block">
-            <button className="btn-primary" onClick={() => addHandle('page')} >
-              Add Page
+          <span className="block">
+            <button className="btn-primary space-x-3" onClick={() => addHandle('page')} >
+              <FolderPlusIcon className="h-6 w-6" aria-hidden="true" />
+              <p className='hidden sm:block'>
+                  Add Page
+                </p>
+            </button>
+          </span>
+        }
+        {
+         ( page?.data.type === 'page-blank') &&
+          <span className="block">
+            <button className="btn-primary space-x-3" onClick={() => addHandle('component')} >
+              <CubeIcon className="h-6 w-6" aria-hidden="true" />
+              <p className='hidden sm:block'>
+                  Add Component
+                </p>
             </button>
           </span>
         }
         {
           query.length === 2 &&
-          <span className="sm:ml-3 hidden sm:block">
-            <button className="btn-primary" onClick={() => addHandle('site')} >
-              Add Site
+          <span className="block">
+            <button className="btn-primary space-x-3" onClick={() => addHandle('site')} >
+            <FolderPlusIcon className="h-6 w-6" aria-hidden="true" />
+              <p className='hidden sm:block'>
+                  Add Site
+                </p>
             </button>
           </span>
         }
@@ -143,7 +174,7 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, prod
 
 
         {/* Dropdown */}
-        <Menu as="div" className="relative ml-3 sm:hidden">
+        {/* <Menu as="div" className="relative ml-3 sm:hidden">
           <Menu.Button className="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
             More
             <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5 text-gray-500" aria-hidden="true" />
@@ -181,7 +212,7 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, prod
               </Menu.Item>
             </Menu.Items>
           </Transition>
-        </Menu>
+        </Menu> */}
       </div>
       <Modal openMCD={openMCD} setOpenMCD={setOpenMCD} >
         {children}

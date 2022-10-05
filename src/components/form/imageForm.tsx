@@ -75,7 +75,7 @@ export const ImageForm: FC<ImageForm> = ({ setOpenMCD, product, image }) => {
                 Update Images
               </h3>
             </div> */}
-            <div className='grid grid-cols-3 gap-2'>
+            <div className='grid grid-cols-2 md:grid-cols-3 gap-2'>
               {
                 getValues('data.image').map(data => (
 
@@ -130,7 +130,7 @@ export const ImageForm: FC<ImageForm> = ({ setOpenMCD, product, image }) => {
             </div>
           </div>
         </div>
-        <div className="bg-gray-50 px-4 py-6 sm:flex sm:flex-row-reverse sm:px-6">
+        <div className="group-button-form">
           
           <button
             className="btn-default"

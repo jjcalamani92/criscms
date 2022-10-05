@@ -34,7 +34,7 @@ export const TabFormPage:FC<TabFormPage> = ({setOpenMCD, page, type, uid}) => {
             className={({ selected }) =>
               classNames(
                 'w-full rounded-lg py-2.5 text-sm font-medium leading-5',
-                page ? "text-red-600" : "text-yellow-700",
+                page ? "text-indigo-700" : "text-gray-200 opacity-40",
                 // 'ring-white ring-opacity-60 ring-offset-2 ring-offset-indigo-400 focus:outline-none focus:ring-2',
                 selected
                   ? 'bg-white shadow'
@@ -49,6 +49,7 @@ export const TabFormPage:FC<TabFormPage> = ({setOpenMCD, page, type, uid}) => {
             className={({ selected }) =>
               classNames(
                 'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-indigo-700',
+                page ? "text-indigo-700" : "text-gray-200 opacity-40",
                 // 'ring-white ring-opacity-60 ring-offset-2 ring-offset-indigo-400 focus:outline-none focus:ring-2',
                 selected
                   ? 'bg-white shadow'

@@ -151,7 +151,7 @@ export const PageForm: FC<PageForm> = ({ setOpenMCD, uid, page, type }) => {
                     page ?
                       <>
                         {
-                          type === 'page' &&
+                          typePageEcommerce.map(data => data.value).includes(type!) &&
                           (typePageEcommerce.map(data => (
                             <div className="flex items-center my-2" key={data.label}>
                               <input
@@ -174,27 +174,7 @@ export const PageForm: FC<PageForm> = ({ setOpenMCD, uid, page, type }) => {
 
                           )
                         }
-                        {
-                          type === 'category' &&
-                          (typePageEcommerce.map(data => (
-                            <div className="flex items-center my-2" key={data.label}>
-                              <input
-                                type="radio"
-                                value={data.value}
-                                {...register('type', { required: true })}
-                                className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                onChange={({ target }) => setValue('type', target.value, { shouldValidate: true })}
-
-
-                              />
-                              <label className="ml-3 block text-sm text-gray-500">
-                                {data.label}
-                              </label>
-                            </div>)
-                          )
-                          )
-
-                        }
+                        
                         {
                           site?.data.dataBase.map(data => data.value).includes(page?.data.type!) &&
                           (site?.data.dataBase.map(data => (
@@ -376,8 +356,7 @@ export const PageForm: FC<PageForm> = ({ setOpenMCD, uid, page, type }) => {
         <div className="group-button-form">
           <button
             type="submit"
-            className="inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-          // onClick={() => setOpen(false)}
+            className="btn-primary "
           >
             {page ? 'Update' : 'Created'}
           </button>

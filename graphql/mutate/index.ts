@@ -1,3 +1,4 @@
+export * from './article.mutate'
 export * from './page.mutate'
 export * from './product.mutate'
 export * from './site.mutate'

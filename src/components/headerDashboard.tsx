@@ -31,9 +31,7 @@ interface HeaderDashboard {
 
 export const HeaderDashboard: FC<HeaderDashboard> = ({ }) => {
   const { data: session, status } = useSession()
-
-
-
+  console.log(session?.user.image.src);
   return (
     <>
       <div className="min-h-full">

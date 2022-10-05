@@ -1,5 +1,4 @@
 import {  gql } from 'graphql-request'
-import { SITE_FRAGMENT } from '../fragment/site.fragment';
 
 export const CREATE_SITE = gql`
   mutation CreateSite($input: CreateSite!) {
@@ -8,6 +7,10 @@ export const CREATE_SITE = gql`
       data{
         seo{
           title
+          image{
+            src
+            alt
+          }
         }
       }
     }

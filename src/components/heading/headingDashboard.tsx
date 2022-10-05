@@ -64,8 +64,6 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, prod
     else if (type === 'article') {
       console.log('article add');
 
-      // setOpenMCD(true)
-      // setChildren(<ProductForm />)
     }
     else if (type === 'category') {
       setOpenMCD(true)

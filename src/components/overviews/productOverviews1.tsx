@@ -1,4 +1,8 @@
+/* eslint-disable react/no-children-prop */
+
 import { useState } from 'react'
+import dynamic from 'next/dynamic';
+
 import { StarIcon } from '@heroicons/react/20/solid'
 import { RadioGroup } from '@headlessui/react'
 import { classNames, getQuery } from '../../../utils/function'
@@ -9,6 +13,42 @@ import { HeadingDashboard } from '../heading'
 import { useProduct } from '../../hooks'
 import { SwiperNavigation } from '../swiper'
 
+import atomOneDark from "react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-dark";
+import rehypeRaw from 'rehype-raw';
+import remarkGfm from 'remark-gfm';
+
+const ReactMarkdown = dynamic<any>(() => import("react-markdown") as any, { ssr: false });
+const SyntaxHighlighter = dynamic<any>(() => import("react-syntax-highlighter") as any, { ssr: false });
+const code = `### Especificaciones
+**Genero**: Hombre
+
+**Actividad**: Viaje
+
+**Edad**: 18 a 25 años
+
+**Capacidad**: 33.34 [L]
+
+**Material Exterior**: Policloruro de vinilo 100%
+
+**Peso**: 0.837 [Kg]
+
+**Color**: Negro
+
+**Medidas**: 39x45x19 [cm]
+
+**Collecion**: Independientes
+`
+// const code = `### Especificaciones
+// **Genero**: Mujer
+
+// **Edad**: 18 a 25 años
+
+// **Peso**: 353 gr
+
+// **Color**: Azul, Gris
+
+// **Collecion**: Totto verano 
+// `
 const products = {
   name: 'Basic Tee 6-Pack',
   price: '$192',
@@ -65,62 +105,70 @@ const reviews = { href: '#', average: 4, totalCount: 117 }
 
 export const ProductOverviews1 = () => {
   const { asPath } = useRouter()
-  const { data:product } = useProduct(asPath)
+  const { data: product } = useProduct(asPath)
+  console.log(product);
+  
   const [selectedColor, setSelectedColor] = useState(products.colors[0])
   const [selectedSize, setSelectedSize] = useState(products.sizes[2])
   return (
     <>
       <HeadingDashboard title="Detail Product" product={product} />
       <div className="bg-white">
-        <div className="py-6">
+        <div className="pb-6">
 
-          <div className="max-w-2xl mx-auto py-0 px-4 sm:px-0 lg:max-w-7xl lg:py-0 lg:px-8 grid grid-cols-1 lg:gap-6 lg:grid-cols-5">
+          <div className="max-w-2xl mx-auto py-0 px-4 sm:px-0 lg:max-w-7xl lg:py-0  grid grid-cols-1 lg:gap-6 lg:grid-cols-5">
             {/* Image gallery */}
             <div className="col-span-3" >
-              <SwiperNavigation image={product?.data.image!}/>
+              <SwiperNavigation image={product?.data.image!} />
             </div>
             <div className="col-span-2 " >
-              <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8 pb-3 pt-3 lg:pt-0">
+              <div className=" mb-3">
                 <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{product?.data.name}</h1>
               </div>
-              <div className='pb-3'>
-                <h3 className="text-md font-medium text-gray-900">Details</h3>
+              <div className=" mb-3">
+                <p className="text-3xl tracking-tight text-gray-900">Bs. {product?.data.price},00 </p>
+              </div>
+
+              <div className="mb-3">
+                <h3 className="sr-only">Reviews</h3>
+                <div className="flex items-center">
+                  <div className="flex items-center">
+                    {[0, 1, 2, 3, 4].map((rating) => (
+                      <StarIcon
+                        key={rating}
+                        className={classNames(
+                          reviews.average > rating ? 'text-gray-900' : 'text-gray-200',
+                          'h-5 w-5 flex-shrink-0'
+                        )}
+                        aria-hidden="true"
+                      />
+                    ))}
+                  </div>
+                  <p className="sr-only">{reviews.average} out of 5 stars</p>
+                  <a href={reviews.href} className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                    {reviews.totalCount} reviews
+                  </a>
+                </div>
+              </div>
+              <div className='mb-3'>
+                <h2 className="text-xl font-medium text-gray-900">Description</h2>
                 <div className="space-y-6">
                   <p className="text-base text-gray-900">{product?.data.description}</p>
                 </div>
               </div>
-              
+
               <div className="mt-4 lg:row-span-3 lg:mt-0">
                 <h2 className="sr-only">Product information</h2>
-                <p className="text-3xl tracking-tight text-gray-900">Bs. {product?.data.price},00 </p>
+                {/* <p className="text-3xl tracking-tight text-gray-900">Bs. {product?.data.price},00 </p> */}
 
                 {/* Reviews */}
-                <div className="mt-6">
-                  <h3 className="sr-only">Reviews</h3>
-                  <div className="flex items-center">
-                    <div className="flex items-center">
-                      {[0, 1, 2, 3, 4].map((rating) => (
-                        <StarIcon
-                          key={rating}
-                          className={classNames(
-                            reviews.average > rating ? 'text-gray-900' : 'text-gray-200',
-                            'h-5 w-5 flex-shrink-0'
-                          )}
-                          aria-hidden="true"
-                        />
-                      ))}
-                    </div>
-                    <p className="sr-only">{reviews.average} out of 5 stars</p>
-                    <a href={reviews.href} className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                      {reviews.totalCount} reviews
-                    </a>
-                  </div>
-                </div>
 
-                <form className="mt-10">
+
+
+                <form className="">
                   {/* Colors */}
-                  <div>
-                    <h3 className="text-sm font-medium text-gray-900">Color</h3>
+                  <div className='mb-3'>
+                    <h3 className="text-xl font-medium text-gray-900">Color</h3>
 
                     <RadioGroup value={selectedColor} onChange={setSelectedColor} className="mt-4">
                       <RadioGroup.Label className="sr-only"> Choose a color </RadioGroup.Label>
@@ -156,9 +204,11 @@ export const ProductOverviews1 = () => {
                   </div>
 
                   {/* Sizes */}
-                  <div className="mt-10">
+                  {
+                    product?.type! === 'clothing' &&
+                  <div className="mb-3">
                     <div className="flex items-center justify-between">
-                      <h3 className="text-sm font-medium text-gray-900">Size</h3>
+                      <h3 className="text-xl font-medium text-gray-900">Size</h3>
                       <a href="#" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
                         Size guide
                       </a>
@@ -216,20 +266,60 @@ export const ProductOverviews1 = () => {
                       </div>
                     </RadioGroup>
                   </div>
+                  }
 
                   <button
                     type="submit"
-                    className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    className="my-6 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   >
                     Add to bag
                   </button>
                 </form>
+                {/* Details */}
+                <div className='prose mb-3'>
+
+                  <ReactMarkdown
+                    remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
+                    children={`${code}`}
+                    rehypePlugins={[rehypeRaw]}
+                    // rehypePlugins={[rehypeHighlight]}
+                    components={{
+                      // u({node, ...props}) { return <u style={{textDecoration: 'underline'}} {...props} />} ,
+                      code({ node, inline, className, children, ...props }: any) {
+                        const match = /language-(\w+)/.exec(className || '')
+                        return !inline && match ? (
+                          <>
+
+                            <SyntaxHighlighter
+                              // unwrapDisallowed={true}
+
+                              children={String(children).replace(/\n$/, '')}
+                              style={atomOneDark as any}
+                              language={match[1]}
+                              PreTag="div"
+                              {...props}
+                            />
+                          </>
+                        ) : (
+
+
+                          <code className={className} {...props}>
+                            <>
+                              {children}
+                            </>
+                          </code>
+                        )
+                      }
+                    }}
+                  />
+                </div>
+
               </div>
             </div>
 
           </div>
 
-          
+
         </div>
       </div>
     </>

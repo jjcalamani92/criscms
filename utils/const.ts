@@ -23,6 +23,8 @@ export const typePageEcommerceCategory = [
   { label:"Gift", value:"gift" , categories: "Regalos"},
   { label:"Book", value:"book" , categories: "Libros"},
   { label:"Paint", value:"paint" , categories: "Pintura"},
+  { label:"Hardware Store", value:"hardware-store" , categories: "Ferretería"},
+  { label:"Glasses", value:"glasses" , categories: "Lentes, Gafas"},
   ]
 
   //TODO: SITE PORTFOLIO

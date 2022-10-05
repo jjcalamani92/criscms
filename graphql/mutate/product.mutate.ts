@@ -41,7 +41,7 @@ export const UPDATE_PRODUCT = gql`
         price
         discountPrice
         description
-        featured {
+        promotion {
           name
           href
         }
@@ -88,7 +88,7 @@ export const UPDATE_PRODUCT_IMAGE = gql`
         price
         discountPrice
         description
-        featured {
+        promotion {
           name
           href
         }

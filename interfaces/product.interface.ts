@@ -22,7 +22,7 @@ export interface DataProduct {
   description: string;
   image: Image[];
   seo: Seo;
-  featured: Featured
+  promotion: Promotion
 }
 
 // export interface Page {
@@ -33,7 +33,7 @@ export interface DataProduct {
 //   page:Page[];
 // }
 
-export interface Featured {
+export interface Promotion {
   name: string;
   href: string;
 }
@@ -49,7 +49,7 @@ export interface CreateProduct {
     name: string
     mark: string
     description: string
-    featured: string
+    promotion: string
     inStock: number
     price: number
     discountPrice: number
@@ -66,7 +66,7 @@ export interface UpdateProduct {
     name: string
     mark: string
     description: string
-    featured: string
+    promotion: string
     inStock: number
     price: number
     discountPrice: number

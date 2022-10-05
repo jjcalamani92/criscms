@@ -77,7 +77,7 @@ export const FIND_PRODUCT = gql`
         price
         discountPrice
         description
-        featured{
+        promotion{
           name
           href
         }

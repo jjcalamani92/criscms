@@ -12,7 +12,7 @@ import { useCreateProduct, useUpdateProduct } from '../../hooks';
 interface FormValues {
   name: string;
   mark: string;
-  featured: string;
+  promotion: string;
   description: string;
   price: number;
   discountPrice: number;
@@ -32,7 +32,7 @@ export const ProductForm: FC<ProductForm> = ({ setOpenMCD, uid, type, product })
   const { asPath } = useRouter()
   const query = getQuery(asPath)
 
-  const { register, handleSubmit, formState: { errors }, setValue } = useForm<FormValues>({ defaultValues: product ? { name: product.data.name, mark: product.data.mark, featured: product.data.featured.href, description: product.data.description, price: product.data.price, discountPrice: product.data.discountPrice, inStock: product.data.inStock } : { name: "", mark: 'none', featured: 'none', description: 'product description', price: 0, discountPrice: 0, inStock: 1 } });
+  const { register, handleSubmit, formState: { errors }, setValue } = useForm<FormValues>({ defaultValues: product ? { name: product.data.name, mark: product.data.mark, promotion: product.data.promotion.href, description: product.data.description, price: product.data.price, discountPrice: product.data.discountPrice, inStock: product.data.inStock } : { name: "", mark: 'none', promotion: 'none', description: 'product description', price: 0, discountPrice: 0, inStock: 1 } });
 
   const { mutate: createProduct } = useCreateProduct(uid!)
   const { mutate: updateProduct } = useUpdateProduct()
@@ -113,7 +113,7 @@ export const ProductForm: FC<ProductForm> = ({ setOpenMCD, uid, type, product })
                 </label>
                 <select
                   className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 text-sm"
-                  {...register("featured", {
+                  {...register("promotion", {
                     required: "Featured required!!"
                   })}
                 >
@@ -121,7 +121,7 @@ export const ProductForm: FC<ProductForm> = ({ setOpenMCD, uid, type, product })
                   <option value="dos-por-uno" >Dos por Uno</option>
                   <option value="descuentos-de-julio" >Descuentos de Julio</option>
                 </select>
-                {errors.featured && <p className='text-red-600 text-sm'>This is required!!</p>}
+                {errors.promotion && <p className='text-red-600 text-sm'>This is required!!</p>}
               </div>
 
               <div className="col-span-6">

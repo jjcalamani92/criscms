@@ -34,6 +34,15 @@ export const FIND_ALL_PRODUCTS_BY_PARENT = gql`
         seo {
           title
           description
+          image{
+            src
+            alt
+          }
+        }
+        image {
+          uid
+          src
+          alt
         }
       }
     }
@@ -73,7 +82,6 @@ export const FIND_PRODUCT = gql`
           href
         }
         image {
-          uid
           src
           alt
         }
@@ -81,6 +89,10 @@ export const FIND_PRODUCT = gql`
           title
           href
           description
+          image{
+            src
+            alt
+          }
         }
       }
     }

@@ -18,11 +18,11 @@ function Page() {
   const { data: pages2 } = usePages2();
   const { data: allProducts } = useAllProducts();
   const { data: articles, isError, isLoading, isFetching, status } = useFindAllArticles();
-  console.log('articles', articles)
-  console.log('isError', isError)
-  console.log('status', status)
-  console.log('isLoading', isLoading)
-  console.log('isFetching', isFetching)
+  // console.log('articles', articles)
+  // console.log('isError', isError)
+  // console.log('status', status)
+  // console.log('isLoading', isLoading)
+  // console.log('isFetching', isFetching)
   
   // console.log(pages0);
   

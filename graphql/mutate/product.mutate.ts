@@ -18,6 +18,10 @@ export const CREATE_PRODUCT = gql`
         seo {
           title
           description
+          image{
+            src
+            alt
+          }
         }
       }
     }
@@ -50,6 +54,10 @@ export const UPDATE_PRODUCT = gql`
           title
           href
           description
+          image{
+            src
+            alt
+          }
         }
       }
     }
@@ -93,6 +101,10 @@ export const UPDATE_PRODUCT_IMAGE = gql`
           title
           href
           description
+          image{
+            src
+            alt
+          }
         }
       }
     }

@@ -10,7 +10,7 @@ interface CardProduct {
 }
 export const CardProduct: FC<CardProduct> = ({ product }) => {
   const { mutate: deleteProduct } = useDeleteProduct(product?.parent!)
-  // console.log(product?.parent);
+  // console.log(product?.data.seo.image.src);
   
   const onDelete = (id:string) => {
     Swal.fire({
@@ -41,8 +41,8 @@ export const CardProduct: FC<CardProduct> = ({ product }) => {
           <Image
             width={400}
             height={400}
-            src={"https://res.cloudinary.com/dvcyhn0lj/image/upload/v1655217461/14.1_no-image.jpg_gkwtld.jpg"}
-            alt={"description image"}
+            src={product?.data.seo.image.src!}
+            alt={product?.data.seo.image.alt!}
           />
           <div className="flex flex-col justify-between px-4 space-y-8">
             <div className="space-y-2">

@@ -22,8 +22,8 @@ export const SwiperNavigation: FC<SwiperNavigation> = ({ image }) => {
       
       <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
         {
-          image.map(data => (
-            <SwiperSlide key={data.uid}>
+          image.map((data, i) => (
+            <SwiperSlide key={i}>
               <Image src={data.src} layout="responsive" objectFit="cover" width={300} height={300} alt={data.alt} />
             </SwiperSlide>
           ))

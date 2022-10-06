@@ -20,24 +20,34 @@ import remarkGfm from 'remark-gfm';
 const ReactMarkdown = dynamic<any>(() => import("react-markdown") as any, { ssr: false });
 const SyntaxHighlighter = dynamic<any>(() => import("react-syntax-highlighter") as any, { ssr: false });
 const code = `### Especificaciones
-**Genero**: Hombre
-
-**Actividad**: Viaje
-
-**Edad**: 18 a 25 años
-
-**Capacidad**: 33.34 [L]
-
-**Material Exterior**: Policloruro de vinilo 100%
-
-**Peso**: 0.837 [Kg]
-
-**Color**: Negro
-
-**Medidas**: 39x45x19 [cm]
-
-**Collecion**: Independientes
+- **Suministro de red**: 220-240 V | 50 Hz
+- **Potencia**: 750 [W]
+- **Ralentí**: 12000 min^-1
+- **Diámetro del disco**: 115 mm
+- **Potencia absorbida**: 750 W
+- **Velocidad de giro en vacío**: 12000 min-1
+- **Diámetro de los discos abrasivos**: 115 mm
+- **Modo operativo**: Energía eléctrica
 `
+// const code = `### Especificaciones
+// **Genero**: Hombre
+
+// **Actividad**: Viaje
+
+// **Edad**: 18 a 25 años
+
+// **Capacidad**: 33.34 [L]
+
+// **Material Exterior**: Policloruro de vinilo 100%
+
+// **Peso**: 0.837 [Kg]
+
+// **Color**: Negro
+
+// **Medidas**: 39x45x19 [cm]
+
+// **Collecion**: Independientes
+// `
 // const code = `### Especificaciones
 // **Genero**: Mujer
 
@@ -167,6 +177,8 @@ export const ProductOverviews1 = () => {
 
                 <form className="">
                   {/* Colors */}
+                  {
+                    product?.type! === 'clothing' &&
                   <div className='mb-3'>
                     <h3 className="text-xl font-medium text-gray-900">Color</h3>
 
@@ -202,7 +214,7 @@ export const ProductOverviews1 = () => {
                       </div>
                     </RadioGroup>
                   </div>
-
+                  }
                   {/* Sizes */}
                   {
                     product?.type! === 'clothing' &&

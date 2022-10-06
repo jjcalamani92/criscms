@@ -25,6 +25,7 @@ export const typePageEcommerceCategory = [
   { label:"Paint", value:"paint" , categories: "Pintura"},
   { label:"Hardware Store", value:"hardware-store" , categories: "Ferretería"},
   { label:"Glasses", value:"glasses" , categories: "Lentes, Gafas"},
+  { label:"Engine", value:"engine" , categories: "Motores, Motobomba"},
   ]
 
   //TODO: SITE PORTFOLIO

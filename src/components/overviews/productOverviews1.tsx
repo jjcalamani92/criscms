@@ -13,12 +13,13 @@ import { HeadingDashboard } from '../heading'
 import { useProduct } from '../../hooks'
 import { SwiperNavigation } from '../swiper'
 
-import atomOneDark from "react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-dark";
-import rehypeRaw from 'rehype-raw';
-import remarkGfm from 'remark-gfm';
+// import atomOneDark from "react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-dark";
+// import rehypeRaw from 'rehype-raw';
+// import remarkGfm from 'remark-gfm';
+import { MarkdownComponent } from '../utils';
 
-const ReactMarkdown = dynamic<any>(() => import("react-markdown") as any, { ssr: false });
-const SyntaxHighlighter = dynamic<any>(() => import("react-syntax-highlighter") as any, { ssr: false });
+// const ReactMarkdown = dynamic<any>(() => import("react-markdown") as any, { ssr: false });
+// const SyntaxHighlighter = dynamic<any>(() => import("react-syntax-highlighter") as any, { ssr: false });
 const code = `### Especificaciones
 - **Suministro de red**: 220-240 V | 50 Hz
 - **Potencia**: 750 [W]
@@ -28,6 +29,37 @@ const code = `### Especificaciones
 - **Velocidad de giro en vacío**: 12000 min-1
 - **Diámetro de los discos abrasivos**: 115 mm
 - **Modo operativo**: Energía eléctrica
+`
+const code0 = `### Características que aumentan la robustez de este motor:
+- El protector de escape y la cubierta del ventilador se han reforzado en los puntos de fijación
+- Arranque  construido en acero.
+- La varilla del regulador está provista de un casquillo.
+- La pipa de la bujía es de resina.
+### Otras características del motor:
+- Un simple pero novedoso sistema de lubricación, con dos cámaras de respiración, garantiza una correcta lubricación en cualquier posición.
+- Un carburador de membrana evita cualquier pérdida de combustible cuando se apoya la máquina de lado.
+- Soporte especial de montaje para pisón.
+`
+const code1 = `### Especificaciones técnicas
+- **TIPO DE MOTOR**: 
+  - Cilindro individual 
+  - 4 tiempos Motor gasolina OHV
+  - Eje horizontal
+- **TIPO DE CAMISA DE CILINDRO**: Camisa de acero
+- **CALIBRE X CARRERA**: 56 x 40 mm
+- **CILINDRADA**: 98 cm³
+- **RELACIÓN DE COMPRESIÓN**: 8.5 : 1
+- **POTENCIA NETA**: 2.1 kW ( 2.8 HP ) / 3600 rpm
+- **POTENCIA NOMINAL**: 1.7 kW ( 2.3 HP ) / 3600 rpm
+- **PAR MÁXIMO NETO**: 5.7 Nm ( 0.58 kgfm ) / 3600 rpm
+- **SISTEMA DE ENCENDIDO**: Transistorizado
+- **MOTOR DE ARRANQUE**: Tirador de arranque
+- **CONSUMO DE COMBUSTIBLE A POTENCIA NOMINAL**: 0.88 L/H - 3600 rpm
+- **CAPACIDAD DE ACEITE**: 0.3 Litro
+- **DIMENSIONES (L X A X A)**: 254 x 316 x 290 mm
+- **PESO EN SECO**: 
+  - Tipo de pisón 50 kg : 10.7 kg
+  - Tipo de pisón 60 kg : 10.8 kg
 `
 // const code = `### Especificaciones
 // **Genero**: Hombre
@@ -116,7 +148,7 @@ const reviews = { href: '#', average: 4, totalCount: 117 }
 export const ProductOverviews1 = () => {
   const { asPath } = useRouter()
   const { data: product } = useProduct(asPath)
-  console.log(product);
+  // console.log(product);
   
   const [selectedColor, setSelectedColor] = useState(products.colors[0])
   const [selectedSize, setSelectedSize] = useState(products.sizes[2])
@@ -134,6 +166,13 @@ export const ProductOverviews1 = () => {
             <div className="col-span-2 " >
               <div className=" mb-3">
                 <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{product?.data.name}</h1>
+              </div>
+              <div className='mb-3'>
+                {/* <h2 className="text-xl font-medium text-gray-900">Description</h2> */}
+                <div className="space-y-6">
+                  <MarkdownComponent code={product?.data.description!} />
+                  {/* <p className="text-base text-gray-900">{product?.data.description}</p> */}
+                </div>
               </div>
               <div className=" mb-3">
                 <p className="text-3xl tracking-tight text-gray-900">Bs. {product?.data.price},00 </p>
@@ -160,12 +199,7 @@ export const ProductOverviews1 = () => {
                   </a>
                 </div>
               </div>
-              <div className='mb-3'>
-                <h2 className="text-xl font-medium text-gray-900">Description</h2>
-                <div className="space-y-6">
-                  <p className="text-base text-gray-900">{product?.data.description}</p>
-                </div>
-              </div>
+              
 
               <div className="mt-4 lg:row-span-3 lg:mt-0">
                 <h2 className="sr-only">Product information</h2>
@@ -288,8 +322,9 @@ export const ProductOverviews1 = () => {
                   </button>
                 </form>
                 {/* Details */}
-                <div className='prose mb-3'>
-
+                <MarkdownComponent code={code0} />
+                <MarkdownComponent code={code1} />
+                {/* <div className='prose mb-3'>
                   <ReactMarkdown
                     remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
                     children={`${code}`}
@@ -313,8 +348,6 @@ export const ProductOverviews1 = () => {
                             />
                           </>
                         ) : (
-
-
                           <code className={className} {...props}>
                             <>
                               {children}
@@ -324,7 +357,7 @@ export const ProductOverviews1 = () => {
                       }
                     }}
                   />
-                </div>
+                </div> */}
 
               </div>
             </div>

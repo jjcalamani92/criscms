@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { useRouter } from 'next/router'
 import { LayoutDashboard, LayoutPages } from '../../../../layouts'
-import { GridPage0, GridPage1, GridPage2, GridPage3, ProductOverviews1 } from '../../../../components'
+import { GridPage0, GridPage1, GridPage2, GridPage3, ProductOverviews, ProductOverviews1 } from '../../../../components'
 import Custom404 from '../../../404'
 import { findPage0, findPage1, findPages0, findPages0ByParent, findPages1, findPages1ByParent, findSite, findSites, usePage0, usePages0, usePages1, useSites, findPages2ByParent, usePages2, findPages2, findPage2, findPages3ByParent, findAllProductsByParent, useAllProducts, findAllProducts, findProduct, useFindAllArticles } from '../../../../hooks'
 import { getPathBySite, getPathByPages0, getPathByPage0, getPathByPage1, getPathByPages1, getPathByPage2, getPathByProduct } from '../../../../../utils'
@@ -33,7 +33,7 @@ function Page() {
     case getPathByPage0(pages0!, asPath): return <GridPage1 />
     case getPathByPage1(pages1!, asPath): return <GridPage2 />
     case getPathByPage2(pages2!, asPath): return <GridPage3 />
-    case getPathByProduct(allProducts!, asPath): return <ProductOverviews1/>
+    case getPathByProduct(allProducts!, asPath): return <ProductOverviews/>
     default:
       return <Custom404 />
   }

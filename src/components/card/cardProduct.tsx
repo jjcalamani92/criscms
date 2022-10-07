@@ -1,8 +1,9 @@
 import Link from "next/link"
-import { FC, useEffect, useState } from "react";
+import React, { FC, useRef, useEffect, useState } from "react";
 import Image from "next/image";
 import { Page, Product, Site } from "../../../interfaces";
-import { useLongPress } from 'react-use';
+import { useLongPress } from 'ahooks';
+import { useRouter } from "next/router";
 
 interface CardProduct {
   product?: Product
@@ -11,17 +12,12 @@ interface CardProduct {
 }
 
 export const CardProduct: FC<CardProduct> = ({ product, select, setSelect }) => {
+  const {push} = useRouter()
   const [check, setCheck] = useState(false)
-  const onLongPress = () => {
-    setCheck(true)
-    console.log('calls callback after long pressing 300ms');
-  };
-
-  const defaultOptions = {
-    isPreventDefault: true,
-    delay: 300,
-  };
-  const longPressEvent = useLongPress(onLongPress, defaultOptions);
+  const ref = useRef<HTMLDivElement>(null);
+  useLongPress(() => onSelect(product?._id!), ref, {
+    onClick: () => push(`/dashboard/sites/${product?.site}/product/${product?.type}=${product?._id}`),
+  });
 
   useEffect(() => {
     if (select!.length === 0) {
@@ -30,31 +26,35 @@ export const CardProduct: FC<CardProduct> = ({ product, select, setSelect }) => 
   }, [select])
   
   const onSelect = ( id:string) => {
+    // console.log("click");
+    // setCheck(true)
     const uid = select!.find(data => data === id)
     if (uid) {
       setSelect(select!.filter(data => data !== id))
+      setCheck(false)
     } else {
       setSelect([...select!, id])
+      setCheck(true)
     }
   } 
   
 
   
   return (
-    <div {...longPressEvent} className="group max-w-xs rounded-md shadow hover:shadow-2xl transition ease-in-out delay-150 bg-gray-50 text-gray-800 relative">
+    <div ref={ref}  className="group max-w-xs rounded-md shadow hover:shadow-2xl transition ease-in-out delay-150 bg-gray-50 text-gray-800 relative">
 
-        <div className={`flex p-1 items-center absolute z-10 top-2 left-2 opacity-0 ${(select?.length !== 0 || check) && "opacity-100"} group-hover:opacity-100  group-hover:transition-all transition ease-in-out delay-150`}>
+        <div className={`flex p-1 items-center absolute z-10 top-2 left-2 opacity-0 ${select?.length !== 0  && "opacity-100"} group-hover:opacity-100  group-hover:transition-all transition ease-in-out delay-150`}>
           <input
             type="checkbox"
             className="h-5 w-5  rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-            onClick={() => onSelect(product?._id!)}
+            onClick={() => {onSelect(product?._id!), setCheck(true)}}
             onChange={(e) => setCheck(!check)}  
             checked={check}
             
           />
         </div>
-      <Link href={`/dashboard/sites/${product?.site}/product/${product?.type}=${product?._id}`}>
-        <a>
+      {/* <Link href={`/dashboard/sites/${product?.site}/product/${product?.type}=${product?._id}`}>
+        <a> */}
           <Image
             width={400}
             height={400}
@@ -66,8 +66,8 @@ export const CardProduct: FC<CardProduct> = ({ product, select, setSelect }) => 
               <h2 className=" text-sm tracking-wide truncate">{product?.data.seo.title}</h2>
             </div>
           </div>
-        </a>
-      </Link>
+        {/* </a>
+      </Link> */}
     </div>
   )
 }

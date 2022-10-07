@@ -28,8 +28,8 @@ import Swal from 'sweetalert2'
 
 interface HeadingDashboard {
   title: string
-  select: string[]
-  setSelect: React.Dispatch<React.SetStateAction<string[]>>
+  select?: string[]
+  setSelect?: React.Dispatch<React.SetStateAction<string[] >> | any
 
   page?: Page
   site?: Site
@@ -63,7 +63,7 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, prod
           timer: 1000,
           showConfirmButton: false,
         })
-        deleteProducts({ids: select, type: query[4]})
+        deleteProducts({ids: select!, type: query[4]})
         setSelect([])
         // select.length === 0
       }

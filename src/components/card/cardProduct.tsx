@@ -7,26 +7,26 @@ import { useDeleteProduct, useDeleteSite } from "../../hooks";
 import { useForm } from 'react-hook-form';
 interface CardProduct {
   product?: Product
-  select: string[]
-  setSelect: React.Dispatch<React.SetStateAction<string[]>>
+  select?: string[]
+  setSelect?: React.Dispatch<React.SetStateAction<string[]>> | any
 }
 
 export const CardProduct: FC<CardProduct> = ({ product, select, setSelect }) => {
   const [check, setCheck] = useState(false)
   console.log(check, product?.data.name)
   useEffect(() => {
-    if (select.length === 0) {
+    if (select!.length === 0) {
       setCheck(false)
     }
   }, [select])
   
   const { mutate: deleteProduct } = useDeleteProduct(product?.parent!)
   const onSelect = ( id:string) => {
-    const uid = select.find(data => data === id)
+    const uid = select!.find(data => data === id)
     if (uid) {
-      setSelect(select.filter(data => data !== id))
+      setSelect(select!.filter(data => data !== id))
     } else {
-      setSelect([...select, id])
+      setSelect([...select!, id])
     }
   } 
   

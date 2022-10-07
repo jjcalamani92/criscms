@@ -36,7 +36,7 @@ interface HeadingDashboard {
   product?:Product
 }
 export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, product, select, setSelect }) => {
-  // console.log(select);
+  console.log(select?.length);
   const { asPath } = useRouter()
   const query = getQuery(asPath)
   // console.log(query);
@@ -203,7 +203,7 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, prod
         }
         {
           query.length === 5 && query[3] === '$products' &&
-          <span className="block">
+          <span className={`block opacity-0 ${select?.length !== 0 && "opacity-100"} transition ease-in-out delay-150`}>
             <button className="btn-primary space-x-3" onClick={() => deleteHandle()} >
             <TrashIcon className="h-6 w-6" aria-hidden="true" />
               <p className='hidden sm:block'>

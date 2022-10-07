@@ -5,6 +5,9 @@ export const FIND_SITES = gql`
     findSites {
       _id
       data{
+        dataBase{
+          value
+        }
         seo{
           title
           image{

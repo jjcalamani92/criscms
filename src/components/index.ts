@@ -8,6 +8,7 @@ export * from './login'
 
 // export * from './card'
 export * from './grids'
+export * from './pagination'
 export * from './heading'
 export * from './overviews'
 export * from './polymorphic'

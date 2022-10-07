@@ -5,6 +5,25 @@ products.map((data) => ({asPath:`/dashboard/sites/${data.site}/product/${data.ty
 export const getPathByProduct = (products: Product[], asPath:string) =>
 getPathByProducts(products).map((data) => data.asPath).find(data => data === asPath);
 
+export const getPathsAllProducts = (products: Product[]) =>
+products.map((data) => ({asPath:`/dashboard/sites/${data.site}/products/${data.type}=${data._id}`, seo: data.data.seo}));
+export const getPathsAllProduct = (products: Product[], asPath:string) =>
+getPathByProducts(products).map((data) => data.asPath).find(data => data === asPath);
+// export const getPathsAllProductsDB = (products: Product[]) =>
+// products.map((data) => ({asPath:`/dashboard/sites/${data.site}/products/${data.type}=${data._id}`, seo: data.data.seo}));
+// export const getPathsAllProductDB = (products: Product[], asPath:string) =>
+// getPathByProducts(products).map((data) => data.asPath).find(data => data === asPath);
+
+
+// export const getPathBySitesDB = (sites: Site[]) =>
+// sites.map((data) => data.data.dataBase.map(db => ({asPath:`/dashboard/sites/${data._id}/$products/${db.value}`, seo: data.data.seo})) ).flat(1);
+// export const getPathBySiteProductsDB = (sites: Site[], asPath:string) =>
+// getPathBySitesDB(sites).map((data) => data.asPath).find(data => data === asPath);
+
+export const getPathBySitesProductsDB = (sites: Site[]) =>
+sites.map((data) => data.data.dataBase.map(db => ({asPath:`/dashboard/sites/${data._id}/$products/${db.value}`, seo: data.data.seo})) ).flat(1);
+export const getPathBySiteProductsDB = (sites: Site[], asPath:string) =>
+getPathBySitesProductsDB(sites).map((data) => data.asPath).find(data => data === asPath);
 
 export const getPathBySites = (sites: Site[]) =>
 sites.map((data) => ({asPath:`/dashboard/sites/${data._id}`, seo: data.data.seo}));

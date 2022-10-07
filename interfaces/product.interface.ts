@@ -25,13 +25,6 @@ export interface DataProduct {
   promotion: Promotion
 }
 
-// export interface Page {
-//   _id: string;
-//   data: Data;
-//   // blogs: Blog[];
-//   slug: string;
-//   page:Page[];
-// }
 
 export interface Promotion {
   name: string;
@@ -40,6 +33,41 @@ export interface Promotion {
 export interface Data {
   type: string;
   seo: Seo;
+}
+export interface ConnectionArgs {
+  before?: string;
+  after?: string;
+  first?: number;
+  last?: number;
+  // before?: string | null;
+  // after?: string | null;
+  // first?: number | null;
+  // last?: number | null;
+}
+
+export interface ListProductResponse{
+  page: ProductConnection
+  pageData: PageData
+}
+
+export interface ProductConnection{
+  edges: ProductEdge[]
+  pageInfo: ProductPageInfo
+}
+export interface ProductEdge {
+  cursor: string
+  node: Product
+}
+export interface ProductPageInfo {
+  startCursor: string
+  endCursor: string
+  hasPreviousPage: boolean
+  hasNextPage: boolean
+}
+export interface PageData {
+  count: number
+  limit: number
+  offset: number
 }
 
 export interface ImageProduct extends Image {}

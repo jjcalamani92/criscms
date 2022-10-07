@@ -1,5 +1,55 @@
 import { gql } from "graphql-request";
 
+export const FIND_PRODUCTS_WITH_CURSOR = gql`
+  query ListProductWithCursor($args: ConnectionArgs!, $type: String!, $siteId: String!) {
+    listProductWithCursor(args: $args, type: $type, siteId: $siteId) {
+      pageData {
+        count
+        limit
+        offset
+      }
+      page {
+        edges {
+          cursor
+          node {
+            _id
+            site
+            parent
+            type
+            data {
+              name
+              slug
+              mark
+              inStock
+              price
+              discountPrice
+              description
+              seo {
+                title
+                description
+                image {
+                  src
+                  alt
+                }
+              }
+              image {
+                uid
+                src
+                alt
+              }
+            }
+          }
+        }
+        pageInfo {
+          startCursor
+          endCursor
+          hasNextPage
+          hasPreviousPage
+        }
+      }
+    }
+  }
+`;
 export const FIND_PRODUCTS_BY_PARENT = gql`
   query FindProductsByParent($parentId: String!, $type: String!) {
     findProductsByParent(parentId: $parentId, type: $type) {
@@ -34,7 +84,7 @@ export const FIND_ALL_PRODUCTS_BY_PARENT = gql`
         seo {
           title
           description
-          image{
+          image {
             src
             alt
           }
@@ -54,11 +104,10 @@ export const FIND_ALL_PRODUCTS = gql`
       _id
       site
       type
-      data{
-        seo{
+      data {
+        seo {
           title
           description
-          
         }
       }
     }
@@ -77,7 +126,7 @@ export const FIND_PRODUCT = gql`
         price
         discountPrice
         description
-        promotion{
+        promotion {
           name
           href
         }
@@ -85,11 +134,11 @@ export const FIND_PRODUCT = gql`
           src
           alt
         }
-        seo{
+        seo {
           title
           href
           description
-          image{
+          image {
             src
             alt
           }

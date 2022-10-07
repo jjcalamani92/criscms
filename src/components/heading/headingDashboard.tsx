@@ -19,25 +19,56 @@ import { Modal } from '../utils'
 import { TabFormPage, TabFormProduct, TabFormSite } from '../tabs'
 import { typePageEcommerceCategory, typeSite } from '../../../utils'
 import { Text } from '../polymorphic'
-import { CubeIcon, FolderPlusIcon, SquaresPlusIcon } from '@heroicons/react/24/outline'
+import { CubeIcon, FolderPlusIcon, SquaresPlusIcon, TrashIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
+import { useDeleteManyProductById } from '../../hooks'
+import Swal from 'sweetalert2'
 
 
 
 interface HeadingDashboard {
   title: string
+  select: string[]
+  setSelect: React.Dispatch<React.SetStateAction<string[]>>
+
   page?: Page
   site?: Site
   product?:Product
 }
-export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, product }) => {
-  
-  // console.log(site);
-  
+export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, product, select, setSelect }) => {
+  // console.log(select);
   const { asPath } = useRouter()
   const query = getQuery(asPath)
+  // console.log(query);
   const [openMCD, setOpenMCD] = useState(false)
   const [children, setChildren] = useState<React.ReactNode>()
+  const { mutate: deleteProducts } = useDeleteManyProductById( {first: 10}, query[2],query[4])
+
+  const deleteHandle = () => {
+    // console.log('deleteHandle', select);
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'Deleted!',
+          text: 'Your file has been deleted.',
+          icon: 'success',
+          timer: 1000,
+          showConfirmButton: false,
+        })
+        deleteProducts({ids: select, type: query[4]})
+        setSelect([])
+        // select.length === 0
+      }
+    })
+  }
   const editHandle = (type: string) => {
     if (type === "site") {
       setOpenMCD(true)
@@ -170,7 +201,17 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, prod
             </button>
           </span>
         }
-
+        {
+          query.length === 5 && query[3] === '$products' &&
+          <span className="block">
+            <button className="btn-primary space-x-3" onClick={() => deleteHandle()} >
+            <TrashIcon className="h-6 w-6" aria-hidden="true" />
+              <p className='hidden sm:block'>
+                  Eliminar
+                </p>
+            </button>
+          </span>
+        }
 
 
         {/* Dropdown */}

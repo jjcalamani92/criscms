@@ -118,3 +118,7 @@ export interface DeleteProduct {
   id:string
   type: string
 }
+export interface DeleteManyProductById {
+  ids:string[]
+  type: string
+}

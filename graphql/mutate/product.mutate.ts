@@ -69,6 +69,11 @@ export const DELETE_PRODUCT = gql`
     deleteProduct(id: $id, type: $type)
   }
 `;
+export const DELETE_MANY_PRODUCT_BY_ID = gql`
+  mutation DeleteProductsById($ids: [String!]!, $type: String!) {
+    deleteProductsById (ids:$ids, type: $type) 
+  }
+`;
 
 export const UPDATE_PRODUCT_IMAGE = gql`
   mutation UpdateProductImage(

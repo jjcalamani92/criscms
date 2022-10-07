@@ -1,10 +1,10 @@
 import { FC, useState, Fragment } from 'react';
 import { useRouter } from 'next/router';
-import { useAllProductsByParent, usePage0, usePage2, usePages0ByParent, usePages1ByParent, usePages3ByParent, useProductsByParent, useProductsWithCursor, useSite } from '../../hooks';
-import { CardPage1, CardPage2, CardPage3, CardProduct } from '../card';
+import { useProductsWithCursor } from '../../hooks';
+import { CardProduct } from '../card';
 import { Grid } from '../grid';
 import { HeadingDashboard } from '../heading';
-import { getQuery, typePageEcommerceCategory } from '../../../utils';
+import { getQuery } from '../../../utils';
 import { Pagination01 } from '../pagination';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css'
@@ -15,6 +15,11 @@ interface GridProduct {
 export const GridProduct: FC<GridProduct> = () => {
   const {asPath} = useRouter()
   const query = getQuery(asPath) 
+  const [select, setSelect] = useState<string[]>([])
+  // console.log(select);
+  
+  // setSelect([...select, '1'])
+  // console.log('select', select);
   
   const [amount, setAmount] = useState(10)
   const [args, setArgs] = useState({
@@ -34,13 +39,13 @@ export const GridProduct: FC<GridProduct> = () => {
 
   return (
     <Fragment>
-      <HeadingDashboard title={"products"} />
+      <HeadingDashboard title={`Products`} select={select} setSelect={setSelect}/>
       <Grid>
       {
         isLoading ?
         rows
         :
-        products?.page.edges.map((data, i) => <CardProduct key={i} product={data.node} />)
+        products?.page.edges.map((data, i) => <CardProduct key={i} product={data.node} select={select} setSelect={setSelect} />)
       }
       </Grid>
       <Pagination01 setArgs={setArgs} amount={amount} pageInfo={products?.page.pageInfo!} pageData={products?.pageData!}/>

@@ -20,7 +20,7 @@ function Page() {
   const { data: pages1 } = usePages1();
   const { data: pages2 } = usePages2();
   const { data: allProducts } = useAllProducts();
-  console.log(getPathBySiteProductsDB(sites!, asPath));
+  // console.log(getPathBySiteProductsDB(sites!, asPath));
   
   // const { data: articles, isError, isLoading, isFetching, status } = useFindAllArticles();
   // const { data: products, isError, isLoading, isFetching, status } = useProductsWithCursor( {

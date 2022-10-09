@@ -36,7 +36,7 @@ interface HeadingDashboard {
   product?:Product
 }
 export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, product, select, setSelect }) => {
-  console.log(select?.length);
+  // console.log(select?.length);
   const { asPath } = useRouter()
   const query = getQuery(asPath)
   // console.log(query);
@@ -104,7 +104,7 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, prod
     }
   }
   return (
-    <div className="flex lg:items-center lg:justify-between py-6 sm:py-10">
+    <div className="flex lg:items-center lg:justify-between pt-6 sm:pt-10">
       <div className="min-w-0 flex-1">
         <div className='flex'>
           <Text as="h2" className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight mr-3">{title}</Text>

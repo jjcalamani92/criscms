@@ -12,6 +12,10 @@ export const FIND_PAGE_1_BY_PARENT = gql`
         seo{
           title
           description
+          image{
+            src
+            alt
+          }
         }
       }
       
@@ -44,6 +48,10 @@ export const FIND_PAGE_1 = gql`
         seo{
           title
           description
+          image{
+            src
+            alt
+          }
           
         }
       }

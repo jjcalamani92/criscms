@@ -6,8 +6,7 @@ import { Grid } from '../grid';
 import { HeadingDashboard } from '../heading';
 import { getQuery } from '../../../utils';
 import { Pagination01 } from '../pagination';
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css'
+import { Product } from '../../../interfaces';
 interface GridProduct {
 
 }
@@ -32,8 +31,8 @@ export const GridProduct: FC<GridProduct> = () => {
       // note: we are adding a key prop here to allow react to uniquely identify each
       // element in this array. see: https://reactjs.org/docs/lists-and-keys.html
       rows.push(<div key={i}>
-        <Skeleton height={200} />
-        <Skeleton height={50} />
+        {/* <Skeleton height={200} />
+        <Skeleton height={50} /> */}  
       </div>);
   }
 
@@ -45,7 +44,7 @@ export const GridProduct: FC<GridProduct> = () => {
         isLoading ?
         rows
         :
-        products?.page.edges.map((data, i) => <CardProduct key={i} product={data.node} select={select} setSelect={setSelect} />)
+        products?.page.edges.map((data, i) => <CardProduct key={i} product={data.node as Product} select={select} setSelect={setSelect} />)
       }
       </Grid>
       <Pagination01 setArgs={setArgs} amount={amount} pageInfo={products?.page.pageInfo!} pageData={products?.pageData!}/>

@@ -13,6 +13,10 @@ export const CREATE_PAGE_0 = gql`
         seo{
           title
           description
+          image{
+            src
+            alt
+          }
         }
       }
     }
@@ -29,6 +33,10 @@ export const UPDATE_PAGE_0 = gql`
         seo{
           title
           description
+          image{
+            src
+            alt
+          }
           
         }
       }
@@ -39,6 +47,11 @@ export const DELETE_PAGE_0 = gql`
   mutation DeletePage0($id: ID!) {
     deletePage0(id: $id)
   }
+`;
+export const DELETE_PAGES_0= gql`
+mutation DeletePages0($ids: [String!]!) {
+  deletePages0(ids:$ids)
+}
 `;
 export const CREATE_PAGE_1 = gql`
   mutation CreatePage1($input: CreatePage!) {
@@ -52,6 +65,10 @@ export const CREATE_PAGE_1 = gql`
         seo{
           title
           description
+          image{
+            src
+            alt
+          }
         }
       }
     }
@@ -68,6 +85,10 @@ export const UPDATE_PAGE_1 = gql`
         seo{
           title
           description
+          image{
+            src
+            alt
+          }
           
         }
       }
@@ -78,6 +99,11 @@ export const DELETE_PAGE_1 = gql`
   mutation DeletePage1($id: ID!) {
     deletePage1(id: $id)
   }
+`;
+export const DELETE_PAGES_1= gql`
+mutation DeletePages1($ids: [String!]!) {
+  deletePages1(ids:$ids)
+}
 `;
 export const CREATE_PAGE_2 = gql`
   mutation CreatePage2($input: CreatePage!) {
@@ -91,6 +117,10 @@ export const CREATE_PAGE_2 = gql`
         seo{
           title
           description
+          image{
+            src
+            alt
+          }
         }
       }
     }
@@ -107,6 +137,10 @@ export const UPDATE_PAGE_2 = gql`
         seo{
           title
           description
+          image{
+            src
+            alt
+          }
           
         }
       }
@@ -117,6 +151,11 @@ export const DELETE_PAGE_2 = gql`
   mutation DeletePage2($id: ID!) {
     deletePage2(id: $id)
   }
+`;
+export const DELETE_PAGES_2= gql`
+mutation DeletePages2($ids: [String!]!) {
+  deletePages2(ids:$ids)
+}
 `;
 export const CREATE_PAGE_3 = gql`
   mutation CreatePage3($input: CreatePage!) {
@@ -130,6 +169,10 @@ export const CREATE_PAGE_3 = gql`
         seo{
           title
           description
+          image{
+            src
+            alt
+          }
         }
       }
     }
@@ -146,6 +189,10 @@ export const UPDATE_PAGE_3 = gql`
         seo{
           title
           description
+          image{
+            src
+            alt
+          }
           
         }
       }
@@ -156,4 +203,9 @@ export const DELETE_PAGE_3 = gql`
   mutation DeletePage3($id: ID!) {
     deletePage3(id: $id)
   }
+`;
+export const DELETE_PAGES_3= gql`
+mutation DeletePages3($ids: [String!]!) {
+  deletePages3(ids:$ids)
+}
 `;

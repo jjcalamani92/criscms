@@ -26,8 +26,6 @@ export const CardProduct: FC<CardProduct> = ({ product, select, setSelect }) => 
   }, [select])
   
   const onSelect = ( id:string) => {
-    // console.log("click");
-    // setCheck(true)
     const uid = select!.find(data => data === id)
     if (uid) {
       setSelect(select!.filter(data => data !== id))
@@ -43,7 +41,7 @@ export const CardProduct: FC<CardProduct> = ({ product, select, setSelect }) => 
   return (
     <div ref={ref}  className="group max-w-xs rounded-md shadow hover:shadow-2xl transition ease-in-out delay-150 bg-gray-50 text-gray-800 relative">
 
-        <div className={`flex p-1 items-center absolute z-10 top-2 left-2 opacity-0 ${select?.length !== 0  && "opacity-100"} group-hover:opacity-100  group-hover:transition-all transition ease-in-out delay-150`}>
+        <div className={`flex p-1 items-center absolute z-50 top-2 left-2 opacity-0 ${select?.length !== 0  && "opacity-100"} group-hover:opacity-100  group-hover:transition-all transition ease-in-out delay-150`}>
           <input
             type="checkbox"
             className="h-5 w-5  rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
@@ -62,9 +60,8 @@ export const CardProduct: FC<CardProduct> = ({ product, select, setSelect }) => 
             alt={product?.data.seo.image.alt!}
           />
           <div className="flex flex-col justify-between px-4 my-3">
-            <div className="">
+            
               <h2 className=" text-sm tracking-wide truncate">{product?.data.seo.title}</h2>
-            </div>
           </div>
         {/* </a>
       </Link> */}

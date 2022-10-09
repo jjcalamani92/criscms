@@ -1,6 +1,6 @@
 import { gql } from "graphql-request";
 
-export const FIND_PAGE_0_BY_PARENT = gql`
+export const FIND_PAGES_0_BY_PARENT = gql`
   query FindPages0ByParent($parentId: String!) {
     findPages0ByParent(parentId: $parentId) {
       _id
@@ -12,6 +12,10 @@ export const FIND_PAGE_0_BY_PARENT = gql`
         seo{
           title
           description
+          image{
+            src
+            alt
+          }
         }
       }
       
@@ -44,6 +48,10 @@ export const FIND_PAGE_0 = gql`
         seo{
           title
           description
+          image{
+            src
+            alt
+          }
           
         }
       }

@@ -1,5 +1,41 @@
 import { gql } from "graphql-request";
-
+export const FIND_SITES_WITH_CURSOR = gql`
+  query  ListSitesWithCursor ($args: ConnectionArgs!) {
+  listSitesWithCursor (args: $args){
+    pageData{
+      count
+      limit
+      offset
+    }
+   page{
+    edges{
+      node{
+        _id
+        data{
+          seo{
+            title
+            image{
+              src
+              alt
+            }
+          }
+        }
+      }
+    }
+    pageInfo{
+      startCursor
+      endCursor
+      hasNextPage
+      hasPreviousPage
+    }
+  }
+    
+    
+    
+    
+  }
+}
+`;
 export const FIND_SITES = gql`
   query FindSites {
     findSites {

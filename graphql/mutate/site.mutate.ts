@@ -133,3 +133,8 @@ export const DELETE_SITE = gql`
     deleteSite(id: $id) 
   }
 `;
+export const DELETE_SITES = gql`
+mutation DeleteSites($ids: [String!]!) {
+  deleteSites(ids:$ids)
+}
+`;

@@ -1,4 +1,4 @@
-import { Image, Seo } from "./site.interface"
+import { Image, Seo, Site } from "./site.interface"
 
 export interface Products {
   clothings?: Product[]
@@ -39,26 +39,22 @@ export interface ConnectionArgs {
   after?: string;
   first?: number;
   last?: number;
-  // before?: string | null;
-  // after?: string | null;
-  // first?: number | null;
-  // last?: number | null;
 }
 
-export interface ListProductResponse{
-  page: ProductConnection
+export interface ListResponse{
+  page: PageConnection
   pageData: PageData
 }
 
-export interface ProductConnection{
-  edges: ProductEdge[]
-  pageInfo: ProductPageInfo
+export interface PageConnection{
+  edges: Edge[]
+  pageInfo: PageInfo
 }
-export interface ProductEdge {
+export interface Edge {
   cursor: string
-  node: Product
+  node: Product | Site
 }
-export interface ProductPageInfo {
+export interface PageInfo {
   startCursor: string
   endCursor: string
   hasPreviousPage: boolean

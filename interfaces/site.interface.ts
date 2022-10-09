@@ -133,3 +133,7 @@ export interface UpdateSiteImage {
   type: string
   uid: string
 }
+
+export interface DeleteManySitesById {
+  ids:string[]
+}

@@ -1,62 +1,44 @@
-import Link from "next/link"
-import { FC } from "react";
+import { FC, useRef } from "react";
 import Image from "next/image";
-import Swal from 'sweetalert2';
 import { Page, Site } from "../../../interfaces";
-import { useDeleteSite } from "../../hooks";
+import { useClickAway, useLongPress, useSelections } from 'ahooks';
+import { useRouter } from "next/router";
+import { Card } from "./card";
+
 interface CardSite {
   site?: Site
+  checked: boolean
+  partiallySelected: boolean
+  toggle: () => void
 }
-export const CardSite: FC<CardSite> = ({ site }) => {
-  // console.log(site);
-
-  const { mutate: deleteSite } = useDeleteSite()
-  const onDelete = (id: string) => {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          title: 'Deleted!',
-          text: 'Your file has been deleted.',
-          icon: 'success',
-          timer: 1000,
-          showConfirmButton: false,
-        })
-        deleteSite(id)
-      }
-    })
-  }
+export const CardSite: FC<CardSite> = ({ site, checked, partiallySelected,  toggle }) => {
+  const {push} = useRouter()
+  const ref = useRef<HTMLDivElement>(null);
+  useLongPress(toggle, ref, {
+    onClick: (e) => { push(`/dashboard/sites/${site?._id}`); e.stopPropagation()}, 
+    // onClick: (e) => console.log('click'), 
+  }, );
   return (
-    <div className="max-w-xs rounded-md shadow hover:shadow-2xl transition  delay-200 bg-gray-50 text-gray-800">
-      <Link href={`/dashboard/sites/${site?._id}`}>
-        <a>
-          <Image
-            width={400}
-            height={400}
-            src={site?.data.seo.image.src!}
-            alt={site?.data.seo.image.alt!}
-            objectFit="cover"
-          />
-          <div className="flex flex-col justify-between px-4 space-y-8">
-            <div className="space-y-2">
-              <h2 className=" text-sm tracking-wide">{site?.data.seo.title}</h2>
-            </div>
-          </div>
-        </a>
-      </Link>
-      <div className="flex flex-col justify-between p-4 space-y-8">
-        <button className="justify-center btn-primary" onClick={() => onDelete(site?._id!)}>
-          Delete
-        </button>
-
+    <div   className="group relative max-w-xs rounded-md shadow hover:shadow-2xl transition-all z-0  delay-150  bg-gray-100 text-gray-800">
+      <input
+        type="checkbox"
+        className={`h-5 w-5 rounded border-gray-400 text-indigo-600 focus:ring-indigo-500 absolute  top-2 left-2 z-100 opacity-0 ${partiallySelected  && "opacity-100"} group-hover:opacity-100 transition ease-in-out delay-150`}
+      onChange={() => toggle}  
+      checked={checked}
+      onClick={toggle}
+      />
+      {/* <Card site={site!} ref={ref}/> */}
+      <div ref={ref}>
+        <img
+          className="h-[12rem] w-full object-cover"
+          src={site?.data.seo.image.src!}
+          alt={site?.data.seo.image.alt!}
+        />
+        <div className="flex items-center h-[3rem] mx-2"> 
+          <h2 className=" text-sm tracking-wide truncate">{site?.data.seo.title}</h2>
+        </div>
       </div>
+
     </div>
   )
 }

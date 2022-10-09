@@ -33,3 +33,6 @@ export interface UpdatePage {
     type: string
   }
 }
+export interface DeletePages {
+  ids:string[]
+}

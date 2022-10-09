@@ -1,10 +1,10 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import { FC } from 'react'
-import { ConnectionArgs, PageData, ProductPageInfo } from '../../../interfaces'
+import { ConnectionArgs, PageData, PageInfo } from '../../../interfaces'
 interface Pagination01{
   // setAfter: React.Dispatch<React.SetStateAction<string | null | any>>
   setArgs: React.Dispatch<React.SetStateAction<ConnectionArgs | any>>
-  pageInfo: ProductPageInfo
+  pageInfo: PageInfo
   pageData: PageData
   amount: number
 }

@@ -3,7 +3,7 @@ import { FC, Fragment, useMemo, useRef, useState } from 'react';
 import { Site } from '../../../interfaces';
 import { useSites, useSitesWithCursor } from '../../hooks';
 import { CardSite } from '../card';
-import { Grid } from '../grid';
+import { Grid, Sites } from '../grid';
 import { HeadingDashboard, HeadingDashboardOption } from '../heading';
 import { Pagination01 } from '../pagination';
 import { Skeleton } from '../skeleton';
@@ -16,13 +16,16 @@ export const GridSite: FC<GridSite> = () => {
   const {data:sites, isFetching} = useSites()
   const list = useMemo(() => sites,
     [sites])
-    const { selected, allSelected, noneSelected, isSelected, toggle, toggleAll, unSelectAll } = useSelections(
-      list?.map(data => data._id)!
-    );
+    // const { selected, allSelected, noneSelected, isSelected, toggle, toggleAll, unSelectAll } = useSelections(
+    //   list?.map(data => data._id)!
+    // );
   return (
     <Fragment>
       <HeadingDashboard title={"Sites"} />
-      <HeadingDashboardOption checked={allSelected} toggleAll={toggleAll} selected={selected} unSelectAll={unSelectAll} /> 
+      {
+        <Sites sites={list!} />
+      }
+      {/* <HeadingDashboardOption checked={allSelected} toggleAll={toggleAll} selected={selected} unSelectAll={unSelectAll} /> 
         <Grid>
         
         {
@@ -35,7 +38,7 @@ export const GridSite: FC<GridSite> = () => {
           }
           </Fragment>
         }
-        </Grid>
+        </Grid> */}
       {/* <Pagination01 setArgs={setArgs} amount={amount} pageInfo={list?.page.pageInfo!} pageData={sitess?.pageData!}/> */}
     </Fragment>
   )

@@ -4,7 +4,7 @@ import { LayoutDashboard, LayoutPages } from '../../../../layouts'
 import { GridPage0, GridPage1, GridPage2, GridPage3, GridProduct, ProductOverviews, ProductOverviews1 } from '../../../../components'
 import Custom404 from '../../../404'
 import { findPage0, findPage1, findPages0, findPages0ByParent, findPages1, findPages1ByParent, findSite, findSites, usePage0, usePages0, usePages1, useSites, findPages2ByParent, usePages2, findPages2, findPage2, findPages3ByParent, findAllProductsByParent, useAllProducts, findAllProducts, findProduct, useFindAllArticles, useProductsWithCursor, findProductsWithCursor } from '../../../../hooks'
-import { getPathBySite, getPathByPages0, getPathByPage0, getPathByPage1, getPathByPages1, getPathByPage2, getPathByProduct, getPathBySiteProductsDB } from '../../../../../utils'
+import { getPathBySite, getPathByPages0, getPathByPage0, getPathByPage1, getPathByPages1, getPathByPage2, getPathByProduct, getPathBySiteProductsDB, getPathByProducts } from '../../../../../utils'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { dehydrate, QueryClient } from '@tanstack/react-query'
 
@@ -20,7 +20,7 @@ function Page() {
   const { data: pages1 } = usePages1();
   const { data: pages2 } = usePages2();
   const { data: allProducts } = useAllProducts();
-  // console.log(getPathBySiteProductsDB(sites!, asPath));
+  // console.log(getPathByProducts(allProducts!));
   
   // const { data: articles, isError, isLoading, isFetching, status } = useFindAllArticles();
   // const { data: products, isError, isLoading, isFetching, status } = useProductsWithCursor( {

@@ -20,9 +20,9 @@ export const CardProduct: FC<CardProduct> = ({ product, select, setSelect }) => 
   });
 
   useEffect(() => {
-    if (select!.length === 0) {
-      setCheck(false)
-    }
+    // if (select!.length === 0) {
+    //   setCheck(false)
+    // }
   }, [select])
   
   const onSelect = ( id:string) => {

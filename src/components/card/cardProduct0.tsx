@@ -1,21 +1,21 @@
 import { FC, useRef } from "react";
 import Image from "next/image";
-import { Page, Site } from "../../../interfaces";
+import { Page, Product, Site } from "../../../interfaces";
 import { useClickAway, useLongPress, useSelections } from 'ahooks';
 import { useRouter } from "next/router";
 import { Card } from "./card";
 
-interface CardSite {
-  site?: Site
+interface CardProduct0 {
+  product?: Product
   checked: boolean
   partiallySelected: boolean
   toggle: () => void
 }
-export const CardSite: FC<CardSite> = ({ site, checked, partiallySelected,  toggle }) => {
+export const CardProduct0: FC<CardProduct0> = ({ product, checked, partiallySelected,  toggle }) => {
   const {push} = useRouter()
   const ref = useRef<HTMLDivElement>(null);
   useLongPress(toggle, ref, {
-    onClick: (e) => { push(`/dashboard/sites/${site?._id}`); e.stopPropagation()}, 
+    onClick: () => { push(`/dashboard/sites/${product?.site}/product/${product?.type}=${product?._id}`)}, 
     // onClick: (e) => console.log('click'), 
   }, );
   return (
@@ -31,11 +31,11 @@ export const CardSite: FC<CardSite> = ({ site, checked, partiallySelected,  togg
       <div ref={ref} className="cursor-pointer">
         <img
           className="h-[12rem] w-full object-cover"
-          src={site?.data.seo.image.src!}
-          alt={site?.data.seo.image.alt!}
+          src={product?.data.seo.image.src!}
+          alt={product?.data.seo.image.alt!}
         />
         <div className="flex items-center h-[3rem] mx-2"> 
-          <h2 className=" text-sm tracking-wide truncate">{site?.data.seo.title}</h2>
+          <h2 className=" text-sm tracking-wide truncate">{product?.data.seo.title}</h2>
         </div>
       </div>
 

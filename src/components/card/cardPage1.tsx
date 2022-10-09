@@ -28,7 +28,7 @@ export const CardPage1: FC<CardPage1> = ({ page, checked, partiallySelected, tog
         checked={checked}
         onClick={toggle}
       />
-      <div ref={ref}>
+      <div ref={ref} className="cursor-pointer">
         <img
           className="h-[12rem] w-full object-cover"
           src={page?.data.seo.image.src!}

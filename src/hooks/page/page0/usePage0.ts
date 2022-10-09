@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { ParsedUrlQuery } from "querystring";
-import { FIND_PAGES_0, FIND_PAGE_0, FIND_PAGE_0_BY_PARENT, graphQLClient } from "../../../../graphql";
+import { FIND_PAGES_0, FIND_PAGE_0, graphQLClient } from "../../../../graphql";
 import { Page } from "../../../../interfaces";
 import { getQuery } from "../../../../utils";
 

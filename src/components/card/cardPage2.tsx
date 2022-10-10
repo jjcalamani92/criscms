@@ -7,18 +7,20 @@ import { useDeletePage2 } from "../../hooks";
 import { useRouter } from "next/router";
 import { useLongPress } from "ahooks";
 interface CardPage2 {
-  page?:  Page
+  page?: Page
   checked: boolean
   partiallySelected: boolean
   toggle: () => void
 }
-export const CardPage2: FC<CardPage2> = ({ page, checked, partiallySelected, toggle  }) => {
+export const CardPage2: FC<CardPage2> = ({ page, checked, partiallySelected, toggle }) => {
   const { push } = useRouter()
   const ref = useRef<HTMLDivElement>(null);
   useLongPress(toggle, ref, {
-    onClick: (e) => { push(`/dashboard/sites/${page?.site}/page2=${page?._id}`); e.stopPropagation() },
+    moveThreshold: { x: 5, y: 5 },
+
+    // onClick: (e) => { push(`/dashboard/sites/${page?.site}/page2=${page?._id}`); e.stopPropagation() },
   },);
-  
+
   return (
     <div className="group relative max-w-xs rounded-md shadow hover:shadow-2xl transition-all z-0  delay-150  bg-gray-100 text-gray-800">
       <input
@@ -28,18 +30,21 @@ export const CardPage2: FC<CardPage2> = ({ page, checked, partiallySelected, tog
         checked={checked}
         onClick={toggle}
       />
-      <div ref={ref} className="cursor-pointer">
+      <div ref={ref} className="">
         <img
           className="h-[12rem] w-full object-cover"
           src={page?.data.seo.image.src!}
           alt={page?.data.seo.image.alt!}
         />
+        <Link href={`/dashboard/sites/${page?.site}/page2=${page?._id}`}>
 
-        <div className="flex items-center h-[3rem] mx-2">
 
-          <h2 className=" text-sm tracking-wide truncate">{page?.data.seo.title}</h2>
+          <a className="flex items-center h-[3rem] mx-2 cursor-pointer">
 
-        </div>
+            <h2 className=" text-sm tracking-wide truncate">{page?.data.seo.title}</h2>
+
+          </a>
+        </Link>
       </div>
 
 

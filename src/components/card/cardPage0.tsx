@@ -16,7 +16,9 @@ export const CardPage0: FC<CardPage0> = ({ page, checked, partiallySelected, tog
   const { push } = useRouter()
   const ref = useRef<HTMLDivElement>(null);
   useLongPress(toggle, ref, {
-    onClick: (e) => { push(`/dashboard/sites/${page?.site}/page0=${page?._id}`); e.stopPropagation() },
+    moveThreshold: { x: 5, y: 5 },
+
+    // onClick: (e) => { push(`/dashboard/sites/${page?.site}/page0=${page?._id}`); e.stopPropagation() },
   },);
   return (
     <div className="group relative max-w-xs rounded-md shadow hover:shadow-2xl transition-all z-0  delay-150  bg-gray-100 text-gray-800">
@@ -27,18 +29,19 @@ export const CardPage0: FC<CardPage0> = ({ page, checked, partiallySelected, tog
         checked={checked}
         onClick={toggle}
       />
-      <div ref={ref} className="cursor-pointer">
+      <div ref={ref} className="">
         <img
           className="h-[12rem] w-full object-cover"
           src={page?.data.seo.image.src!}
           alt={page?.data.seo.image.alt!}
         />
 
-        <div className="flex items-center h-[3rem] mx-2">
+        <Link href={`/dashboard/sites/${page?.site}/page0=${page?._id}`}>
+          <a className="flex items-center h-[3rem] mx-2 cursor-pointer">
+            <h2 className=" text-sm tracking-wide truncate">{page?.data.seo.title}</h2>
 
-          <h2 className=" text-sm tracking-wide truncate">{page?.data.seo.title}</h2>
-
-        </div>
+          </a>
+        </Link>
       </div>
 
 

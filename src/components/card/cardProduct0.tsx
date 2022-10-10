@@ -4,6 +4,7 @@ import { Page, Product, Site } from "../../../interfaces";
 import { useClickAway, useLongPress, useSelections } from 'ahooks';
 import { useRouter } from "next/router";
 import { Card } from "./card";
+import Link from "next/link";
 
 interface CardProduct0 {
   product?: Product
@@ -15,7 +16,9 @@ export const CardProduct0: FC<CardProduct0> = ({ product, checked, partiallySele
   const {push} = useRouter()
   const ref = useRef<HTMLDivElement>(null);
   useLongPress(toggle, ref, {
-    onClick: () => { push(`/dashboard/sites/${product?.site}/product/${product?.type}=${product?._id}`)}, 
+    moveThreshold: { x: 5, y: 5 },
+
+    // onClick: () => { push(`/dashboard/sites/${product?.site}/product/${product?.type}=${product?._id}`)}, 
     // onClick: (e) => console.log('click'), 
   }, );
   return (
@@ -28,15 +31,17 @@ export const CardProduct0: FC<CardProduct0> = ({ product, checked, partiallySele
       onClick={toggle}
       />
       {/* <Card site={site!} ref={ref}/> */}
-      <div ref={ref} className="cursor-pointer">
+      <div ref={ref} className="">
         <img
           className="h-[12rem] w-full object-cover"
           src={product?.data.seo.image.src!}
           alt={product?.data.seo.image.alt!}
         />
-        <div className="flex items-center h-[3rem] mx-2"> 
+        <Link href={`/dashboard/sites/${product?.site}/product/${product?.type}=${product?._id}`}>
+        <a className="flex items-center h-[3rem] mx-2 cursor-pointer"> 
           <h2 className=" text-sm tracking-wide truncate">{product?.data.seo.title}</h2>
-        </div>
+        </a>
+        </Link>
       </div>
 
     </div>

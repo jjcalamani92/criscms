@@ -15,7 +15,7 @@ interface CardSite {
 export const CardSite: FC<CardSite> = ({ site, checked, partiallySelected,  toggle }) => {
   // const {push} = useRouter()
   const ref = useRef<HTMLDivElement>(null);
-  useLongPress(() => toggle(), ref, {
+  useLongPress(toggle, ref, {
     moveThreshold: { x: 5, y: 5 },
     // onClick: (e) => { push(`/dashboard/sites/${site?._id}`); e.stopPropagation()}, 
     // onClick: (e) => { push(`/dashboard/sites/${site?._id}`); e.stopPropagation()}, 

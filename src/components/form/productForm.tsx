@@ -19,12 +19,13 @@ interface FormValues {
   inStock: number;
 };
 interface ProductForm {
-  setOpenMCD: React.Dispatch<React.SetStateAction<boolean>>
+  toggle: () => void
+  setLeft: () => void
   uid?: string
   type?: string
   product?: Product
 }
-export const ProductForm: FC<ProductForm> = ({ setOpenMCD, uid, type, product }) => {
+export const ProductForm: FC<ProductForm> = ({ toggle, setLeft, uid, type, product }) => {
   const { data: session } = useSession()
   // console.log(product);
 
@@ -59,7 +60,7 @@ export const ProductForm: FC<ProductForm> = ({ setOpenMCD, uid, type, product })
       createProduct({ input: form, type: type! })
 
     }
-    setOpenMCD(false)
+    toggle()
   };
   const cancelButtonRef = useRef(null)
   const ref = createRef();
@@ -187,7 +188,8 @@ export const ProductForm: FC<ProductForm> = ({ setOpenMCD, uid, type, product })
           </button>
           <button
             className="btn-default"
-            onClick={() => setOpenMCD(false)}
+            type="button"
+            onClick={setLeft}
             ref={cancelButtonRef}>
             Cancel
           </button>

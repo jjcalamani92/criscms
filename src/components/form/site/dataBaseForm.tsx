@@ -10,10 +10,11 @@ interface FormValues {
   value: string[];
 };
 interface DataBaseForm {
-  setOpenMCD: React.Dispatch<React.SetStateAction<boolean>>
+  toggle: () => void
+  setLeft: () => void
   site?: Site
 }
-export const DataBaseForm: FC<DataBaseForm> = ({ setOpenMCD, site }) => {
+export const DataBaseForm: FC<DataBaseForm> = ({ toggle, setLeft, site }) => {
   const { mutate: updateSiteDB } = useUpdateSiteDB()
   const { register, handleSubmit } = useForm<FormValues>({ defaultValues: { value: site?.data.dataBase.map(data => data.value) } });
 
@@ -27,7 +28,7 @@ export const DataBaseForm: FC<DataBaseForm> = ({ setOpenMCD, site }) => {
       timer: 1000
     })
     updateSiteDB({ id: site?._id!, input: updateFormDB })
-    setOpenMCD(false)
+    toggle()
   };
   const cancelButtonRef = useRef(null)
   const ref = createRef();
@@ -77,7 +78,8 @@ export const DataBaseForm: FC<DataBaseForm> = ({ setOpenMCD, site }) => {
           </button>
           <button
             className="btn-default"
-            onClick={() => setOpenMCD(false)}
+            type="button"
+            onClick={setLeft}
             ref={cancelButtonRef}>
             Cancel
           </button>

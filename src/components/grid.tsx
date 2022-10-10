@@ -42,15 +42,16 @@ export const Sites: FC<Sites> = ({ sites}) => {
 
 interface Products {
   products: Product[];
+  type: string
 }
 
-export const Products: FC<Products> = ({ products}) => {
+export const Products: FC<Products> = ({ products, type}) => {
   const { selected, allSelected, noneSelected, isSelected, toggle, toggleAll, unSelectAll } = useSelections(
     products?.map(data => data._id)!
   );
   return (
     <Fragment>
-    <HeadingDashboardOption checked={allSelected} toggleAll={toggleAll} selected={selected} unSelectAll={unSelectAll} /> 
+    <HeadingDashboardOption checked={allSelected} toggleAll={toggleAll} selected={selected} unSelectAll={unSelectAll} type={type} /> 
     <Grid>
       {
         products?.map((data, i) => <CardProduct0 key={i} product={data} checked={isSelected(data._id)} toggle={() => toggle(data._id)} partiallySelected={selected.length !== 0} />)

@@ -2,26 +2,28 @@ import { MegaphoneIcon, TrashIcon, XMarkIcon } from '@heroicons/react/24/outline
 import { useRouter } from 'next/router'
 import { FC } from 'react'
 import Swal from 'sweetalert2'
-import { getQuery } from '../../../utils'
-import { useDeletePages0, useDeleteManySitesById, useDeletePages1, useDeletePages2, useDeletePages3 } from '../../hooks'
+import { getQuery, typePageEcommerceCategory } from '../../../utils'
+import { useDeletePages0, useDeleteManySitesById, useDeletePages1, useDeletePages2, useDeletePages3, useDeleteProducts } from '../../hooks'
 
 interface HeadingDashboardOption {
   checked: boolean
   toggleAll: () => void
   unSelectAll: () => void
   selected: string[]
+  type?: string
 }
 
-export const HeadingDashboardOption: FC<HeadingDashboardOption> = ({ checked, toggleAll, unSelectAll, selected }) => {
+export const HeadingDashboardOption: FC<HeadingDashboardOption> = ({ checked, toggleAll, unSelectAll, selected, type }) => {
   const { asPath } = useRouter()
   const query = getQuery(asPath)
-  // console.log(query);
+  console.log(type);
 
   const { mutate: deleteSites } = useDeleteManySitesById()
   const { mutate: deletePages0 } = useDeletePages0(query[2])
   const { mutate: deletePages1 } = useDeletePages1(query[3]?.split('=')[1])
   const { mutate: deletePages2 } = useDeletePages2(query[3]?.split('=')[1])
   const { mutate: deletePages3 } = useDeletePages3(query[3]?.split('=')[1])
+  const { mutate: deleteProducts } = useDeleteProducts(query[3]?.split('=')[1])
   const deleteHandle = () => {
     // console.log('deleteHandle', select);
     Swal.fire({
@@ -49,6 +51,9 @@ export const HeadingDashboardOption: FC<HeadingDashboardOption> = ({ checked, to
           if (query[3].split('=')[0] === 'page0') { deletePages1({ ids: selected })} 
           if (query[3].split('=')[0] === 'page1') {
             deletePages2({ ids: selected })
+          }
+          if (query[3].split('=')[0] === 'page2' && typePageEcommerceCategory.map(data => data.value).includes(type!)) {
+            deleteProducts({ ids: selected, type: type! })
           }
           if (query[3].split('=')[0] === 'page2') {
             deletePages3({ ids: selected })

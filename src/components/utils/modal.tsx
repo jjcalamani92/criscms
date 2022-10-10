@@ -3,15 +3,15 @@ import { FC, Fragment, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 
 interface Modal {
-  openMCD: boolean
-  setOpenMCD: React.Dispatch<React.SetStateAction<boolean>>
+  state: boolean
+  toggle: () => void
   children: React.ReactNode;
 }
-export const Modal:FC<Modal> = ({children, openMCD, setOpenMCD,}) => {
+export const Modal:FC<Modal> = ({children, state, toggle,}) => {
   const cancelButtonRef = useRef(null)
   return (
-    <Transition.Root show={openMCD} as={Fragment}>
-      <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpenMCD}>
+    <Transition.Root show={state} as={Fragment}>
+      <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={toggle}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"

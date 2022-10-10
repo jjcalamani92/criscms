@@ -4,13 +4,15 @@ import { classNames } from '../../../utils/function'
 import { PageForm, SiteForm } from '../form'
 import { Page, Site } from '../../../interfaces'
 interface TabFormPage {
-  setOpenMCD: React.Dispatch<React.SetStateAction<boolean>>
   page?: Page
   type?: string 
   uid?: string
+  toggle: () => void
+  setLeft: () => void
+  
 }
 
-export const TabFormPage:FC<TabFormPage> = ({setOpenMCD, page, type, uid}) => {
+export const TabFormPage:FC<TabFormPage> = ({page, type, uid, toggle, setLeft}) => {
 
   return (
     <div className="w-full max-w-lg">
@@ -66,7 +68,7 @@ export const TabFormPage:FC<TabFormPage> = ({setOpenMCD, page, type, uid}) => {
               'rounded-xl bg-white'
             )}
           >
-            <PageForm setOpenMCD={setOpenMCD} type={type} uid={uid} page={page}/>
+            <PageForm toggle={toggle} setLeft={setLeft} type={type} uid={uid} page={page}/>
           </Tab.Panel>
           <Tab.Panel
             className={classNames(

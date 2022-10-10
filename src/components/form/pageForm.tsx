@@ -10,7 +10,8 @@ import { useUpdatePage1 } from '../../hooks/page/page1/useUpdatePage1';
 
 
 interface PageForm {
-  setOpenMCD: React.Dispatch<React.SetStateAction<boolean>>
+  toggle: () => void
+  setLeft: () => void
   uid?: string
   page?: Page
   type?: string
@@ -31,7 +32,7 @@ interface FormValues {
   type: string;
 };
 
-export const PageForm: FC<PageForm> = ({ setOpenMCD, uid, page, type }) => {
+export const PageForm: FC<PageForm> = ({ toggle, setLeft, uid, page, type }) => {
   const { asPath, replace } = useRouter()
   const query = getQuery(asPath)
   const { data: site } = useSite(asPath)
@@ -92,7 +93,7 @@ export const PageForm: FC<PageForm> = ({ setOpenMCD, uid, page, type }) => {
       // else if (query.length === 4) { createPage1(form) }
       // else if (query.length === 3) { createPage0(form) }
     }
-    setOpenMCD(false)
+    toggle()
   }
   const cancelButtonRef = useRef(null)
   const ref = createRef();
@@ -381,12 +382,13 @@ export const PageForm: FC<PageForm> = ({ setOpenMCD, uid, page, type }) => {
           <button
             type="submit"
             className="btn-primary "
-          >
+            >
             {page ? 'Update' : 'Created'}
           </button>
           <button
+            type="button"
             className="btn-default"
-            onClick={() => setOpenMCD(false)}
+            onClick={setLeft}
             ref={cancelButtonRef}>
             Cancel
           </button>

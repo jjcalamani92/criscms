@@ -10,7 +10,8 @@ import { Site } from '../../../../interfaces';
 import { useCreateSite, useUpdateSite } from '../../../hooks';
 
 interface SiteForm {
-  setOpenMCD: React.Dispatch<React.SetStateAction<boolean>>
+  toggle: () => void,
+  setLeft: () => void,
   site?: Site
 }
 interface FormValues {
@@ -20,7 +21,7 @@ interface FormValues {
   type: string;
   client: string;
 };
-export const SiteForm: FC<SiteForm> = ({ setOpenMCD, site }) => {
+export const SiteForm: FC<SiteForm> = ({ toggle, site, setLeft }) => {
   const { asPath, replace } = useRouter()
   const query = getQuery(asPath)
   // console.log(site);
@@ -57,7 +58,7 @@ export const SiteForm: FC<SiteForm> = ({ setOpenMCD, site }) => {
       }),
         createSite(createForm)
     }
-    setOpenMCD(false)
+    toggle()
 
 
   }
@@ -119,18 +120,12 @@ export const SiteForm: FC<SiteForm> = ({ setOpenMCD, site }) => {
                 </label>
                 <div className="mt-1">
                   <textarea
-                    // id="about"
-                    // name="about"
                     rows={3}
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm"
-                    // placeholder="you@example.com"
-                    // defaultValue={''}
+                    
                     {...register("description")}
                   />
                 </div>
-                {/* <p className="mt-2 text-sm text-gray-500">
-                  Brief description for your profile. URLs are hyperlinked.
-                </p> */}
               </div>
               
               {
@@ -190,8 +185,9 @@ export const SiteForm: FC<SiteForm> = ({ setOpenMCD, site }) => {
             {site ? 'Update' : 'Created'}
           </button>
           <button
+            type="button"
             className="btn-default"
-            onClick={() => setOpenMCD(false)}
+            onClick={setLeft}
             ref={cancelButtonRef}>
             Cancel
           </button>

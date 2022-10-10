@@ -12,10 +12,11 @@
   }
   ```
 */
-import { Fragment, useState } from 'react'
+import { FC, Fragment, useState } from 'react'
 import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
 import { Bars3Icon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { classNames } from '../../../utils'
+import { useToggle } from 'ahooks'
 
 const navigation = {
   categories: [
@@ -140,16 +141,18 @@ const navigation = {
   ],
 }
 
+interface HeaderEcommerce0 {
+  toggleShoppingCarts: () => void
+}
 
-
-export const  HeaderEcommerce0 = () => {
-  const [open, setOpen] = useState(false)
-
+export const  HeaderEcommerce0:FC<HeaderEcommerce0> = ({toggleShoppingCarts}) => {
+  const [state, { toggle, setLeft, setRight }] = useToggle();
+  
   return (
     <div className="bg-white">
       {/* Mobile menu */}
-      <Transition.Root show={open} as={Fragment}>
-        <Dialog as="div" className="relative z-40 lg:hidden" onClose={setOpen}>
+      <Transition.Root show={state} as={Fragment}>
+        <Dialog as="div" className="relative z-40 lg:hidden" onClose={toggle}>
           <Transition.Child
             as={Fragment}
             enter="transition-opacity ease-linear duration-300"
@@ -177,7 +180,7 @@ export const  HeaderEcommerce0 = () => {
                   <button
                     type="button"
                     className="-m-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400"
-                    onClick={() => setOpen(false)}
+                    onClick={setLeft}
                   >
                     <span className="sr-only">Close menu</span>
                     <XMarkIcon className="h-6 w-6" aria-hidden="true" />
@@ -298,7 +301,7 @@ export const  HeaderEcommerce0 = () => {
               <button
                 type="button"
                 className="rounded-md bg-white p-2 text-gray-400 lg:hidden"
-                onClick={() => setOpen(true)}
+                onClick={setRight}
               >
                 <span className="sr-only">Open menu</span>
                 <Bars3Icon className="h-6 w-6" aria-hidden="true" />
@@ -449,14 +452,14 @@ export const  HeaderEcommerce0 = () => {
 
                 {/* Cart */}
                 <div className="ml-4 flow-root lg:ml-6">
-                  <a href="#" className="group -m-2 flex items-center p-2">
+                  <div className="group -m-2 flex items-center p-2 cursor-pointer" onClick={toggleShoppingCarts}>
                     <ShoppingBagIcon
                       className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                       aria-hidden="true"
                     />
                     <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
                     <span className="sr-only">items in cart, view bag</span>
-                  </a>
+                  </div>
                 </div>
               </div>
             </div>

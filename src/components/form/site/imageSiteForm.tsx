@@ -36,11 +36,12 @@ interface FormValues {
   }
 }
 interface ImageSiteForm {
-  setOpenMCD: React.Dispatch<React.SetStateAction<boolean>>
+  toggle: () => void
+  setLeft: () => void
   site?: Site
   image?: ImageProduct[]
 }
-export const ImageSiteForm: FC<ImageSiteForm> = ({ setOpenMCD, site, image }) => {
+export const ImageSiteForm: FC<ImageSiteForm> = ({ toggle, setLeft, site, image }) => {
   const { data: session } = useSession()
   // console.log('data', site?.data.icon);
   const [type, setType] = useState('')
@@ -176,7 +177,8 @@ export const ImageSiteForm: FC<ImageSiteForm> = ({ setOpenMCD, site, image }) =>
           
           <button
             className="btn-default"
-            onClick={() => setOpenMCD(false)}
+            type="button"
+            onClick={setLeft}
             ref={cancelButtonRef}>
             Cancel
           </button>

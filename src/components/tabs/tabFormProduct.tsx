@@ -4,13 +4,14 @@ import { classNames } from '../../../utils/function'
 import { ImageForm, PageForm, ProductForm, SiteForm } from '../form'
 import { Page, Product, Site } from '../../../interfaces'
 interface TabFormProduct {
-  setOpenMCD: React.Dispatch<React.SetStateAction<boolean>>
+  toggle: () => void
+  setLeft: () => void
   product?: Product
   type?: string 
   uid?: string
 }
 
-export const TabFormProduct:FC<TabFormProduct> = ({setOpenMCD, product, type, uid}) => {
+export const TabFormProduct:FC<TabFormProduct> = ({toggle, setLeft, product, type, uid}) => {
 
   return (
     <div className="w-full max-w-lg">
@@ -70,14 +71,14 @@ export const TabFormProduct:FC<TabFormProduct> = ({setOpenMCD, product, type, ui
               'rounded-xl bg-white'
             )}
           >
-            <ProductForm setOpenMCD={setOpenMCD} type={type} uid={uid} product={product}/>
+            <ProductForm toggle={toggle} setLeft={setLeft} type={type} uid={uid} product={product}/>
           </Tab.Panel>
           <Tab.Panel
             className={classNames(
               'rounded-xl bg-white'
             )}
           >
-            <ImageForm setOpenMCD={setOpenMCD} product={product!}/>
+            <ImageForm toggle={toggle} setLeft={setLeft} product={product!}/>
 
           </Tab.Panel>
           <Tab.Panel

@@ -8,6 +8,7 @@ import { getPathBySite, getPathByPages0, getPathByPage0, getPathByPage1, getPath
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { LayoutPagesMarketing } from '../../../../layouts/layoutPagesMarketing'
+import { LayoutPagesEcommerce } from '../../../../layouts/layoutPagesEcommerce'
 
 
 
@@ -21,28 +22,8 @@ function Page() {
   const { data: pages1 } = usePages1();
   const { data: pages2 } = usePages2();
   const { data: allProducts } = useAllProducts();
-  // console.log(getPathByProducts(allProducts!));
-  
-  // const { data: articles, isError, isLoading, isFetching, status } = useFindAllArticles();
-  // const { data: products, isError, isLoading, isFetching, status } = useProductsWithCursor( {
-  //   first: first,
-  //   before: before,
-  //   after: after,
-  //   last: last
-  // }, "clothing");
-  
-  // console.log('articles', articles)
-  // console.log('isError', isError)
-  // console.log('status', status)
-  // console.log('isLoading', isLoading)
-  // console.log('isFetching', isFetching)
-  
-  // console.log(pages0);
-  
-  
-
   switch (asPath) {
-    case '/dashboard/projects/6343944ebb75fd3fa0679347': return <h1>Hi</h1>
+    case '/dashboard/projects/6324d2d5132d462bc1c57b55': return <Fragment><div><h1>Hi</h1></div></Fragment>
     default:
       return <Custom404 />
   }
@@ -51,7 +32,7 @@ function Page() {
 export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
-    paths: [{ params: { slug: ["6343944ebb75fd3fa0679347"] } }],
+    paths: [{ params: { slug: ["6324d2d5132d462bc1c57b55"] } }],
     fallback: 'blocking'
   };
 }
@@ -69,9 +50,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
 }
 Page.getLayout = function getLayout(children: React.ReactNode) {
   return (
-    <LayoutPagesMarketing>
+    <LayoutPagesEcommerce>
       {children}
-    </LayoutPagesMarketing>
+    </LayoutPagesEcommerce>
   )
 }
 

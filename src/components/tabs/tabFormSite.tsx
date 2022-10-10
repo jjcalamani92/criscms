@@ -5,11 +5,12 @@ import { DataBaseForm, SiteForm } from '../form'
 import { Site } from '../../../interfaces'
 import { ImageSiteForm } from '../form';
 interface TabFormSite {
-  setOpenMCD: React.Dispatch<React.SetStateAction<boolean>>
+  toggle: () => void
+  setLeft: () => void
   site?: Site
 }
 
-export const TabFormSite: FC<TabFormSite> = ({ setOpenMCD, site }) => {
+export const TabFormSite: FC<TabFormSite> = ({ toggle, setLeft, site }) => {
   // console.log(site);
   return (
     <div className="w-full max-w-lg">
@@ -67,14 +68,14 @@ export const TabFormSite: FC<TabFormSite> = ({ setOpenMCD, site }) => {
               'rounded-xl bg-white'
             )}
           >
-            <SiteForm setOpenMCD={setOpenMCD} site={site} />
+            <SiteForm toggle={toggle} setLeft={setLeft}  site={site} />
           </Tab.Panel>
           <Tab.Panel
             className={classNames(
               'rounded-xl bg-white'
             )}
           >
-            <DataBaseForm setOpenMCD={setOpenMCD} site={site} />
+            <DataBaseForm toggle={toggle} setLeft={setLeft}  site={site} />
 
           </Tab.Panel>
           <Tab.Panel
@@ -82,7 +83,7 @@ export const TabFormSite: FC<TabFormSite> = ({ setOpenMCD, site }) => {
               'rounded-xl bg-white'
             )}
           >
-            <ImageSiteForm setOpenMCD={setOpenMCD} site={site} />
+            <ImageSiteForm toggle={toggle} setLeft={setLeft}  site={site} />
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>

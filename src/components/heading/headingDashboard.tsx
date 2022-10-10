@@ -23,6 +23,7 @@ import { CubeIcon, FolderPlusIcon, SquaresPlusIcon, TrashIcon } from '@heroicons
 import Link from 'next/link'
 import { useDeleteManyProductById } from '../../hooks'
 import Swal from 'sweetalert2'
+import { useToggle } from 'ahooks'
 
 
 
@@ -40,6 +41,8 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, prod
   const { asPath } = useRouter()
   const query = getQuery(asPath)
   // console.log(query);
+  const [state, { toggle, setLeft, setRight }] = useToggle();
+
   const [openMCD, setOpenMCD] = useState(false)
   const [children, setChildren] = useState<React.ReactNode>()
   const { mutate: deleteProducts } = useDeleteManyProductById( {first: 10}, query[2],query[4])
@@ -71,36 +74,36 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, prod
   }
   const editHandle = (type: string) => {
     if (type === "site") {
-      setOpenMCD(true)
-      setChildren(<TabFormSite setOpenMCD={setOpenMCD} site={site} />)
+      toggle()
+      setChildren(<TabFormSite toggle={toggle} setLeft={setLeft} site={site} />)
     } else if (type === "page") {
-      setOpenMCD(true)
-      setChildren(<TabFormPage setOpenMCD={setOpenMCD} page={page} type={page?.data.type} />)
+      toggle()
+      setChildren(<TabFormPage  toggle={toggle} setLeft={setLeft} page={page} type={page?.data.type} />)
     } else if (type === "product") {
-      setOpenMCD(true)
-      setChildren(<TabFormProduct setOpenMCD={setOpenMCD} type={product?.type} product={product}/>)
+      toggle()
+      setChildren(<TabFormProduct toggle={toggle} setLeft={setLeft} type={product?.type} product={product}/>)
     }
   }
   const addHandle = (type: string) => {
     if (type === 'site') {
-      setOpenMCD(true)
-      setChildren(<TabFormSite setOpenMCD={setOpenMCD} />)
+      toggle()
+      setChildren(<TabFormSite toggle={toggle} setLeft={setLeft} />)
     }
     else if (type === 'page') {
-      setOpenMCD(true)
-      setChildren(<TabFormPage setOpenMCD={setOpenMCD} type={site ? site?.data.type : page?.data.type} uid={site ? site?._id : page?._id} />)
+      toggle()
+      setChildren(<TabFormPage toggle={toggle} setLeft={setLeft}  type={site ? site?.data.type : page?.data.type} uid={site ? site?._id : page?._id} />)
     }
     else if (type === 'product') {
-      setOpenMCD(true)
-      setChildren(<TabFormProduct setOpenMCD={setOpenMCD} type={page?.data.type} uid={page?._id} />)
+      toggle()
+      setChildren(<TabFormProduct toggle={toggle} setLeft={setLeft} type={page?.data.type} uid={page?._id} />)
     }
     else if (type === 'article') {
       console.log('article add');
 
     }
     else if (type === 'category') {
-      setOpenMCD(true)
-      setChildren(<TabFormPage setOpenMCD={setOpenMCD} type={page?.data.type} uid={page?._id} />)
+      toggle()
+      setChildren(<TabFormPage toggle={toggle} setLeft={setLeft}  type={page?.data.type} uid={page?._id} />)
     }
   }
   return (
@@ -212,9 +215,6 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, prod
             </button>
           </span>
         }
-
-
-        {/* Dropdown */}
         {
 
         (site && site.data.type === 'ecommerce') &&
@@ -257,7 +257,7 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, prod
         </Menu>
         }
       </div>
-      <Modal openMCD={openMCD} setOpenMCD={setOpenMCD} >
+      <Modal state={state} toggle={toggle} >
         {children}
       </Modal>
     </div>

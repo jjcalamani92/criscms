@@ -28,7 +28,7 @@ export const GridPage2: FC<GridPage2> = () => {
       
       {
         typePageEcommerceCategory.map(data => data.value).includes(page1?.data.type!) &&
-        <Products products={listProducts!} />
+        <Products products={listProducts!} type={page1?.data.type!} />
       }
     </Fragment>
   )

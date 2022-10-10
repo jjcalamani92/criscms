@@ -4,6 +4,7 @@ import { Page, Site } from "../../../interfaces";
 import { useClickAway, useLongPress, useSelections } from 'ahooks';
 import { useRouter } from "next/router";
 import { Card } from "./card";
+import Link from "next/link";
 
 interface CardSite {
   site?: Site
@@ -12,12 +13,11 @@ interface CardSite {
   toggle: () => void
 }
 export const CardSite: FC<CardSite> = ({ site, checked, partiallySelected,  toggle }) => {
-  const {push} = useRouter()
+  // const {push} = useRouter()
   const ref = useRef<HTMLDivElement>(null);
-  useLongPress(toggle, ref, {
-    delay: 500,
+  useLongPress(() => toggle(), ref, {
     moveThreshold: { x: 5, y: 5 },
-    onClick: (e) => { push(`/dashboard/sites/${site?._id}`); e.stopPropagation()}, 
+    // onClick: (e) => { push(`/dashboard/sites/${site?._id}`); e.stopPropagation()}, 
     // onClick: (e) => { push(`/dashboard/sites/${site?._id}`); e.stopPropagation()}, 
     // onClick: (e) => console.log('click'), 
   }, );
@@ -31,15 +31,17 @@ export const CardSite: FC<CardSite> = ({ site, checked, partiallySelected,  togg
       onClick={toggle}
       />
       {/* <Card site={site!} ref={ref}/> */}
-      <div ref={ref} className="cursor-pointer">
+      <div ref={ref} className="">
         <img
           className="h-[12rem] w-full object-cover"
           src={site?.data.seo.image.src!}
           alt={site?.data.seo.image.alt!}
         />
-        <div className="flex items-center h-[3rem] mx-2"> 
-          <h2 className=" text-sm tracking-wide truncate">{site?.data.seo.title}</h2>
-        </div>
+        <Link href={`/dashboard/sites/${site?._id}`}>
+          <a  className="flex items-center h-[3rem] mx-2 cursor-pointer"> 
+            <h2 className=" text-sm tracking-wide truncate">{site?.data.seo.title}</h2>
+          </a>
+        </Link>
       </div>
 
     </div>

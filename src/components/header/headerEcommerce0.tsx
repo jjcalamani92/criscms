@@ -196,7 +196,7 @@ export const  HeaderEcommerce0:FC<HeaderEcommerce0> = ({toggleShoppingCarts}) =>
                           key={category.name}
                           className={({ selected }) =>
                             classNames(
-                              selected ? 'text-indigo-600 border-indigo-600' : 'text-gray-900 border-transparent',
+                              selected ? 'text-red-600 border-red-600' : 'text-gray-900 border-transparent',
                               'flex-1 whitespace-nowrap border-b-2 py-4 px-1 text-base font-medium'
                             )
                           }
@@ -291,12 +291,12 @@ export const  HeaderEcommerce0:FC<HeaderEcommerce0> = ({toggleShoppingCarts}) =>
       </Transition.Root>
 
       <header className="relative bg-white">
-        <p className="flex h-10 items-center justify-center bg-indigo-600 px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
+        <p className="flex h-10 items-center justify-center bg-red-600 px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
           Get free delivery on orders over $100
         </p>
 
         <nav aria-label="Top" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="border-b border-gray-200">
+          
             <div className="flex h-16 items-center">
               <button
                 type="button"
@@ -313,7 +313,7 @@ export const  HeaderEcommerce0:FC<HeaderEcommerce0> = ({toggleShoppingCarts}) =>
                   <span className="sr-only">Your Company</span>
                   <img
                     className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                    src="https://res.cloudinary.com/dqsbh2kn0/image/upload/v1665419887/criscrm/6324d2d5132d462bc1c57b55/2022-10-10T16:38:07.214Z.jpg"
                     alt=""
                   />
                 </a>
@@ -330,7 +330,7 @@ export const  HeaderEcommerce0:FC<HeaderEcommerce0> = ({toggleShoppingCarts}) =>
                             <Popover.Button
                               className={classNames(
                                 open
-                                  ? 'border-indigo-600 text-indigo-600'
+                                  ? 'border-red-600 text-red-600'
                                   : 'border-transparent text-gray-700 hover:text-gray-800',
                                 'relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out'
                               )}
@@ -463,8 +463,9 @@ export const  HeaderEcommerce0:FC<HeaderEcommerce0> = ({toggleShoppingCarts}) =>
                 </div>
               </div>
             </div>
-          </div>
         </nav>
+          <div className="border-b border-gray-200">
+          </div>
       </header>
     </div>
   )

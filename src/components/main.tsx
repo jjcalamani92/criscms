@@ -12,3 +12,10 @@ export const Main: FC<Main> = ({ children }) => {
     </main>
   )
 }
+export const MainEcommerce: FC<Main> = ({ children }) => {
+  return (
+    <main className="bg-white">
+          {children}
+    </main>
+  )
+}

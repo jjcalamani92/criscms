@@ -3,7 +3,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { FC } from "react";
 import { HeaderEcommerce0, HeaderMarketing0, HeaderPage, ShoppingCarts } from "../components";
-import { Main } from "../components/main";
+import { Main, MainEcommerce } from "../components/main";
 
 interface LayoutPagesEcommerce {
 	children?: React.ReactNode;
@@ -35,9 +35,9 @@ export const LayoutPagesEcommerce: FC<LayoutPagesEcommerce> = ({
 			</Head>
 			<HeaderEcommerce0 toggleShoppingCarts={toggle} />
 			<ShoppingCarts state={state} toggle={toggle} setLeft={setLeft}/>
-			<Main>
+			<MainEcommerce>
 				{children}
-			</Main>
+			</MainEcommerce>
 			
 		</>
 	);

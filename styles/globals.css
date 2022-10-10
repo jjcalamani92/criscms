@@ -26,4 +26,21 @@
   .group-button-form {
     @apply bg-gray-100 flex flex-row-reverse p-4 gap-3;
   }
+  .swiper {
+    @apply w-full h-full;
+  }
+  .swiper-slide {
+    @apply ;
+  }
+  .swiper-slide img {
+    @apply ;
+  }
+  .swiper-pagination-bullet{
+    background: red !important;
+  }
+  .swiper-pagination-bullet-active{
+    background: red !important;
+  }
+  
+  
 }

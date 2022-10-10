@@ -6,7 +6,6 @@ import { Grid, Pages2, Products } from '../grid';
 import { HeadingDashboard, HeadingDashboardOption } from '../heading';
 import { usePages2ByParent } from '../../hooks/page/page2';
 import { typePageEcommerceCategory } from '../../../utils';
-import { useSelections } from 'ahooks';
 interface GridPage2 {
 
 }

@@ -15,7 +15,10 @@ export const CardSite: FC<CardSite> = ({ site, checked, partiallySelected,  togg
   const {push} = useRouter()
   const ref = useRef<HTMLDivElement>(null);
   useLongPress(toggle, ref, {
+    delay: 500,
+    moveThreshold: { x: 5, y: 5 },
     onClick: (e) => { push(`/dashboard/sites/${site?._id}`); e.stopPropagation()}, 
+    // onClick: (e) => { push(`/dashboard/sites/${site?._id}`); e.stopPropagation()}, 
     // onClick: (e) => console.log('click'), 
   }, );
   return (

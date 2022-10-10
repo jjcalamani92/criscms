@@ -10,7 +10,7 @@ interface Grid {
   children: React.ReactNode;
 }
 
-export const Grid: FC<Grid> = ({ children }) => {
+export const GridProjects: FC<Grid> = ({ children }) => {
   return (
     <div className={`grid grid-cols-2 gap-3 sm:gap-6  sm:grid-cols-4  lg:grid-cols-5 xl:grid-cols-6 py-6 sm:pt-10`}>
       {children}
@@ -23,18 +23,18 @@ interface Sites {
   sites: Site[];
 }
 
-export const Sites: FC<Sites> = ({ sites}) => {
+export const SitesProjects: FC<Sites> = ({ sites}) => {
   const { selected, allSelected, noneSelected, isSelected, toggle, toggleAll, unSelectAll } = useSelections(
     sites?.map(data => data._id)!
   );
   return (
     <Fragment>
     <HeadingDashboardOption checked={allSelected} toggleAll={toggleAll} selected={selected} unSelectAll={unSelectAll} /> 
-    <Grid>
+    <GridProjects>
       {
         sites?.map((data, i) => <CardSite key={i} site={data} checked={isSelected(data._id)} toggle={() => toggle(data._id)} partiallySelected={selected.length !== 0} />)
       }
-    </Grid>
+    </GridProjects>
       </Fragment>
 
   )
@@ -44,18 +44,18 @@ interface Products {
   products: Product[];
 }
 
-export const Products: FC<Products> = ({ products}) => {
+export const ProductsProjects: FC<Products> = ({ products}) => {
   const { selected, allSelected, noneSelected, isSelected, toggle, toggleAll, unSelectAll } = useSelections(
     products?.map(data => data._id)!
   );
   return (
     <Fragment>
     <HeadingDashboardOption checked={allSelected} toggleAll={toggleAll} selected={selected} unSelectAll={unSelectAll} /> 
-    <Grid>
+    <GridProjects>
       {
         products?.map((data, i) => <CardProduct0 key={i} product={data} checked={isSelected(data._id)} toggle={() => toggle(data._id)} partiallySelected={selected.length !== 0} />)
       }
-    </Grid>
+    </GridProjects>
       </Fragment>
 
   )
@@ -64,18 +64,18 @@ interface Pages0 {
   pages0: Page[];
 }
 
-export const Pages0: FC<Pages0> = ({ pages0}) => {
+export const Pages0Projects: FC<Pages0> = ({ pages0}) => {
   const { selected, allSelected, noneSelected, isSelected, toggle, toggleAll, unSelectAll } = useSelections(
     pages0?.map(data => data._id)!
   );
   return (
     <Fragment>
     <HeadingDashboardOption checked={allSelected} toggleAll={toggleAll} selected={selected} unSelectAll={unSelectAll} /> 
-    <Grid>
+    <GridProjects>
       {
         pages0?.map((data, i) => <CardPage0 key={i} page={data} checked={isSelected(data._id)} toggle={() => toggle(data._id)} partiallySelected={selected.length !== 0} />)
       }
-    </Grid>
+    </GridProjects>
       </Fragment>
 
   )
@@ -84,18 +84,18 @@ interface Pages1 {
   pages1: Page[];
 }
 
-export const Pages1: FC<Pages1> = ({ pages1}) => {
+export const Pages1Projects: FC<Pages1> = ({ pages1}) => {
   const { selected, allSelected, noneSelected, isSelected, toggle, toggleAll, unSelectAll } = useSelections(
     pages1?.map(data => data._id)!
   );
   return (
     <Fragment>
     <HeadingDashboardOption checked={allSelected} toggleAll={toggleAll} selected={selected} unSelectAll={unSelectAll} /> 
-    <Grid>
+    <GridProjects>
       {
         pages1?.map((data, i) => <CardPage1 key={i} page={data} checked={isSelected(data._id)} toggle={() => toggle(data._id)} partiallySelected={selected.length !== 0} />)
       }
-    </Grid>
+    </GridProjects>
       </Fragment>
 
   )
@@ -104,18 +104,18 @@ interface Pages2 {
   pages2: Page[];
 }
 
-export const Pages2: FC<Pages2> = ({ pages2}) => {
+export const Pages2Projects: FC<Pages2> = ({ pages2}) => {
   const { selected, allSelected, noneSelected, isSelected, toggle, toggleAll, unSelectAll } = useSelections(
     pages2?.map(data => data._id)!
   );
   return (
     <Fragment>
     <HeadingDashboardOption checked={allSelected} toggleAll={toggleAll} selected={selected} unSelectAll={unSelectAll} /> 
-    <Grid>
+    <GridProjects>
       {
         pages2?.map((data, i) => <CardPage2 key={i} page={data} checked={isSelected(data._id)} toggle={() => toggle(data._id)} partiallySelected={selected.length !== 0} />)
       }
-    </Grid>
+    </GridProjects>
       </Fragment>
 
   )

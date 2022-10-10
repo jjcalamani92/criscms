@@ -4,7 +4,7 @@ import { createRef, FC, Fragment, useRef, useState } from 'react';
 import { useForm, Resolver, SubmitHandler, PathString } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import { Page } from '../../../interfaces';
-import { getQuery, typePageEcommerce, typePageMarketing, typePagePortfolio } from '../../../utils';
+import { getQuery, typePageEcommerce, typePageEducation, typePageMarketing, typePagePortfolio } from '../../../utils';
 import { useCreatePage0, useCreatePage1, useCreatePage2, useSite, useUpdatePage0, useUpdatePage2 } from '../../hooks';
 import { useUpdatePage1 } from '../../hooks/page/page1/useUpdatePage1';
 
@@ -242,6 +242,30 @@ export const PageForm: FC<PageForm> = ({ setOpenMCD, uid, page, type }) => {
                               </div>)
                             )}
                             {errors.type && <p className='text-red-600 text-sm'>This is required!!</p>}
+
+                          </>
+                        }
+                        {
+                          type === 'education' &&
+                          <>
+                            {typePageEducation.map(data => (
+                              <div className="flex items-center my-2" key={data.label}>
+                                <input
+                                  type="radio"
+                                  id={data.value}
+                                  value={data.value}
+                                  {...register('type', { required: true })}
+                                  className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                  onChange={({ target }) => setValue('type', target.value, { shouldValidate: true })}
+
+                                />
+                                <label className="ml-3 block text-sm text-gray-500">
+                                  {data.label}
+                                </label>
+                              </div>)
+                            )}
+                            {errors.type && <p className='text-red-600 text-sm'>This is required!!</p>}
+
 
                           </>
                         }

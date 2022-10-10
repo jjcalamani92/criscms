@@ -29,6 +29,12 @@ export const typePageEcommerceCategory = [
   ]
 
   //TODO: SITE PORTFOLIO
+  export const typePageEducation = [
+    { label:"Page", value:"page" },
+    { label:"Category", value:"category" },
+    { label:"Page Blank", value:"page-blank" },
+  ]
+  //TODO: SITE PORTFOLIO
   export const typePagePortfolio = [
     { label:"Page", value:"page" },
     { label:"Article", value:"article" },

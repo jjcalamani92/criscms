@@ -7,11 +7,6 @@ import { Fragment } from 'react'
 import { GridSite, HeadingDashboard } from '../../../components'
 
 
-const Page: NextPageWithLayout = () => {
-  return <p>hello world</p>
-}
-
-
 export default function Sites() {
   return (
     <Fragment>

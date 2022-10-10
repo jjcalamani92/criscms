@@ -5,3 +5,5 @@ export * from './cardPage0'
 export * from './cardProduct'
 export * from './cardProduct0'
 export * from './cardSite'
+
+export * from './projects'

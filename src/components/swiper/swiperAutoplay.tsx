@@ -20,7 +20,7 @@ export const SwiperAutoplay = () => {
         centeredSlides={true}
         effect={"fade"}
         autoplay={{
-          delay: 5000,
+          delay: 20000,
           disableOnInteraction: false,
         }}
         pagination={{
@@ -40,9 +40,9 @@ export const SwiperAutoplay = () => {
 
 			<div className="relative max-w-screen-xl px-4 py-32 mx-auto lg:h-screen lg:items-center lg:flex">
 				<div className="max-w-xl text-center sm:text-left">
-					<h1 className="text-3xl font-extrabold sm:text-5xl">
+					<h1 className="text-3xl font-bold tracking-tight sm:text-7xl">
 						La calidad esta{' '}
-						<strong className="font-extrabold text-red-600 sm:block">
+						<strong className="font-bold tracking-tight text-red-600 sm:block">
 							Disponible
 						</strong>
 					</h1>
@@ -51,19 +51,14 @@ export const SwiperAutoplay = () => {
 					</p>
 
 					<div className="flex flex-wrap gap-4 mt-8 text-center">
-						<a
-							className="block w-full px-12 py-3 text-sm font-medium text-white rounded shadow bg-red-500 sm:w-auto active:bg-red-500 hover:bg-red-600 focus:outline-none focus:ring"
-							href=""
-						>
-							Ver Productos
-						</a>
+					<button className="btn-primary bg-red-600 hover:bg-red-700 px-6 text-lg">
+              Ver Productos
+            </button>
+						<button className="btn-default px-6 text-lg" >
+              Descuentos
+            </button>
 
-						<a
-							className="block w-full px-12 py-3 text-sm font-medium bg-white rounded shadow text-red-500 sm:w-auto hover:text-red-600 active:text-red-500 focus:outline-none focus:ring"
-							href=""
-						>
-							Descuentos
-						</a>
+						
 					</div>
 				</div>
 				</div>
@@ -78,9 +73,9 @@ export const SwiperAutoplay = () => {
 
 			<div className="relative max-w-screen-xl px-4 py-32 mx-auto lg:h-screen lg:items-center lg:flex">
 				<div className="max-w-xl text-center sm:text-left">
-					<h1 className="text-3xl font-extrabold sm:text-5xl">
+					<h1 className="text-3xl font-bold tracking-tight sm:text-7xl">
 						La calidad esta{' '}
-						<strong className="font-extrabold text-red-600 sm:block">
+						<strong className="font-bold tracking-tight text-red-600 sm:block">
 							Disponible
 						</strong>
 					</h1>
@@ -89,19 +84,12 @@ export const SwiperAutoplay = () => {
 					</p>
 
 					<div className="flex flex-wrap gap-4 mt-8 text-center">
-						<a
-							className="block w-full px-12 py-3 text-sm font-medium text-white rounded shadow bg-red-500 sm:w-auto active:bg-red-500 hover:bg-red-600 focus:outline-none focus:ring"
-							href=""
-						>
-							Ver Productos
-						</a>
-
-						<a
-							className="block w-full px-12 py-3 text-sm font-medium bg-white rounded shadow text-red-500 sm:w-auto hover:text-red-600 active:text-red-500 focus:outline-none focus:ring"
-							href=""
-						>
-							Descuentos
-						</a>
+					<button className="btn-primary bg-red-600 hover:bg-red-700 px-6 text-lg">
+              Ver Productos
+            </button>
+						<button className="btn-default px-6 text-lg" >
+              Descuentos
+            </button>
 					</div>
 				</div>
 				</div>

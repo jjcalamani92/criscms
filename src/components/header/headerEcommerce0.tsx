@@ -17,6 +17,8 @@ import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
 import { Bars3Icon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { classNames } from '../../../utils'
 import { useToggle } from 'ahooks'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 const navigation = {
   categories: [
@@ -42,7 +44,7 @@ const navigation = {
           id: 'clothing',
           name: 'Clothing',
           items: [
-            { name: 'Tops', href: '#' },
+            { name: 'Tops', href: '/dashboard/projects/6324d2d5132d462bc1c57b55/woman/tops' },
             { name: 'Dresses', href: '#' },
             { name: 'Pants', href: '#' },
             { name: 'Denim', href: '#' },
@@ -101,7 +103,7 @@ const navigation = {
           id: 'clothing',
           name: 'Clothing',
           items: [
-            { name: 'Tops', href: '#' },
+            { name: 'Tops', href: '/woman/tops' },
             { name: 'Pants', href: '#' },
             { name: 'Sweaters', href: '#' },
             { name: 'T-Shirts', href: '#' },
@@ -147,7 +149,8 @@ interface HeaderEcommerce0 {
 
 export const  HeaderEcommerce0:FC<HeaderEcommerce0> = ({toggleShoppingCarts}) => {
   const [state, { toggle, setLeft, setRight }] = useToggle();
-  
+  const { asPath } = useRouter()
+  console.log(asPath)
   return (
     <div className="bg-white">
       {/* Mobile menu */}
@@ -320,7 +323,7 @@ export const  HeaderEcommerce0:FC<HeaderEcommerce0> = ({toggleShoppingCarts}) =>
               </div>
 
               {/* Flyout menus */}
-              <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
+              <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch z-10">
                 <div className="flex h-full space-x-8">
                   {navigation.categories.map((category) => (
                     <Popover key={category.name} className="flex">
@@ -388,9 +391,11 @@ export const  HeaderEcommerce0:FC<HeaderEcommerce0> = ({toggleShoppingCarts}) =>
                                           >
                                             {section.items.map((item) => (
                                               <li key={item.name} className="flex">
-                                                <a href={item.href} className="hover:text-gray-800">
+                                                <Link href={item.href}>
+                                                <a  className="hover:text-gray-800">
                                                   {item.name}
                                                 </a>
+                                                </Link>
                                               </li>
                                             ))}
                                           </ul>

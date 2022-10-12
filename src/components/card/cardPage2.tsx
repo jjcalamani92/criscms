@@ -1,11 +1,9 @@
 import Link from "next/link"
 import { FC, useRef } from "react";
-import Image from "next/image";
 import { Page } from "../../../interfaces";
-import Swal from 'sweetalert2';
-import { useDeletePage2 } from "../../hooks";
 import { useRouter } from "next/router";
 import { useLongPress } from "ahooks";
+import { Image } from "../utils";
 interface CardPage2 {
   page?: Page
   checked: boolean
@@ -31,11 +29,8 @@ export const CardPage2: FC<CardPage2> = ({ page, checked, partiallySelected, tog
         onClick={toggle}
       />
       <div ref={ref} className="">
-        <img
-          className="h-[12rem] w-full object-cover"
-          src={page?.data.seo.image.src!}
-          alt={page?.data.seo.image.alt!}
-        />
+        <Image img={page?.data.seo.image!} className={"h-[12rem] w-full object-cover"}/>
+
         <Link href={`/dashboard/sites/${page?.site}/page2=${page?._id}`}>
 
 

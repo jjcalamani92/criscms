@@ -1,9 +1,9 @@
 import Link from "next/link"
 import { FC } from "react";
-import Image from "next/image";
 import { Page } from "../../../interfaces";
 import Swal from 'sweetalert2';
 import { useDeletePage3 } from "../../hooks";
+import { Image } from "../utils";
 interface CardPage3 {
   page?:  Page
   
@@ -37,12 +37,8 @@ export const CardPage3: FC<CardPage3> = ({ page }) => {
     <div className="max-w-xs rounded-md shadow-lg bg-gray-50 text-gray-800">
       <Link href={`/dashboard/sites/${page?.site}/page2=${page?._id}`}>
         <a>
-          <Image
-            width={400}
-            height={400}
-            src={"https://res.cloudinary.com/dvcyhn0lj/image/upload/v1655217461/14.1_no-image.jpg_gkwtld.jpg"}
-            alt={"description image"}
-          />
+          <Image img={page?.data.seo.image!} className={"h-[12rem] w-full object-cover"}/>
+
           <div className="flex flex-col justify-between px-4 space-y-8">
             <div className="space-y-2">
               <h2 className=" text-sm tracking-wide">{page?.data.seo.title }</h2>

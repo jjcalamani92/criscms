@@ -31,7 +31,10 @@ export const FIND_PAGES_0 = gql`
         seo{
           title
           description
-          
+          image{
+            src
+            alt
+          }
         }
       }
     }

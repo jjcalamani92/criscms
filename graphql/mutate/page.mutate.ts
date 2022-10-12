@@ -116,6 +116,27 @@ export const UPDATE_PAGE_1 = gql`
     }
   }
 `;
+export const UPDATE_IMAGE_PAGE_1 = gql`
+mutation UpdateImagePage1($id: ID!, $input: UpdateImage!, $uid: String!) {
+  updateImagePage1 (id:$id, input: $input, uid:$uid) {
+			_id
+      site
+      parent
+      data{
+        type
+        seo{
+          title
+          description
+          image{
+            src
+            alt
+          }
+          
+        }
+      }
+    }
+  }
+`;
 export const DELETE_PAGE_1 = gql`
   mutation DeletePage1($id: ID!) {
     deletePage1(id: $id)
@@ -168,6 +189,27 @@ export const UPDATE_PAGE_2 = gql`
     }
   }
 `;
+export const UPDATE_IMAGE_PAGE_2 = gql`
+mutation UpdateImagePage2($id: ID!, $input: UpdateImage!, $uid: String!) {
+  updateImagePage2 (id:$id, input: $input, uid:$uid) {
+			_id
+      site
+      parent
+      data{
+        type
+        seo{
+          title
+          description
+          image{
+            src
+            alt
+          }
+          
+        }
+      }
+    }
+  }
+`;
 export const DELETE_PAGE_2 = gql`
   mutation DeletePage2($id: ID!) {
     deletePage2(id: $id)
@@ -202,6 +244,27 @@ export const CREATE_PAGE_3 = gql`
 export const UPDATE_PAGE_3 = gql`
   mutation UpdatePage3($id:ID!, $input: UpdatePage!) {
     updatePage3(id:$id, input: $input) {
+			_id
+      site
+      parent
+      data{
+        type
+        seo{
+          title
+          description
+          image{
+            src
+            alt
+          }
+          
+        }
+      }
+    }
+  }
+`;
+export const UPDATE_IMAGE_PAGE_3 = gql`
+mutation UpdateImagePage3($id: ID!, $input: UpdateImage!, $uid: String!) {
+  updateImagePage3 (id:$id, input: $input, uid:$uid) {
 			_id
       site
       parent

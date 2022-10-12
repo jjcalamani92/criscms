@@ -12,7 +12,7 @@ import { DataProduct, ImageProduct, Page, Product, Site } from '../../../../inte
 
 
 import { getQuery, uuidv3 } from '../../../../utils/function';
-import { useUpdateProductImage, useUpdateSiteImage } from '../../../hooks';
+import { useUpdatePage1Image, useUpdatePage2Image, useUpdatePage3Image, useUpdateProductImage, useUpdateSiteImage } from '../../../hooks';
 import { useUpdatePage0Image } from '../../../hooks/page/page0/useUpdatePage0Image';
 
 interface FormValues {
@@ -36,10 +36,14 @@ export const ImagePageForm: FC<ImagePageForm> = ({ toggle, setLeft, page }) => {
 
   const { asPath, replace } = useRouter()
   const query = getQuery(asPath)
-
+  console.log(query[3].split('=')[0]);
+  
   const { register, handleSubmit, formState: { errors }, getValues, setValue, watch } = useForm<FormValues>({ defaultValues: { page: { src: page?.data.seo.image ? page?.data.seo.image.src : "https://res.cloudinary.com/dqsbh2kn0/image/upload/v1663014890/zawkgpyjvvxrfwp9j7w1.jpg" } } });
 
   const { mutate: updateImagePage0 } = useUpdatePage0Image()
+  const { mutate: updateImagePage1 } = useUpdatePage1Image()
+  const { mutate: updateImagePage2 } = useUpdatePage2Image()
+  const { mutate: updateImagePage3 } = useUpdatePage3Image()
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
 
@@ -57,8 +61,18 @@ export const ImagePageForm: FC<ImagePageForm> = ({ toggle, setLeft, page }) => {
         const { data } = await axios.post(`${process.env.API_URL}/upload/file`, formData)
          if (type === "page") {
           setValue('page', { src: data.url, alt: `description image of the ${page?.data.seo.title}` }, { shouldValidate: true })
-          console.log({ id: page?._id!, input: getValues('page'), uid: session?.user.sid! });
-          updateImagePage0({ id: page?._id!, input: getValues('page'), uid: session?.user.sid! })
+          if (query[3].split('=')[0] === 'page0') {
+            updateImagePage0({ id: page?._id!, input: getValues('page'), uid: session?.user.sid! })
+          } else if (query[3].split('=')[0] === 'page1') {
+            updateImagePage1({ id: page?._id!, input: getValues('page'), uid: session?.user.sid! })
+            
+          } else if (query[3].split('=')[0] === 'page2') {
+            updateImagePage2({ id: page?._id!, input: getValues('page'), uid: session?.user.sid! })
+            
+          } else if (query[3].split('=')[0] === 'page3') {
+            updateImagePage3({ id: page?._id!, input: getValues('page'), uid: session?.user.sid! })
+            
+          }
         } 
 
 

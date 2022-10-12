@@ -11,7 +11,8 @@ interface CardPage2 {
   toggle: () => void
 }
 export const CardPage2: FC<CardPage2> = ({ page, checked, partiallySelected, toggle }) => {
-  const { push } = useRouter()
+  
+  
   const ref = useRef<HTMLDivElement>(null);
   useLongPress(toggle, ref, {
     moveThreshold: { x: 5, y: 5 },

@@ -3,10 +3,10 @@ import { useRouter } from 'next/router';
 import { createRef, FC, Fragment, useRef, useState } from 'react';
 import { useForm, Resolver, SubmitHandler, PathString } from 'react-hook-form';
 import Swal from 'sweetalert2';
-import { Page } from '../../../interfaces';
-import { getQuery, typePageEcommerce, typePageEducation, typePageMarketing, typePagePortfolio } from '../../../utils';
-import { useCreatePage0, useCreatePage1, useCreatePage2, useSite, useUpdatePage0, useUpdatePage2 } from '../../hooks';
-import { useUpdatePage1 } from '../../hooks/page/page1/useUpdatePage1';
+import { Page } from '../../../../interfaces';
+import { getQuery, typePageEcommerce, typePageEducation, typePageMarketing, typePagePortfolio } from '../../../../utils';
+import { useCreatePage0, useCreatePage1, useCreatePage2, useSite, useUpdatePage0, useUpdatePage2 } from '../../../hooks';
+import { useUpdatePage1 } from '../../../hooks/page/page1/useUpdatePage1';
 
 
 interface PageForm {
@@ -36,8 +36,7 @@ export const PageForm: FC<PageForm> = ({ toggle, setLeft, uid, page, type }) => 
   const { asPath, replace } = useRouter()
   const query = getQuery(asPath)
   const { data: site } = useSite(asPath)
-  // console.log(query);
-  // console.log(page);
+
 
 
   const { mutate: createPage0 } = useCreatePage0()
@@ -52,7 +51,7 @@ export const PageForm: FC<PageForm> = ({ toggle, setLeft, uid, page, type }) => 
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     const form = { ...data, title: data.title.trim(), description: data.description.trim(), site: query[2], parent: uid! }
-    const formUpdate = { ...data }
+    const formUpdate = { ...data, title: data.title.trim(), description: data.description.trim(), site: page?.site!, parent: page?.parent! }
 
 
     if (page) {

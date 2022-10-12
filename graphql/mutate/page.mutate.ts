@@ -43,6 +43,27 @@ export const UPDATE_PAGE_0 = gql`
     }
   }
 `;
+export const UPDATE_IMAGE_PAGE_0 = gql`
+mutation UpdateImagePage0($id: ID!, $input: UpdateImage!, $uid: String!) {
+  updateImagePage0 (id:$id, input: $input, uid:$uid) {
+			_id
+      site
+      parent
+      data{
+        type
+        seo{
+          title
+          description
+          image{
+            src
+            alt
+          }
+          
+        }
+      }
+    }
+  }
+`;
 export const DELETE_PAGE_0 = gql`
   mutation DeletePage0($id: ID!) {
     deletePage0(id: $id)

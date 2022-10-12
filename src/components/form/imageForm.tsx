@@ -27,19 +27,15 @@ interface ImageForm {
   image?: ImageProduct[]
 }
 export const ImageForm: FC<ImageForm> = ({ toggle, setLeft, product, image }) => {
-  // console.log(product);
+
   const { data: session } = useSession()
 
   const { asPath, replace } = useRouter()
   const query = getQuery(asPath)
-  // console.log(query.at(-2));
   
   const { register, handleSubmit, formState: { errors }, getValues, setValue, watch } = useForm<FormValues>({defaultValues: {...product}});
-  // console.log('image', getValues('article.image'));
   const {mutate: updateProductImage} = useUpdateProductImage()
   
-  const queryClient = useQueryClient();
-
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
 
   };
@@ -56,9 +52,7 @@ export const ImageForm: FC<ImageForm> = ({ toggle, setLeft, product, image }) =>
         const { data } = await axios.post(`${process.env.API_URL}/upload/file`, formData)
         setValue('data.image', [...getValues('data.image'), {uid: uuidv3(), src: data.url, alt:`description image of the ${product?.data.name}`}], { shouldValidate: true })
         updateProductImage({id: product?._id!, input: getValues('data.image'), type: product?.type!, uid: session?.user.sid!})
-        // await graphQLClient.request(UPDATE_PRODUCT_IMAGE, {id: product!._id, input: getValues('data.image'), type: query.at(-2)})
-        // queryClient.invalidateQueries([`find-product-by-type`]);
-        
+
       }
     } catch (error) {
       console.log({ error })

@@ -35,6 +35,11 @@ export interface Image {
   src: string;
   alt: string;
 }
+export interface ImageInterface {
+  uid?: string
+  src: string;
+  alt: string;
+}
 
 
 export interface DataBase {

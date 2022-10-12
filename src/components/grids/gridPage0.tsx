@@ -13,7 +13,6 @@ export const GridPage0: FC<GridPage0> = () => {
   const { query, asPath } = useRouter()
   const { data: pages0 } = usePages0ByParent(asPath)
   const { data: site } = useSite(asPath);
-  // console.log(pages0)
   const list = useMemo(() => pages0,
     [pages0])
   
@@ -21,11 +20,6 @@ export const GridPage0: FC<GridPage0> = () => {
     <Fragment>
       <HeadingDashboard title={site?.data.name!} site={site}/>
       <Pages0 pages0={list!}/>
-      
-      {/* <HeadingDashboardOption checked={allSelected} toggleAll={toggleAll} selected={selected} unSelectAll={unSelectAll} /> 
-      <Grid>
-        {list?.map((data, i) => <CardPage0 key={i} page={data} checked={isSelected(data._id)} toggle={() => toggle(data._id)} partiallySelected={selected.length !== 0}/>)}
-      </Grid> */}
     </Fragment>
   )
 }

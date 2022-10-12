@@ -19,12 +19,14 @@ import { classNames } from '../../../utils'
 import { useToggle } from 'ahooks'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import { Image, LinkURL, NextLink } from '../utils'
+import { Menu0, Popover0, Popover1, Popover2, Popover3 } from '../headless'
 
 const navigation = {
   categories: [
     {
       id: 'women',
-      name: 'Women',
+      name: 'Menu',
       featured: [
         {
           name: 'New Arrivals',
@@ -80,62 +82,7 @@ const navigation = {
         },
       ],
     },
-    {
-      id: 'men',
-      name: 'Men',
-      featured: [
-        {
-          name: 'New Arrivals',
-          href: '#',
-          imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-04-detail-product-shot-01.jpg',
-          imageAlt: 'Drawstring top with elastic loop closure and textured interior padding.',
-        },
-        {
-          name: 'Artwork Tees',
-          href: '#',
-          imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-06.jpg',
-          imageAlt:
-            'Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt.',
-        },
-      ],
-      sections: [
-        {
-          id: 'clothing',
-          name: 'Clothing',
-          items: [
-            { name: 'Tops', href: '/woman/tops' },
-            { name: 'Pants', href: '#' },
-            { name: 'Sweaters', href: '#' },
-            { name: 'T-Shirts', href: '#' },
-            { name: 'Jackets', href: '#' },
-            { name: 'Activewear', href: '#' },
-            { name: 'Browse All', href: '#' },
-          ],
-        },
-        {
-          id: 'accessories',
-          name: 'Accessories',
-          items: [
-            { name: 'Watches', href: '#' },
-            { name: 'Wallets', href: '#' },
-            { name: 'Bags', href: '#' },
-            { name: 'Sunglasses', href: '#' },
-            { name: 'Hats', href: '#' },
-            { name: 'Belts', href: '#' },
-          ],
-        },
-        {
-          id: 'brands',
-          name: 'Brands',
-          items: [
-            { name: 'Re-Arranged', href: '#' },
-            { name: 'Counterfeit', href: '#' },
-            { name: 'Full Nelson', href: '#' },
-            { name: 'My Way', href: '#' },
-          ],
-        },
-      ],
-    },
+    
   ],
   pages: [
     { name: 'Company', href: '#' },
@@ -143,11 +90,11 @@ const navigation = {
   ],
 }
 
-interface HeaderEcommerce0 {
+interface HeaderFood0 {
   toggleShoppingCarts: () => void
 }
 
-export const  HeaderEcommerce0:FC<HeaderEcommerce0> = ({toggleShoppingCarts}) => {
+export const  HeaderFood0:FC<HeaderFood0> = ({toggleShoppingCarts}) => {
   const [state, { toggle, setLeft, setRight }] = useToggle();
   const { asPath } = useRouter()
   return (
@@ -313,14 +260,13 @@ export const  HeaderEcommerce0:FC<HeaderEcommerce0> = ({toggleShoppingCarts}) =>
               <div className="ml-4 flex lg:ml-0">
                 <a href="#">
                   <span className="sr-only">Your Company</span>
-                  <img
-                    className="h-8 w-auto"
-                    src="https://res.cloudinary.com/dqsbh2kn0/image/upload/v1665419887/criscrm/6324d2d5132d462bc1c57b55/2022-10-10T16:38:07.214Z.jpg"
-                    alt=""
-                  />
+                  <img src={"https://res.cloudinary.com/dqsbh2kn0/image/upload/v1665504775/criscrm/63459587474708532c2dd798/2022-10-11T16:12:55.004Z.jpg"} alt={"item.imageAlt"} className={"h-16 w-auto"} /> 
+
+                  
                 </a>
               </div>
-
+              {/* <Popover3 /> */}
+              {/* <Menu0 /> */}
               {/* Flyout menus */}
               <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch z-10">
                 <div className="flex h-full space-x-8">
@@ -350,7 +296,7 @@ export const  HeaderEcommerce0:FC<HeaderEcommerce0> = ({toggleShoppingCarts}) =>
                             leaveFrom="opacity-100"
                             leaveTo="opacity-0"
                           >
-                            <Popover.Panel className="absolute inset-x-0 top-full text-sm text-gray-500">
+                            <Popover.Panel className="absolute inset-x-0 top-full text-sm text-gray-500" static>
                               {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
                               <div className="absolute inset-0 top-1/2 bg-white shadow" aria-hidden="true" />
 
@@ -361,11 +307,7 @@ export const  HeaderEcommerce0:FC<HeaderEcommerce0> = ({toggleShoppingCarts}) =>
                                       {category.featured.map((item) => (
                                         <div key={item.name} className="group relative text-base sm:text-sm">
                                           <div className="aspect-w-1 aspect-h-1 overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
-                                            <img
-                                              src={item.imageSrc}
-                                              alt={item.imageAlt}
-                                              className="object-cover object-center"
-                                            />
+                                            <img src={item.imageSrc} alt={item.imageAlt} className={"object-cover object-center"} /> 
                                           </div>
                                           <a href={item.href} className="mt-6 block font-medium text-gray-900">
                                             <span className="absolute inset-0 z-10" aria-hidden="true" />
@@ -390,11 +332,9 @@ export const  HeaderEcommerce0:FC<HeaderEcommerce0> = ({toggleShoppingCarts}) =>
                                           >
                                             {section.items.map((item) => (
                                               <li key={item.name} className="flex">
-                                                <Link href={item.href}>
-                                                <a  className="hover:text-gray-800">
-                                                  {item.name}
-                                                </a>
-                                                </Link>
+                                                {/* <Link > */}
+                                                <Popover.Button as={NextLink} href={item.href} style="hover:text-gray-800" label={item.name}/>
+                                                {/* </Link> */}
                                               </li>
                                             ))}
                                           </ul>

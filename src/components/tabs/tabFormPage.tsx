@@ -1,7 +1,7 @@
 import { FC, useState } from 'react'
 import { Tab } from '@headlessui/react'
 import { classNames } from '../../../utils/function'
-import { PageForm, SiteForm } from '../form'
+import { ImagePageForm, PageForm, SiteForm } from '../form'
 import { Page, Site } from '../../../interfaces'
 interface TabFormPage {
   page?: Page
@@ -46,21 +46,7 @@ export const TabFormPage:FC<TabFormPage> = ({page, type, uid, toggle, setLeft}) 
           >
             Seo
           </Tab>
-          <Tab
-            disabled={page ? false : true}
-            className={({ selected }) =>
-              classNames(
-                'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-indigo-700',
-                page ? "text-indigo-700" : "text-gray-200 opacity-40",
-                // 'ring-white ring-opacity-60 ring-offset-2 ring-offset-indigo-400 focus:outline-none focus:ring-2',
-                selected
-                  ? 'bg-white shadow'
-                  : 'text-blue-900 hover:bg-white/[0.12] '
-              )
-            }
-          >
-            More
-          </Tab>
+          
         </Tab.List>
         <Tab.Panels className="mt-2">
           <Tab.Panel
@@ -75,16 +61,10 @@ export const TabFormPage:FC<TabFormPage> = ({page, type, uid, toggle, setLeft}) 
               'rounded-xl bg-white'
             )}
           >
-            <h1>2</h1>
+            <ImagePageForm  toggle={toggle} setLeft={setLeft} page={page} />
 
           </Tab.Panel>
-          <Tab.Panel
-            className={classNames(
-              'rounded-xl bg-white'
-            )}
-          >
-            <h1>2</h1>
-          </Tab.Panel>
+          
         </Tab.Panels>
       </Tab.Group>
     </div>

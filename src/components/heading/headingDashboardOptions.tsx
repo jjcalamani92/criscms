@@ -16,7 +16,6 @@ interface HeadingDashboardOption {
 export const HeadingDashboardOption: FC<HeadingDashboardOption> = ({ checked, toggleAll, unSelectAll, selected, type }) => {
   const { asPath } = useRouter()
   const query = getQuery(asPath)
-  console.log(type);
 
   const { mutate: deleteSites } = useDeleteManySitesById()
   const { mutate: deletePages0 } = useDeletePages0(query[2])

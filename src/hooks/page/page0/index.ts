@@ -1,5 +1,6 @@
 export * from './useCreatePage0'
 export * from './useUpdatePage0'
+export * from './useUpdatePage0Image'
 export * from './useDeletePage0'
 export * from './useDeletePages0'
 export * from './usePage0'

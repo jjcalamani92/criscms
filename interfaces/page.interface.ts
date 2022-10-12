@@ -1,6 +1,6 @@
 // import { Article } from "../article/article.interface";
 // import { Product } from "../product/product.interface";
-import { Seo } from "./site.interface";
+import { Image, Seo } from "./site.interface";
 
 export interface Page {
   _id: string;
@@ -15,6 +15,7 @@ export interface Page {
 
 interface Data {
   type: string;
+  icon: Image;
   seo: Seo;
 }
 
@@ -32,6 +33,14 @@ export interface UpdatePage {
     description: string
     type: string
   }
+}
+export interface UpdateImagePage {
+  id:string
+  input: {
+    src: string
+    alt: string
+  }
+  uid: string
 }
 export interface DeletePages {
   ids:string[]

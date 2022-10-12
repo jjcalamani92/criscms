@@ -2,10 +2,11 @@
 import { FC, Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { classNames } from '../../utils/function'
+import { classNames, getQuery } from '../../utils/function'
 import { useSession, signOut } from 'next-auth/react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 const user = {
   name: 'Tom Cook',
   email: 'tom@example.com',
@@ -13,12 +14,12 @@ const user = {
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 }
 const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Sites', href: '/dashboard/sites', current: false },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '/dashboard/projects', current: false },
-  { name: 'Calendar', href: '#', current: false },
-  { name: 'Reports', href: '#', current: false },
+  // { name: 'Dashboard', href: '#', current: true },
+  { name: 'Sites', href: 'sites', current: false },
+  // { name: 'Team', href: '#', current: false },
+  { name: 'Projects', href: 'projects', current: false },
+  { name: 'Calendar', href: 'calendar', current: false },
+  { name: 'Reports', href: 'reports', current: false },
 ]
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
@@ -31,7 +32,8 @@ interface HeaderDashboard {
 
 export const HeaderDashboard: FC<HeaderDashboard> = ({ }) => {
   const { data: session, status } = useSession()
-  // console.log(session?.user.image.src);
+  const { asPath } = useRouter()
+  const query = getQuery(asPath)
   return (
     <>
       <div className="min-h-full">
@@ -57,14 +59,14 @@ export const HeaderDashboard: FC<HeaderDashboard> = ({ }) => {
                     <div className="hidden md:block">
 
                       <div className="ml-10 flex items-baseline space-x-4">
-                        {navigation.map((item) => (
+                        {navigation.map((item, i) => (
                           <Link
-                            key={item.name}
-                            href={item.href}
+                            key={i}
+                            href={`/dashboard/${item.href}`}
                           >
                             <a
                               className={classNames(
-                                item.current
+                                query[1] === item.href
                                   ? 'bg-gray-900 text-white'
                                   : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                                 'px-3 py-2 rounded-md text-sm font-medium'

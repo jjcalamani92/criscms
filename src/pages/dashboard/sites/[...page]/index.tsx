@@ -20,26 +20,6 @@ function Page() {
   const { data: pages1 } = usePages1();
   const { data: pages2 } = usePages2();
   const { data: allProducts } = useAllProducts();
-  // console.log(getPathByProducts(allProducts!));
-  
-  // const { data: articles, isError, isLoading, isFetching, status } = useFindAllArticles();
-  // const { data: products, isError, isLoading, isFetching, status } = useProductsWithCursor( {
-  //   first: first,
-  //   before: before,
-  //   after: after,
-  //   last: last
-  // }, "clothing");
-  
-  // console.log('articles', articles)
-  // console.log('isError', isError)
-  // console.log('status', status)
-  // console.log('isLoading', isLoading)
-  // console.log('isFetching', isFetching)
-  
-  // console.log(pages0);
-  
-  
-
   switch (asPath) {
     case getPathBySite(sites!, asPath): return <GridPage0 />
     case getPathByPage0(pages0!, asPath): return <GridPage1 />
@@ -66,7 +46,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const queryClient = new QueryClient()
 
   const query = context?.params?.page!
-  // console.log(query);
   
   if (query.length === 1) {
     const siteId = query[0]; const parentId = siteId

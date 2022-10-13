@@ -1,7 +1,9 @@
+:root {
+  --swiper-theme-color: #4f46e5 !important;
+ }
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 @layer base {
   mark {
     @apply bg-gray-200 px-1 py-0.5 rounded;
@@ -27,20 +29,6 @@
     @apply bg-gray-100 flex flex-row-reverse p-4 gap-3;
   }
   .swiper {
-    @apply w-full h-full;
+    @apply w-full h-[24rem] sm:h-[44rem] lg:h-[54rem] ;
   }
-  .swiper-slide {
-    @apply ;
-  }
-  .swiper-slide img {
-    @apply ;
-  }
-  .swiper-pagination-bullet{
-    background: red !important;
-  }
-  .swiper-pagination-bullet-active{
-    background: red !important;
-  }
-  
-  
 }

@@ -3,12 +3,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
-// import required modules
-import { Navigation } from "swiper";
-import Image from "next/image";
+import "swiper/css/pagination";
+
+import { Navigation, Pagination } from 'swiper';
 
 import { FC } from "react";
 import { ImageProduct } from "../../../interfaces";
+import { Image } from "../utils";
 
 interface SwiperNavigation {
   image: ImageProduct[]
@@ -17,27 +18,30 @@ interface SwiperNavigation {
 export const SwiperNavigation: FC<SwiperNavigation> = ({ image }) => {
   return (
     <>
-    {
-      image.length !== 0 ?
-      
-      <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+      <Swiper navigation={true} modules={[Navigation, Pagination]} className="mySwiper" pagination={{
+          clickable: true,
+        }}>
         {
           image.map((data, i) => (
             <SwiperSlide key={i}>
-              <Image src={data.src} layout="responsive" objectFit="cover" width={300} height={300} alt={data.alt} />
+              <Image img={data} className=" object-contain w-full h-full" />
             </SwiperSlide>
           ))
         }
       </Swiper>
+    {/* {
+      image.length !== 0 ?
+      
       :
       <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
             <SwiperSlide >
-              <Image src={'https://res.cloudinary.com/dqsbh2kn0/image/upload/v1663014890/zawkgpyjvvxrfwp9j7w1.jpg'} layout="responsive" objectFit="cover" width={300} height={300} alt={'image not found'} />
+              
+              <Image img={data} className="object-cover"/>
             </SwiperSlide>
         
       </Swiper>
         
-    }
+    } */}
     </>
   );
 }

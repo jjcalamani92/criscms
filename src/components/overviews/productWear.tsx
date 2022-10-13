@@ -96,9 +96,9 @@ export const ProductWear:FC<ProductWear> = ({product}) => {
   const [selectedSize, setSelectedSize] = useState(products.sizes[2])
   return (
     <>
-      <HeadingDashboard title="Detail Product" product={product} />
+      <HeadingDashboard title="Detail Products" product={product} />
       <div className="bg-white">
-        <div className="pb-6">
+        <div className="py-6 sm:py-10">
 
           <div className="max-w-2xl mx-auto py-0 px-4 sm:px-0 lg:max-w-7xl lg:py-0  grid grid-cols-1 lg:gap-6 lg:grid-cols-5">
             {/* Image gallery */}
@@ -106,7 +106,7 @@ export const ProductWear:FC<ProductWear> = ({product}) => {
               <SwiperNavigation image={product?.data.image!} />
             </div>
             <div className="col-span-2 " >
-              <div className=" mb-3">
+              <div className="mt-3 lg:mt-0 mb-3">
                 <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{product?.data.name}</h1>
               </div>
               <div className='mb-3'>
@@ -262,42 +262,7 @@ export const ProductWear:FC<ProductWear> = ({product}) => {
                 </form>
                 {/* Details */}
                 <MarkdownComponent code={code} />
-                {/* <MarkdownComponent code={code1} /> */}
-                {/* <div className='prose mb-3'>
-                  <ReactMarkdown
-                    remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
-                    children={`${code}`}
-                    rehypePlugins={[rehypeRaw]}
-                    // rehypePlugins={[rehypeHighlight]}
-                    components={{
-                      // u({node, ...props}) { return <u style={{textDecoration: 'underline'}} {...props} />} ,
-                      code({ node, inline, className, children, ...props }: any) {
-                        const match = /language-(\w+)/.exec(className || '')
-                        return !inline && match ? (
-                          <>
-
-                            <SyntaxHighlighter
-                              // unwrapDisallowed={true}
-
-                              children={String(children).replace(/\n$/, '')}
-                              style={atomOneDark as any}
-                              language={match[1]}
-                              PreTag="div"
-                              {...props}
-                            />
-                          </>
-                        ) : (
-                          <code className={className} {...props}>
-                            <>
-                              {children}
-                            </>
-                          </code>
-                        )
-                      }
-                    }}
-                  />
-                </div> */}
-
+                
               </div>
             </div>
 

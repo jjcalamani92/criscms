@@ -14,7 +14,7 @@ interface MarkdownComponent {
 }
 export const MarkdownComponent: FC<MarkdownComponent> = ({ code }) => {
   return (
-    <div className='prose'>
+    <div className='prose prose-p:my-3'>
 
       <ReactMarkdown
         remarkPlugins={[[remarkGfm, { singleTilde: false }]]}

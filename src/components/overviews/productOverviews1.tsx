@@ -154,9 +154,9 @@ export const ProductOverviews1 = () => {
   const [selectedSize, setSelectedSize] = useState(products.sizes[2])
   return (
     <>
-      <HeadingDashboard title="Detail Product" product={product} />
+      <HeadingDashboard title="Detail Products" product={product} />
       <div className="bg-white">
-        <div className="pb-6">
+        <div className="py-6 sm:py-10">
 
           <div className="max-w-2xl mx-auto py-0 px-4 sm:px-0 lg:max-w-7xl lg:py-0  grid grid-cols-1 lg:gap-6 lg:grid-cols-5">
             {/* Image gallery */}

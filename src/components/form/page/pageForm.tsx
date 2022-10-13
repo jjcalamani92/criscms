@@ -4,7 +4,7 @@ import { createRef, FC, Fragment, useRef, useState } from 'react';
 import { useForm, Resolver, SubmitHandler, PathString } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import { Page } from '../../../../interfaces';
-import { getQuery, typePageEcommerce, typePageEducation, typePageMarketing, typePagePortfolio } from '../../../../utils';
+import { getQuery, typePageEcommerce, typePageEducation, typePageFood, typePageMarketing, typePagePortfolio } from '../../../../utils';
 import { useCreatePage0, useCreatePage1, useCreatePage2, useSite, useUpdatePage0, useUpdatePage2 } from '../../../hooks';
 import { useUpdatePage1 } from '../../../hooks/page/page1/useUpdatePage1';
 
@@ -36,9 +36,6 @@ export const PageForm: FC<PageForm> = ({ toggle, setLeft, uid, page, type }) => 
   const { asPath, replace } = useRouter()
   const query = getQuery(asPath)
   const { data: site } = useSite(asPath)
-
-
-
   const { mutate: createPage0 } = useCreatePage0()
   const { mutate: updatePage0 } = useUpdatePage0()
   const { mutate: createPage1 } = useCreatePage1()
@@ -67,10 +64,6 @@ export const PageForm: FC<PageForm> = ({ toggle, setLeft, uid, page, type }) => 
       } else if (query.length === 4 && query.at(-1)?.split('=')[0] === 'page0') {
         updatePage0({ id: page._id, input: formUpdate })
       }
-      // if (query.length === 6) { updatePage2({ id: page._id, input: formUpdate }) }
-      // else if (query.length === 5) { updatePage1({ id: page._id, input: formUpdate }) }
-      // else if (query.length === 4) { updatePage0({ id: page._id, input: formUpdate }) }
-      // replace(getURL(asPath))
     } else {
       Swal.fire({
         position: 'center',
@@ -88,9 +81,6 @@ export const PageForm: FC<PageForm> = ({ toggle, setLeft, uid, page, type }) => 
       } else if (query.length === 3) {
         createPage0(form)
       }
-      // if (query.length === 5) { createPage2(form) }
-      // else if (query.length === 4) { createPage1(form) }
-      // else if (query.length === 3) { createPage0(form) }
     }
     toggle()
   }
@@ -225,6 +215,30 @@ export const PageForm: FC<PageForm> = ({ toggle, setLeft, uid, page, type }) => 
                           type === 'ecommerce' &&
                           <>
                             {typePageEcommerce.map(data => (
+                              <div className="flex items-center my-2" key={data.label}>
+                                <input
+                                  type="radio"
+                                  value={data.value}
+                                  // onBlur={onBlur} 
+                                  {...register('type', { required: true })}
+                                  className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                  onChange={({ target }) => setValue('type', target.value, { shouldValidate: true })}
+                                // onChange={() => setRadio(data.value)}
+
+                                />
+                                <label className="ml-3 block text-sm text-gray-500">
+                                  {data.label}
+                                </label>
+                              </div>)
+                            )}
+                            {errors.type && <p className='text-red-600 text-sm'>This is required!!</p>}
+
+                          </>
+                        }
+                        {
+                          type === 'food' &&
+                          <>
+                            {typePageFood.map(data => (
                               <div className="flex items-center my-2" key={data.label}>
                                 <input
                                   type="radio"

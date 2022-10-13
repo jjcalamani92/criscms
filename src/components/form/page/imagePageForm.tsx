@@ -1,5 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -36,9 +36,9 @@ export const ImagePageForm: FC<ImagePageForm> = ({ toggle, setLeft, page }) => {
 
   const { asPath, replace } = useRouter()
   const query = getQuery(asPath)
-  console.log(query[3].split('=')[0]);
+  // console.log(page);
   
-  const { register, handleSubmit, formState: { errors }, getValues, setValue, watch } = useForm<FormValues>({ defaultValues: { page: { src: page?.data.seo.image ? page?.data.seo.image.src : "https://res.cloudinary.com/dqsbh2kn0/image/upload/v1663014890/zawkgpyjvvxrfwp9j7w1.jpg" } } });
+  const { register, handleSubmit, formState: { errors }, getValues, setValue, watch } = useForm<FormValues>({ defaultValues: { page: { src: page?.data.seo.image?.src } } });
 
   const { mutate: updateImagePage0 } = useUpdatePage0Image()
   const { mutate: updateImagePage1 } = useUpdatePage1Image()
@@ -57,7 +57,13 @@ export const ImagePageForm: FC<ImagePageForm> = ({ toggle, setLeft, page }) => {
       for (const file of target.files) {
         const formData = new FormData();
         formData.append('file', file)
-        formData.append('site', query[2])
+        formData.append('parentId', page?._id!)
+        formData.append('siteId', query[2])
+        formData.append('type', "page")
+        if (getValues('page').src) {
+          let image = getValues('page').src.split('/').at(-1)?.split('.').at(-2)
+          await axios.post(`${process.env.API_URL}/upload/delete`, {name: image, type: "page"} )
+        }
         const { data } = await axios.post(`${process.env.API_URL}/upload/file`, formData)
          if (type === "page") {
           setValue('page', { src: data.url, alt: `description image of the ${page?.data.seo.title}` }, { shouldValidate: true })
@@ -78,7 +84,9 @@ export const ImagePageForm: FC<ImagePageForm> = ({ toggle, setLeft, page }) => {
 
       }
     } catch (error) {
-      console.log({ error })
+      const err = error as AxiosError
+      const { message } = err.response?.data as {message: string}
+      console.log(message)
     }
   }
   const cancelButtonRef = useRef(null)
@@ -93,7 +101,7 @@ export const ImagePageForm: FC<ImagePageForm> = ({ toggle, setLeft, page }) => {
               </h2>
               <div className="mt-1 flex items-center">
                 <span className="inline-block  rounded-sm bg-gray-100 border border-indigo-90">
-                  <img className="object-contain bg-white px-2 h-32 w-32" src={getValues('page.src')} alt={""} />
+                  <img className="object-cover bg-white h-32 w-32" src={getValues('page.src') || "https://res.cloudinary.com/dqsbh2kn0/image/upload/v1663014890/zawkgpyjvvxrfwp9j7w1.jpg"} alt={""} />
                 </span>
                 <label htmlFor="file-upload" className="ml-5 rounded-md border border-gray-300 bg-white py-2 px-3 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   onClick={() => setType('page')}

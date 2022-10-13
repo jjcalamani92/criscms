@@ -1,5 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -49,10 +49,14 @@ export const ImageSiteForm: FC<ImageSiteForm> = ({ toggle, setLeft, site, image 
   const { asPath, replace } = useRouter()
   const query = getQuery(asPath)
   // console.log(query.at(-2));
-
-  const { register, handleSubmit, formState: { errors }, getValues, setValue, watch } = useForm<FormValues>({ defaultValues: { logo: { src: site?.data.logo ? site?.data.logo.src : "https://res.cloudinary.com/dqsbh2kn0/image/upload/v1663014890/zawkgpyjvvxrfwp9j7w1.jpg" }, site: { src: site?.data.image ? site?.data.image.src : "https://res.cloudinary.com/dqsbh2kn0/image/upload/v1663014890/zawkgpyjvvxrfwp9j7w1.jpg" }, icon: { src: site?.data.icon ? site?.data.icon.src : "https://res.cloudinary.com/dqsbh2kn0/image/upload/v1663014890/zawkgpyjvvxrfwp9j7w1.jpg" } } });
-  // console.log('image', getValues('article.image'));
+  // "https://res.cloudinary.com/dqsbh2kn0/image/upload/v1663014890/zawkgpyjvvxrfwp9j7w1.jpg"
+  const { register, handleSubmit, formState: { errors }, getValues, setValue, watch } = useForm<FormValues>({ defaultValues: { logo:  {src: site?.data.logo?.src} , site: { src: site?.data.image?.src }, icon: { src: site?.data.icon?.src } } });
+  // console.log(getValues('icon')?.src.split('/').at(-1)?.split('.').at(-2));
+  // console.log(getValues('logo')?.src.split('/').at(-1)?.split('.').at(-2));
+  // console.log(getValues('site')?.src.split('/').at(-1)?.split('.').at(-2));
+  
   // const {mutate: updateProductImage} = useUpdateProductImage()
+
   const { mutate: updateSiteImage } = useUpdateSiteImage()
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
@@ -67,16 +71,37 @@ export const ImageSiteForm: FC<ImageSiteForm> = ({ toggle, setLeft, site, image 
       for (const file of target.files) {
         const formData = new FormData();
         formData.append('file', file)
-        formData.append('site', query[2])
+        formData.append('parentId', query[2])
+        formData.append('siteId', query[2])
+        formData.append('type', "site")
 
+        
+        
+        
+
+        
+        
         const { data } = await axios.post(`${process.env.API_URL}/upload/file`, formData)
+        
         setValue('input', { src: data.url, alt: `description image of the ${site?.data.name}` }, { shouldValidate: true })
         updateSiteImage({ id: site?._id!, input: getValues('input'), type: type, uid: session?.user.sid! })
         if (type === 'logo') {
+          if (getValues('logo')) {
+            let logo = getValues('logo').src.split('/').at(-1)?.split('.').at(-2)
+            await axios.post(`${process.env.API_URL}/upload/delete`, {name: logo, type: "site"} )
+          }
           setValue('logo', { src: data.url, alt: `description image of the ${site?.data.name}` }, { shouldValidate: true })
         } else if (type === "site") {
+          if (getValues('site').src) {
+            let image = getValues('site').src.split('/').at(-1)?.split('.').at(-2)
+            await axios.post(`${process.env.API_URL}/upload/delete`, {name: image, type: "site"} )
+          }
           setValue('site', { src: data.url, alt: `description image of the ${site?.data.name}` }, { shouldValidate: true })
         } else {
+          if (getValues('icon').src) {
+            let icon = getValues('icon').src.split('/').at(-1)?.split('.').at(-2)
+            await axios.post(`${process.env.API_URL}/upload/delete`, {name: icon, type: "site"} )
+          }
           setValue('icon', { src: data.url, alt: `description image of the ${site?.data.name}` }, { shouldValidate: true })
 
         }
@@ -84,7 +109,11 @@ export const ImageSiteForm: FC<ImageSiteForm> = ({ toggle, setLeft, site, image 
 
       }
     } catch (error) {
-      console.log({ error })
+      const err = error as AxiosError
+      const { message } = err.response?.data as {message: string}
+      console.log(message)
+      // console.log(error.response.data.message);
+      
     }
   }
   const cancelButtonRef = useRef(null)
@@ -103,7 +132,7 @@ export const ImageSiteForm: FC<ImageSiteForm> = ({ toggle, setLeft, site, image 
               <h2 className="label-form">Icon</h2>
               <div className="mt-1 flex items-center">
                 <span className="inline-block h-28 w-28 overflow-hidden rounded-full bg-gray-100 border">
-                  <img className="p-2 bg-white object-center h-28 w-28 text-gray-300" src={getValues('icon.src')} alt={""} />
+                  <img className="p-2 bg-white object-cover object-center h-28 w-28 text-gray-300" src={getValues('icon.src') || "https://res.cloudinary.com/dqsbh2kn0/image/upload/v1663014890/zawkgpyjvvxrfwp9j7w1.jpg"} alt={""} />
                   {/* <svg className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
                   </svg> */}
@@ -126,7 +155,7 @@ export const ImageSiteForm: FC<ImageSiteForm> = ({ toggle, setLeft, site, image 
               </h2>
               <div className="mt-1 flex items-center">
                 <span className="inline-block  rounded-sm bg-gray-100 border border-indigo-90">
-                  <img className="object-contain bg-white h-32 w-96" src={getValues('logo.src')} alt={""} />
+                  <img className="object-contain bg-white h-32 w-96" src={getValues('logo.src') || "https://res.cloudinary.com/dqsbh2kn0/image/upload/v1663014890/zawkgpyjvvxrfwp9j7w1.jpg"} alt={""} />
 
                   {/* <img className='object-cover h-48 w-96' src="https://res.cloudinary.com/dqsbh2kn0/image/upload/v1663014890/zawkgpyjvvxrfwp9j7w1.jpg" alt="" /> */}
                 </span>
@@ -149,7 +178,7 @@ export const ImageSiteForm: FC<ImageSiteForm> = ({ toggle, setLeft, site, image 
               </h2>
               <div className="mt-1 flex items-center">
                 <span className="inline-block  rounded-sm bg-gray-100 border border-indigo-90">
-                  <img className="object-contain bg-white px-2 h-32 w-32" src={getValues('site.src')} alt={""} />
+                  <img className="object-cover bg-white  h-32 w-32" src={getValues('site.src') || "https://res.cloudinary.com/dqsbh2kn0/image/upload/v1663014890/zawkgpyjvvxrfwp9j7w1.jpg"} alt={""} />
                 </span>
                 <label htmlFor="file-upload" className="ml-5 rounded-md border border-gray-300 bg-white py-2 px-3 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   onClick={() => setType('site')}

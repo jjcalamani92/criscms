@@ -26,7 +26,18 @@ export const typePageEcommerceCategory = [
   { label:"Hardware Store", value:"hardware-store" , categories: "Ferretería"},
   { label:"Glasses", value:"glasses" , categories: "Lentes, Gafas"},
   { label:"Engine", value:"engine" , categories: "Motores, Motobomba"},
-  ]
+]
+export const typePageFoodCategory = [
+  { label:"Ice Cream", value:"ice-cream", categories: "Helados, ..." },
+  { label:"Food", value:"food" , categories: "Comidas, almuerzos"},
+  { label:"Beverage", value:"beverage" , categories: "Bebidas..."},
+  { label:"Cakes", value:"cakes" , categories: "Tortas..."},
+]
+export const typePageFood = [
+  { label:"Page", value:"page" },
+  { label:"Food", value:"food" },
+  { label:"Page Blank", value:"page-blank" },
+]
 
   //TODO: SITE PORTFOLIO
   export const typePageEducation = [

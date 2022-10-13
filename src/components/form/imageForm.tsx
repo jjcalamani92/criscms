@@ -1,5 +1,6 @@
+import { MinusCircleIcon } from '@heroicons/react/24/outline';
 import { useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -29,7 +30,8 @@ interface ImageForm {
 export const ImageForm: FC<ImageForm> = ({ toggle, setLeft, product, image }) => {
 
   const { data: session } = useSession()
-
+  console.log(product);
+  
   const { asPath, replace } = useRouter()
   const query = getQuery(asPath)
   
@@ -46,8 +48,10 @@ export const ImageForm: FC<ImageForm> = ({ toggle, setLeft, product, image }) =>
     try {
       for (const file of target.files) {
         const formData = new FormData();
-        formData.append('file', file )
-        formData.append('site', query[2] )
+        formData.append('file', file)
+        formData.append('parentId', query[2])
+        formData.append('siteId', query[2])
+        formData.append('type', `products-${product?.type}`)
 
         const { data } = await axios.post(`${process.env.API_URL}/upload/file`, formData)
         setValue('data.image', [...getValues('data.image'), {uid: uuidv3(), src: data.url, alt:`description image of the ${product?.data.name}`}], { shouldValidate: true })
@@ -55,11 +59,20 @@ export const ImageForm: FC<ImageForm> = ({ toggle, setLeft, product, image }) =>
 
       }
     } catch (error) {
-      console.log({ error })
+      const err = error as AxiosError
+      const { message } = err.response?.data as {message: string}
+      console.log(message)
     }
   }
   const cancelButtonRef = useRef(null)
-
+  console.log(['1', '2', '3'].filter(data => data !== '2'));
+  
+  const deleteImage = async (src: string) => {
+    setValue('data.image', getValues('data.image').filter(data => data.src !== src), { shouldValidate: true } )
+    updateProductImage({id: product?._id!, input: getValues('data.image'), type: product?.type!, uid: session?.user.sid!})
+    const url = src.split('/').at(-1)?.split('.').at(-2)
+        await axios.post(`${process.env.API_URL}/upload/delete`, {name: url, type: `products-${product?.type}`} )
+  }
   return (
     <div className="mt-5 md:col-span-2 md:mt-0">
       <form onSubmit={handleSubmit(onSubmit)} action="#" method="POST">
@@ -72,9 +85,12 @@ export const ImageForm: FC<ImageForm> = ({ toggle, setLeft, product, image }) =>
             </div> */}
             <div className='grid grid-cols-2 md:grid-cols-3 gap-2'>
               {
-                getValues('data.image').map(data => (
+                getValues('data.image').map((data, i) => (
+                  <div className="flex items-center relative" key={i}>
+                    <div className='absolute top-1 left-1 z-10 bg-gray-100 rounded-full cursor-pointer' onClick={() => deleteImage(data.src)}>
+                    <MinusCircleIcon className="h-6 w-6 text-indigo-600" aria-hidden="true" />
 
-                  <div className="flex items-center" key={data.uid}>
+                    </div>
                     <div className=" rounded-lg leading-none">
                       <Image
                         // src={getValues('imageSrc')}
@@ -91,6 +107,7 @@ export const ImageForm: FC<ImageForm> = ({ toggle, setLeft, product, image }) =>
 
               {/* <label className="label-form">Cover photo</label> */}
               <div className="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 p-3">
+                
                 <div className="space-y-1 text-center">
                   <svg
                     className="mx-auto h-7 w-7 text-gray-400"

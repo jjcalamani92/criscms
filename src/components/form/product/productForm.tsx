@@ -4,9 +4,9 @@ import { useRouter } from 'next/router';
 import { createRef, FC, useRef } from 'react';
 import { useForm, Resolver, SubmitHandler } from 'react-hook-form';
 import Swal from 'sweetalert2';
-import { Product } from '../../../interfaces';
-import { getQuery } from '../../../utils';
-import { useCreateProduct, useUpdateProduct } from '../../hooks';
+import { Product } from '../../../../interfaces';
+import { getQuery } from '../../../../utils';
+import { useCreateProduct, useUpdateProduct } from '../../../hooks';
 
 
 interface FormValues {

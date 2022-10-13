@@ -52,3 +52,42 @@ export const MarkdownComponent: FC<MarkdownComponent> = ({ code }) => {
 
   )
 }
+export const MarkdownComponentFC: FC<MarkdownComponent> = ({ code }) => {
+  return (
+    
+
+      <ReactMarkdown
+        remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
+        children={`${code}`}
+        rehypePlugins={[rehypeRaw]}
+        // rehypePlugins={[rehypeHighlight]}
+        components={{
+          // u({node, ...props}) { return <u style={{textDecoration: 'underline'}} {...props} />} ,
+          code({ node, inline, className, children, ...props }: any) {
+            const match = /language-(\w+)/.exec(className || '')
+            return !inline && match ? (
+              <>
+
+                <SyntaxHighlighter
+                  // unwrapDisallowed={true}
+
+                  children={String(children).replace(/\n$/, '')}
+                  style={atomOneDark as any}
+                  language={match[1]}
+                  PreTag="div"
+                  {...props}
+                />
+              </>
+            ) : (
+              <code className={className} {...props}>
+                <>
+                  {children}
+                </>
+              </code>
+            )
+          }
+        }}
+      />
+
+  )
+}

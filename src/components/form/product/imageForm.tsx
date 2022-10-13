@@ -7,13 +7,13 @@ import { useRouter } from 'next/router';
 import { ChangeEvent, FC, useRef } from 'react';
 import { useForm, Resolver, SubmitHandler } from 'react-hook-form';
 import Swal from 'sweetalert2';
-import { graphQLClient, UPDATE_PRODUCT_IMAGE } from '../../../graphql';
-import { DataProduct, ImageProduct, Product } from '../../../interfaces';
+import { graphQLClient, UPDATE_PRODUCT_IMAGE } from '../../../../graphql';
+import { DataProduct, ImageProduct, Product } from '../../../../interfaces';
 
 
 
-import { getQuery, uuidv3 } from '../../../utils/function';
-import { useUpdateProductImage } from '../../hooks/product/useUpdateProductImage';
+import { getQuery, uuidv3 } from '../../../../utils/function';
+import { useUpdateProductImage } from '../../../hooks/product/useUpdateProductImage';
 
 
 interface FormValues {

@@ -4,7 +4,7 @@ import { createRef, FC, Fragment, useRef, useState } from 'react';
 import { useForm, Resolver, SubmitHandler, PathString } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import { Page } from '../../../../interfaces';
-import { getQuery, typePageEcommerce, typePageEducation, typePageFood, typePageMarketing, typePagePortfolio } from '../../../../utils';
+import { getQuery, typePageEcommerce, typePageEducation, typePageFood, typePageFoodCategory, typePageMarketing, typePagePortfolio } from '../../../../utils';
 import { useCreatePage0, useCreatePage1, useCreatePage2, useSite, useUpdatePage0, useUpdatePage2 } from '../../../hooks';
 import { useUpdatePage1 } from '../../../hooks/page/page1/useUpdatePage1';
 
@@ -36,6 +36,8 @@ export const PageForm: FC<PageForm> = ({ toggle, setLeft, uid, page, type }) => 
   const { asPath, replace } = useRouter()
   const query = getQuery(asPath)
   const { data: site } = useSite(asPath)
+  console.log(site);
+  
   const { mutate: createPage0 } = useCreatePage0()
   const { mutate: updatePage0 } = useUpdatePage0()
   const { mutate: createPage1 } = useCreatePage1()
@@ -43,6 +45,7 @@ export const PageForm: FC<PageForm> = ({ toggle, setLeft, uid, page, type }) => 
   const { mutate: createPage2 } = useCreatePage2()
   const { mutate: updatePage2 } = useUpdatePage2()
   const [radio, setRadio] = useState('')
+// console.log(type);
 
   const { register, handleSubmit, setValue, formState: { errors } } = useForm<FormValues>({ mode: "onChange", defaultValues: page ? { title: page?.data.seo.title, description: page?.data.seo.description, type: page?.data.type } : { title: "", description: "page description", type: '' } });
 
@@ -205,8 +208,32 @@ export const PageForm: FC<PageForm> = ({ toggle, setLeft, uid, page, type }) => 
                             </div>)
                           )
                           )
-
                         }
+                        {
+                          type === 'category-food' &&
+                          <>
+                            {typePageFood.map(data => (
+                              <div className="flex items-center my-2" key={data.label}>
+                                <input
+                                  type="radio"
+                                  value={data.value}
+                                  // onBlur={onBlur} 
+                                  {...register('type', { required: true })}
+                                  className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                  onChange={({ target }) => setValue('type', target.value, { shouldValidate: true })}
+                                // onChange={() => setRadio(data.value)}
+
+                                />
+                                <label className="ml-3 block text-sm text-gray-500">
+                                  {data.label}
+                                </label>
+                              </div>)
+                            )}
+                            {errors.type && <p className='text-red-600 text-sm'>This is required!!</p>}
+
+                          </>
+                        }
+                        
                         {errors.type && <p className='text-red-600 text-sm'>This is required!!</p>}
                       </>
                       :
@@ -352,6 +379,28 @@ export const PageForm: FC<PageForm> = ({ toggle, setLeft, uid, page, type }) => 
                             )}
                             {errors.type && <p className='text-red-600 text-sm'>This is required!!</p>}
 
+
+                          </>
+                        }
+                        {
+                          type === 'category-food' && 
+                          <>
+                            {typePageFoodCategory.map(data => (
+                              <div className="flex items-center my-2" key={data.label}>
+                                <input
+                                  type="radio"
+                                  id={data.value}
+                                  value={data.value}
+                                  {...register('type', { required: true })}
+                                  className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                  onChange={() => setRadio(data.value)}
+                                />
+                                <label className="ml-3 block text-sm text-gray-500">
+                                  {data.label}
+                                </label>
+                              </div>)
+                            )}
+                            {errors.type && <p className='text-red-600 text-sm'>This is required!!</p>}
 
                           </>
                         }

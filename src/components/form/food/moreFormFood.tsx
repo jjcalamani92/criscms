@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { createRef, FC, useRef, useState } from 'react';
 import { useForm, Resolver, SubmitHandler } from 'react-hook-form';
 
-import { classNames, getQuery } from '../../../utils/function';
+import { classNames, getQuery } from '../../../../utils/function';
 const product = {
   name: 'Basic Tee 6-Pack',
   price: '$192',
@@ -70,11 +70,11 @@ interface FormValues {
   discountPrice: number;
   inStock: number;
 };
-interface MoreForm {
+interface MoreFormFood {
   setOpenMCD: React.Dispatch<React.SetStateAction<boolean>>
 
 }
-export const MoreForm: FC<MoreForm> = ({ setOpenMCD }) => {
+export const MoreFormFood: FC<MoreFormFood> = ({ setOpenMCD }) => {
 
   const { asPath, replace } = useRouter()
   const query = getQuery(asPath)

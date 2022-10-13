@@ -25,61 +25,54 @@ import { Menu0, Popover0, Popover1, Popover2, Popover3 } from '../headless'
 const navigation = {
   categories: [
     {
-      id: 'women',
-      name: 'Menu',
+      id: 'food',
+      name: 'Food',
       featured: [
         {
-          name: 'New Arrivals',
+          name: 'Balde copacabana 12 presas',
           href: '#',
-          imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg',
+          imageSrc: 'http://www.polloscopacabana.com/images/products/i_balde-12.jpg',
           imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
         },
         {
-          name: 'Basic Tees',
+          name: 'Balde copacabana 8 presas',
           href: '#',
-          imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg',
+          imageSrc: 'http://www.polloscopacabana.com/images/products/i_balde-8.jpg',
+          imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
+        },
+        {
+          name: 'Balde alitas',
+          href: '#',
+          imageSrc: 'http://www.polloscopacabana.com/images/products/i_balde-alitas.jpg',
           imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
         },
+        {
+          name: 'Combo especial',
+          href: '#',
+          imageSrc: 'http://www.polloscopacabana.com/images/products/i_comboespecial.jpg',
+          imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
+        },
+        {
+          name: 'Combo Trío',
+          href: '#',
+          imageSrc: 'http://www.polloscopacabana.com/images/products/i_trio.jpg',
+          imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
+        },
+        
       ],
       sections: [
         {
-          id: 'clothing',
-          name: 'Clothing',
+          id: 'menu',
+          name: 'Menu',
           items: [
-            { name: 'Tops', href: '/dashboard/projects/6324d2d5132d462bc1c57b55/woman/tops' },
-            { name: 'Dresses', href: '#' },
-            { name: 'Pants', href: '#' },
-            { name: 'Denim', href: '#' },
-            { name: 'Sweaters', href: '#' },
-            { name: 'T-Shirts', href: '#' },
-            { name: 'Jackets', href: '#' },
-            { name: 'Activewear', href: '#' },
-            { name: 'Browse All', href: '#' },
+            { name: 'Pollo', href: '/dashboard/projects/6324d2d5132d462bc1c57b55/woman/tops' },
+            { name: 'Hamburguesa', href: '#' },
+            { name: 'Ensaladas', href: '#' },
+            { name: 'Extras', href: '#' },
+            { name: 'Cafetería y pastelería', href: '#' }
           ],
         },
-        {
-          id: 'accessories',
-          name: 'Accessories',
-          items: [
-            { name: 'Watches', href: '#' },
-            { name: 'Wallets', href: '#' },
-            { name: 'Bags', href: '#' },
-            { name: 'Sunglasses', href: '#' },
-            { name: 'Hats', href: '#' },
-            { name: 'Belts', href: '#' },
-          ],
-        },
-        {
-          id: 'brands',
-          name: 'Brands',
-          items: [
-            { name: 'Full Nelson', href: '#' },
-            { name: 'My Way', href: '#' },
-            { name: 'Re-Arranged', href: '#' },
-            { name: 'Counterfeit', href: '#' },
-            { name: 'Significant Other', href: '#' },
-          ],
-        },
+        
       ],
     },
     
@@ -302,10 +295,10 @@ export const  HeaderFood0:FC<HeaderFood0> = ({toggleShoppingCarts}) => {
 
                               <div className="relative bg-white">
                                 <div className="mx-auto max-w-7xl px-8">
-                                  <div className="grid grid-cols-2 gap-y-10 gap-x-8 py-16">
-                                    <div className="col-start-2 grid grid-cols-2 gap-x-8">
-                                      {category.featured.map((item) => (
-                                        <div key={item.name} className="group relative text-base sm:text-sm">
+                                  <div className="grid grid-cols-5 gap-y-10 gap-x-8 py-16">
+                                    <div className="col-start-2 col-span-4 grid grid-cols-5 gap-x-8">
+                                      {category.featured.map((item, i) => (
+                                        <div key={i} className="group relative text-base sm:text-sm">
                                           <div className="aspect-w-1 aspect-h-1 overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
                                             <img src={item.imageSrc} alt={item.imageAlt} className={"object-cover object-center"} /> 
                                           </div>
@@ -319,7 +312,7 @@ export const  HeaderFood0:FC<HeaderFood0> = ({toggleShoppingCarts}) => {
                                         </div>
                                       ))}
                                     </div>
-                                    <div className="row-start-1 grid grid-cols-3 gap-y-10 gap-x-8 text-sm">
+                                    <div className="row-start-1 grid grid-cols-1 gap-y-10 gap-x-8 text-sm">
                                       {category.sections.map((section) => (
                                         <div key={section.name}>
                                           <p id={`${section.name}-heading`} className="font-medium text-gray-900">

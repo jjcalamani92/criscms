@@ -16,8 +16,8 @@ import { classNames, getQuery } from '../../../utils/function'
 import { useRouter } from 'next/router'
 import { Page, Product, Site } from '../../../interfaces'
 import { Modal } from '../utils'
-import { TabFormPage, TabFormProduct, TabFormSite } from '../tabs'
-import { typePageEcommerceCategory, typeSite } from '../../../utils'
+import { TabFormFood, TabFormPage, TabFormProduct, TabFormSite } from '../tabs'
+import { typePageEcommerceCategory, typePageFoodCategory, typeSite } from '../../../utils'
 import { Text } from '../polymorphic'
 import { CubeIcon, FolderPlusIcon, SquaresPlusIcon, TrashIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
@@ -40,7 +40,7 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, prod
   // console.log(select?.length);
   const { asPath } = useRouter()
   const query = getQuery(asPath)
-  // console.log(query);
+  console.log(page?.data.type);
   const [state, { toggle, setLeft, setRight }] = useToggle();
 
   const [openMCD, setOpenMCD] = useState(false)
@@ -105,6 +105,10 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, prod
       toggle()
       setChildren(<TabFormPage toggle={toggle} setLeft={setLeft}  type={page?.data.type} uid={page?._id} />)
     }
+    else if (type === 'food') {
+      toggle()
+      setChildren(<TabFormFood toggle={toggle} setLeft={setLeft}  type={page?.data.type} uid={page?._id} />)
+    }
   }
   return (
     <div className="flex lg:items-center lg:justify-between pt-6 pb-1 sm:pt-10">
@@ -149,11 +153,16 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, prod
 
       </div>
       <div className="flex lg:mt-0 lg:ml-4">
-
-
-
-        
-        {['category'].includes(page?.data.type!) &&
+        {/* {['category-food'].includes(page?.data.type!) &&
+          <span className="block">
+            <button className="btn-primary space-x-3" onClick={() => addHandle('category')} >
+            <DocumentPlusIcon className="h-6 w-6" aria-hidden="true" />
+            <p className='hidden sm:block'>
+              Add Category
+                </p>
+            </button>
+          </span>} */}
+        {['category', 'category-food'].includes(page?.data.type!) &&
           <span className="block">
             <button className="btn-primary space-x-3" onClick={() => addHandle('category')} >
             <DocumentPlusIcon className="h-6 w-6" aria-hidden="true" />
@@ -168,6 +177,15 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, prod
             <DocumentPlusIcon className="h-6 w-6" aria-hidden="true" />
               <p className='hidden sm:block'>
                   Add Product
+                </p>
+            </button>
+          </span>}
+        {typePageFoodCategory.map(data => data.value).includes(page?.data.type!) &&
+          <span className="block">
+            <button className="btn-primary space-x-3" onClick={() => addHandle('food')} >
+            <DocumentPlusIcon className="h-6 w-6" aria-hidden="true" />
+              <p className='hidden sm:block'>
+                  Add Food
                 </p>
             </button>
           </span>}
@@ -193,6 +211,17 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, prod
             </button>
           </span>
         }
+        {/* {
+         ( page?.data.type === 'food') &&
+          <span className="block">
+            <button className="btn-primary space-x-3" onClick={() => addHandle('food')} >
+              <CubeIcon className="h-6 w-6" aria-hidden="true" />
+                <p className='hidden sm:block'>
+                  Add Food
+                </p>
+            </button>
+          </span>
+        } */}
         {
           query.length === 2 &&
           <span className="block">

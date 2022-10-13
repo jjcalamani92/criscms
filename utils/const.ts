@@ -35,7 +35,7 @@ export const typePageFoodCategory = [
 ]
 export const typePageFood = [
   { label:"Page", value:"page" },
-  { label:"Food", value:"food" },
+  { label:"Category", value:"category-food" },
   { label:"Page Blank", value:"page-blank" },
 ]
 

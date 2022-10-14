@@ -10,10 +10,12 @@ export const Home = () => {
 
 const image = [
 	{
+		uid:"1",
 	src:"http://www.polloscopacabana.com/images/banners/pcburger-crocante-rotativo-1920x587.jpg",
 	alt: "1",
 },
 	{
+		uid:"1",
 	src:"http://www.polloscopacabana.com/images/banners/pccopacabana-xl-rotativook-1920x587.jpg",
 	alt: "1",
 },

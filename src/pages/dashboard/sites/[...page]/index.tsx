@@ -50,6 +50,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const queryClient = new QueryClient()
 
   const query = context?.params?.page!
+  console.log(query);
   
   if (query.length === 1) {
     const siteId = query[0]; const parentId = siteId
@@ -74,12 +75,15 @@ export const getStaticProps: GetStaticProps = async (context) => {
       await queryClient.prefetchQuery(["find-pages3-by-parent", parentId], async () => await findPages3ByParent(parentId))
       await queryClient.prefetchQuery(["find-all-products-by-parent", parentId], async () => await findAllProductsByParent(parentId))
     } 
+  } else if (query.length === 3 && query[1] === 'meal') {
+    const id = query[2]?.split('=')[1]!
+    const type = query[2]?.split('=')[0]!
+    await queryClient.prefetchQuery(["find-food", id, type], async () => await findFood(id, type))
   } else if (query.length === 3 && query[1] !== '$products') {
     const id = query[2]?.split('=')[1]!
     const type = query[2]?.split('=')[0]!
     await queryClient.prefetchQuery(["find-product", id, type], async () => await findProduct(id, type))
-    await queryClient.prefetchQuery(["find-food", id, type], async () => await findFood(id, type))
-
+    // await queryClient.prefetchQuery(["find-food", id, type], async () => await findFood(id, type))
   }
 
   await queryClient.prefetchQuery(["find-all-products"], findAllProducts)

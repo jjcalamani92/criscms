@@ -22,6 +22,12 @@ export const SwiperNavigation: FC<SwiperNavigation> = ({ image }) => {
           clickable: true,
         }}>
         {
+          image.length !== 0 
+          ?
+            <SwiperSlide >
+              <Image img={null} className=" object-contain w-full h-full" />
+            </SwiperSlide>
+          :
           image.map((data, i) => (
             <SwiperSlide key={i}>
               <Image img={data} className=" object-contain w-full h-full" />

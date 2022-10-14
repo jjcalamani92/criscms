@@ -47,7 +47,7 @@ interface Image {
 }
 export const Image:FC<Image> = ({className, img}) => {
   return (
-      <img src={img ? img.src : "https://res.cloudinary.com/dqsbh2kn0/image/upload/v1663014890/zawkgpyjvvxrfwp9j7w1.jpg" } alt={img ? img.alt : 'image description'} className={className}/>
+      <img src={img?.src || "https://res.cloudinary.com/dqsbh2kn0/image/upload/v1663014890/zawkgpyjvvxrfwp9j7w1.jpg" } alt={ img?.alt || 'image description'} className={className}/>
   )
 }
 

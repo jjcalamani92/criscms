@@ -31,4 +31,5 @@
   .swiper {
     @apply w-full h-[24rem] sm:h-[44rem] lg:h-[54rem] ;
   }
+
 }

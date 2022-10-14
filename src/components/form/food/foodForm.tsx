@@ -4,9 +4,9 @@ import { useRouter } from 'next/router';
 import { createRef, FC, useRef } from 'react';
 import { useForm, Resolver, SubmitHandler } from 'react-hook-form';
 import Swal from 'sweetalert2';
-import { Product } from '../../../../interfaces';
+import { Food, Product } from '../../../../interfaces';
 import { getQuery } from '../../../../utils';
-import { useCreateProduct, useUpdateProduct } from '../../../hooks';
+import { useCreateFood, useCreateProduct, useUpdateFood, useUpdateProduct } from '../../../hooks';
 
 
 interface FormValues {
@@ -23,44 +23,42 @@ interface FoodForm {
   setLeft: () => void
   uid?: string
   type?: string
-  product?: Product
+  meal?: Food
 }
-export const FoodForm: FC<FoodForm> = ({ toggle, setLeft, uid, type, product }) => {
+export const FoodForm: FC<FoodForm> = ({ toggle, setLeft, uid, type, meal }) => {
   const { data: session } = useSession()
 
   const { asPath } = useRouter()
   const query = getQuery(asPath)
-  console.log('type', type);
   
-  const { register, handleSubmit, formState: { errors }, setValue } = useForm<FormValues>({ defaultValues: product ? { name: product.data.name, promotion: product.data.promotion.href, description: product.data.description, price: product.data.price, discountPrice: product.data.discountPrice } : { name: "", promotion: 'none', description: 'product description', price: 0, discountPrice: 0} });
+  const { register, handleSubmit, formState: { errors }, setValue } = useForm<FormValues>({ defaultValues: meal ? { name: meal.data.name, promotion: meal.data.promotion.href, description: meal.data.description, price: meal.data.price, discountPrice: meal.data.discountPrice } : { name: "", promotion: 'none', description: 'meal description', price: 0, discountPrice: 0} });
 
-  const { mutate: createProduct } = useCreateProduct(uid!)
-  const { mutate: updateProduct } = useUpdateProduct()
+  const { mutate: createFood } = useCreateFood(uid!)
+  const { mutate: updateFood } = useUpdateFood()
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    const updateForm = { ...data, name: data.name.trim(), price: Number(data.price), discountPrice: Number(data.discountPrice), uid: session?.user.sid!, change: "create product" }
+    const updateForm = { ...data, name: data.name.trim(), price: Number(data.price), discountPrice: Number(data.discountPrice), uid: session?.user.sid!, change: "create meal" }
     const form = { ...updateForm, site: query[2], parent: uid! }
-    console.log(form);
+    // console.log(form);
     
-    // if (product) {
-    //   Swal.fire({
-    //     position: 'center',
-    //     icon: 'success',
-    //     title: 'Updated Product',
-    //     showConfirmButton: false,
-    //     timer: 1000
-    //   })
-    //   updateProduct({ id: product._id, input: updateForm, type: product.type })
-    // } else {
-    //   Swal.fire({
-    //     position: 'center',
-    //     icon: 'success',
-    //     title: 'Created Product',
-    //     showConfirmButton: false,
-    //     timer: 500
-    //   })
-    //   createProduct({ input: form, type: type! })
-
-    // }
+    if (meal) {
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Updated Food',
+        showConfirmButton: false,
+        timer: 1000
+      })
+      updateFood({ id: meal._id, input: updateForm, type: meal.type })
+    } else {
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Created Food',
+        showConfirmButton: false,
+        timer: 500
+      })
+      createFood({ input: form, type: type! })
+    }
     toggle()
   };
   const cancelButtonRef = useRef(null)
@@ -182,7 +180,7 @@ export const FoodForm: FC<FoodForm> = ({ toggle, setLeft, uid, type, product }) 
             type="submit"
             className="btn-primary "
           >
-            {product ? 'Update' : 'Created'}
+            {meal ? 'Update' : 'Created'}
           </button>
           <button
             className="btn-default"

@@ -50,6 +50,7 @@ export const ImagePageForm: FC<ImagePageForm> = ({ toggle, setLeft, page }) => {
   };
   const onFileSelected = async ({ target }: ChangeEvent<HTMLInputElement>) => {
 
+    setLeft()
     if (!target.files || target.files.length === 0) {
       return;
     }
@@ -87,6 +88,13 @@ export const ImagePageForm: FC<ImagePageForm> = ({ toggle, setLeft, page }) => {
       const err = error as AxiosError
       const { message } = err.response?.data as {message: string}
       console.log(message)
+      Swal.fire({
+      
+        icon: 'error',
+        title: 'Oops...',
+        text: "message",
+        footer: '<a href="">Why do I have this issue?</a>'
+      })
     }
   }
   const cancelButtonRef = useRef(null)

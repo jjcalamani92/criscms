@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Food, Product } from "../../../interfaces";
 import { getQuery } from "../../../utils";
-import { FIND_ALL_FOODS_BY_PARENT, FIND_ALL_PRODUCTS_BY_PARENT, FIND_PRODUCTS_BY_PARENT, graphQLClient } from '../../../graphql';
+import { FIND_ALL_FOODS_BY_PARENT, graphQLClient } from '../../../graphql';
 
 export const findAllFoodsByParent = async (parentId:string) => {
   const { findAllFoodsByParent } = await graphQLClient.request(FIND_ALL_FOODS_BY_PARENT, {parentId: parentId});

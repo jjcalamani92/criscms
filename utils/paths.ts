@@ -1,9 +1,14 @@
-import { Page, Product, Site } from "../interfaces";
+import { Food, Page, Product, Site } from "../interfaces";
 
 export const getPathByProducts = (products: Product[]) =>
 products.map((data) => ({asPath:`/dashboard/sites/${data.site}/product/${data.type}=${data._id}`, seo: data.data.seo}));
 export const getPathByProduct = (products: Product[], asPath:string) =>
 getPathByProducts(products).map((data) => data.asPath).find(data => data === asPath);
+
+export const getPathByFoods = (foods: Food[]) =>
+foods.map((data) => ({asPath:`/dashboard/sites/${data.site}/meal/${data.type}=${data._id}`, seo: data.data.seo}));
+export const getPathByFood = (foods: Food[], asPath:string) =>
+getPathByFoods(foods).map((data) => data.asPath).find(data => data === asPath);
 
 export const getPathsAllProducts = (products: Product[]) =>
 products.map((data) => ({asPath:`/dashboard/sites/${data.site}/products/${data.type}=${data._id}`, seo: data.data.seo}));

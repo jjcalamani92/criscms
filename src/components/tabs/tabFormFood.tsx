@@ -1,17 +1,17 @@
 import { FC, useState } from 'react'
 import { Tab } from '@headlessui/react'
 import { classNames } from '../../../utils/function'
-import { FoodForm, ImageForm, PageForm, ProductForm, SiteForm } from '../form'
-import { Page, Product, Site } from '../../../interfaces'
+import { FoodForm, ImageForm, ImageFormFood, PageForm, ProductForm, SiteForm } from '../form'
+import { Food, Page, Product, Site } from '../../../interfaces'
 interface TabFormFood {
   toggle: () => void
   setLeft: () => void
-  product?: Product
+  meal?: Food
   type?: string 
   uid?: string
 }
 
-export const TabFormFood:FC<TabFormFood> = ({toggle, setLeft, product, type, uid}) => {
+export const TabFormFood:FC<TabFormFood> = ({toggle, setLeft, meal, type, uid}) => {
 
   return (
     <div className="w-full max-w-lg">
@@ -27,16 +27,16 @@ export const TabFormFood:FC<TabFormFood> = ({toggle, setLeft, product, type, uid
               )
             }
           >
-            {product ? "Updated" : "Created"}
+            {meal ? "Updated" : "Created"}
             
           </Tab>
           <Tab
-            disabled={product ? false : true}
+            disabled={meal ? false : true}
 
             className={({ selected }) =>
               classNames(
                 'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-indigo-700',
-                product ? "text-indigo-700" : "text-gray-200 opacity-40",
+                meal ? "text-indigo-700" : "text-gray-200 opacity-40",
 
                 // 'ring-white ring-opacity-60 ring-offset-2 ring-offset-indigo-400 focus:outline-none focus:ring-2',
                 selected
@@ -48,12 +48,12 @@ export const TabFormFood:FC<TabFormFood> = ({toggle, setLeft, product, type, uid
             Images
           </Tab>
           <Tab
-            disabled={product ? false : true}
+            disabled={meal ? false : true}
 
             className={({ selected }) =>
               classNames(
                 'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-indigo-700',
-                product ? "text-indigo-700" : "text-gray-200 opacity-40",
+                meal ? "text-indigo-700" : "text-gray-200 opacity-40",
 
                 // 'ring-white ring-opacity-60 ring-offset-2 ring-offset-indigo-400 focus:outline-none focus:ring-2',
                 selected
@@ -71,14 +71,14 @@ export const TabFormFood:FC<TabFormFood> = ({toggle, setLeft, product, type, uid
               'rounded-xl bg-white'
             )}
           >
-            <FoodForm toggle={toggle} setLeft={setLeft} type={type} uid={uid} product={product}/>
+            <FoodForm toggle={toggle} setLeft={setLeft} type={type} uid={uid} meal={meal}/>
           </Tab.Panel>
           <Tab.Panel
             className={classNames(
               'rounded-xl bg-white'
             )}
           >
-            <ImageForm toggle={toggle} setLeft={setLeft} product={product!}/>
+            <ImageFormFood toggle={toggle} setLeft={setLeft} meal={meal}/>
 
           </Tab.Panel>
           <Tab.Panel

@@ -13,6 +13,7 @@ import { DataProduct, Food, ImageProduct, Product } from '../../../../interfaces
 
 
 import { getQuery, uuidv3 } from '../../../../utils/function';
+import { useUpdateFoodImage } from '../../../hooks';
 import { useUpdateProductImage } from '../../../hooks/product/useUpdateProductImage';
 
 
@@ -21,22 +22,22 @@ interface FormValues {
   data: DataProduct
   // image: ImageProduct[] ;
 };
-interface ImageForm {
+interface ImageFormFood {
   toggle: () => void
   setLeft: () => void
-  product?: Product 
+  meal?: Food
   image?: ImageProduct[]
 }
-export const ImageForm: FC<ImageForm> = ({ toggle, setLeft, product, image }) => {
+export const ImageFormFood: FC<ImageFormFood> = ({ toggle, setLeft, meal, image }) => {
 
   const { data: session } = useSession()
-  // console.log(product);
+  // console.log(meal);
   
   const { asPath, replace } = useRouter()
   const query = getQuery(asPath)
   
-  const { register, handleSubmit, formState: { errors }, getValues, setValue, watch } = useForm<FormValues>({defaultValues: {...product}});
-  const {mutate: updateProductImage} = useUpdateProductImage()
+  const { register, handleSubmit, formState: { errors }, getValues, setValue, watch } = useForm<FormValues>({defaultValues: {...meal}});
+  const {mutate: updateFoodImage} = useUpdateFoodImage()
   
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
 
@@ -51,11 +52,11 @@ export const ImageForm: FC<ImageForm> = ({ toggle, setLeft, product, image }) =>
         formData.append('file', file)
         formData.append('parentId', query[2])
         formData.append('siteId', query[2])
-        formData.append('type', `products-${product?.type}`)
+        formData.append('type', `products-${meal?.type}`)
 
         const { data } = await axios.post(`${process.env.API_URL}/upload/file`, formData)
-        setValue('data.image', [...getValues('data.image'), {uid: uuidv3(), src: data.url, alt:`description image of the ${product?.data.name}`}], { shouldValidate: true })
-        updateProductImage({id: product?._id!, input: getValues('data.image'), type: product?.type!, uid: session?.user.sid!})
+        setValue('data.image', [...getValues('data.image'), {uid: uuidv3(), src: data.url, alt:`description image of the ${meal?.data.name}`}], { shouldValidate: true })
+        updateFoodImage({id: meal?._id!, input: getValues('data.image'), type: meal?.type!, uid: session?.user.sid!})
 
       }
     } catch (error) {
@@ -69,9 +70,9 @@ export const ImageForm: FC<ImageForm> = ({ toggle, setLeft, product, image }) =>
   
   const deleteImage = async (src: string) => {
     setValue('data.image', getValues('data.image').filter(data => data.src !== src), { shouldValidate: true } )
-    updateProductImage({id: product?._id!, input: getValues('data.image'), type: product?.type!, uid: session?.user.sid!})
+    updateFoodImage({id: meal?._id!, input: getValues('data.image'), type: meal?.type!, uid: session?.user.sid!})
     const url = src.split('/').at(-1)?.split('.').at(-2)
-        await axios.post(`${process.env.API_URL}/upload/delete`, {name: url, type: `products-${product?.type}`} )
+        await axios.post(`${process.env.API_URL}/upload/delete`, {name: url, type: `meals-${meal?.type}`} )
   }
   return (
     <div className="mt-5 md:col-span-2 md:mt-0">

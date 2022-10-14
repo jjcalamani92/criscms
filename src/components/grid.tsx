@@ -1,11 +1,12 @@
 import { useSelections } from 'ahooks';
 import { FC, Fragment, useRef } from 'react';
-import { Page, Product, Site } from '../../interfaces';
+import { Food, Page, Product, Site } from '../../interfaces';
 import { useDeleteManySitesById } from '../hooks';
 import { CardPage1, CardPage2, CardPage3, CardSite } from './card';
 import { HeadingDashboardOption } from './heading';
 import { CardProduct0 } from './card/cardProduct0';
 import { CardPage0 } from './card/cardPage0';
+import { CardFood } from './card/cardFood';
 interface Grid {
   children: React.ReactNode;
 }
@@ -55,6 +56,27 @@ export const Products: FC<Products> = ({ products, type}) => {
     <Grid>
       {
         products?.map((data, i) => <CardProduct0 key={i} product={data} checked={isSelected(data._id)} toggle={() => toggle(data._id)} partiallySelected={selected.length !== 0} />)
+      }
+    </Grid>
+      </Fragment>
+
+  )
+}
+interface Foods {
+  foods: Food[];
+  type: string
+}
+
+export const Foods: FC<Foods> = ({ foods, type}) => {
+  const { selected, allSelected, noneSelected, isSelected, toggle, toggleAll, unSelectAll } = useSelections(
+    foods?.map(data => data._id)!
+  );
+  return (
+    <Fragment>
+    <HeadingDashboardOption checked={allSelected} toggleAll={toggleAll} selected={selected} unSelectAll={unSelectAll} type={type} /> 
+    <Grid>
+      {
+        foods?.map((data, i) => <CardFood key={i} food={data} checked={isSelected(data._id)} toggle={() => toggle(data._id)} partiallySelected={selected.length !== 0} />)
       }
     </Grid>
       </Fragment>

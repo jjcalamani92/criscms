@@ -19,6 +19,7 @@ export const GridPage1: FC<GridPage1> = () => {
   return (
     <Fragment>
       <HeadingDashboard title={page0?.data.seo.title!} page={page0}/>
+      
       <Pages1 pages1={list!}/>
     </Fragment>
   )

@@ -14,7 +14,7 @@ import {
 import { Menu, Transition } from '@headlessui/react'
 import { classNames, getQuery } from '../../../utils/function'
 import { useRouter } from 'next/router'
-import { Page, Product, Site } from '../../../interfaces'
+import { Food, Page, Product, Site } from '../../../interfaces'
 import { Modal } from '../utils'
 import { TabFormFood, TabFormPage, TabFormProduct, TabFormSite } from '../tabs'
 import { typePageEcommerceCategory, typePageFoodCategory, typeSite } from '../../../utils'
@@ -35,12 +35,13 @@ interface HeadingDashboard {
   page?: Page
   site?: Site
   product?:Product
+  meal?:Food
 }
-export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, product, select, setSelect }) => {
+export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, product, meal, select, setSelect }) => {
   // console.log(select?.length);
   const { asPath } = useRouter()
   const query = getQuery(asPath)
-  console.log(page?.data.type);
+  // console.log(page?.data.type);
   const [state, { toggle, setLeft, setRight }] = useToggle();
 
   const [openMCD, setOpenMCD] = useState(false)
@@ -82,6 +83,9 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, prod
     } else if (type === "product") {
       toggle()
       setChildren(<TabFormProduct toggle={toggle} setLeft={setLeft} type={product?.type} product={product}/>)
+    } else if (type === "meal") {
+      toggle()
+      setChildren(<TabFormFood toggle={toggle} setLeft={setLeft} type={meal?.type} meal={meal}/>)
     }
   }
   const addHandle = (type: string) => {
@@ -142,6 +146,17 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, prod
             product &&
             <span className="block">
               <button className="btn-default space-x-3" onClick={() => editHandle('product')} >
+              <PencilIcon className="h-5 w-5 text-gray-500" aria-hidden="true" />
+              <p className='hidden sm:block'>
+                  Edit
+                </p> 
+              </button>
+            </span>
+          }
+          {
+            meal &&
+            <span className="block">
+              <button className="btn-default space-x-3" onClick={() => editHandle('meal')} >
               <PencilIcon className="h-5 w-5 text-gray-500" aria-hidden="true" />
               <p className='hidden sm:block'>
                   Edit

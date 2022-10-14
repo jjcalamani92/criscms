@@ -1,10 +1,10 @@
 import React, { Fragment, useState } from 'react'
 import { useRouter } from 'next/router'
 import { LayoutDashboard, LayoutPages } from '../../../../layouts'
-import { GridPage0, GridPage1, GridPage2, GridPage3, GridProduct, ProductOverviews, ProductOverviews1 } from '../../../../components'
+import { GridPage0, GridPage1, GridPage2, GridPage3, GridProduct, MealOverviews, ProductOverviews, ProductOverviews1 } from '../../../../components'
 import Custom404 from '../../../404'
-import { findPage0, findPage1, findPages0, findPages0ByParent, findPages1, findPages1ByParent, findSite, findSites, usePage0, usePages0, usePages1, useSites, findPages2ByParent, usePages2, findPages2, findPage2, findPages3ByParent, findAllProductsByParent, useAllProducts, findAllProducts, findProduct, useFindAllArticles, useProductsWithCursor, findProductsWithCursor } from '../../../../hooks'
-import { getPathBySite, getPathByPages0, getPathByPage0, getPathByPage1, getPathByPages1, getPathByPage2, getPathByProduct, getPathBySiteProductsDB, getPathByProducts } from '../../../../../utils'
+import { findPage0, findPage1, findPages0, findPages0ByParent, findPages1, findPages1ByParent, findSite, findSites, usePage0, usePages0, usePages1, useSites, findPages2ByParent, usePages2, findPages2, findPage2, findPages3ByParent, findAllProductsByParent, useAllProducts, findAllProducts, findProduct, useFindAllArticles, useProductsWithCursor, findProductsWithCursor, useAllFoods, findAllFoodsByParent, findAllFoods, findFood } from '../../../../hooks'
+import { getPathBySite, getPathByPages0, getPathByPage0, getPathByPage1, getPathByPages1, getPathByPage2, getPathByProduct, getPathBySiteProductsDB, getPathByProducts, getPathByFoods, getPathByFood } from '../../../../../utils'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { dehydrate, QueryClient } from '@tanstack/react-query'
 
@@ -20,12 +20,16 @@ function Page() {
   const { data: pages1 } = usePages1();
   const { data: pages2 } = usePages2();
   const { data: allProducts } = useAllProducts();
+  const { data: allFoods } = useAllFoods();
+  // console.log(getPathByFoods(allFoods!));
+  
   switch (asPath) {
     case getPathBySite(sites!, asPath): return <GridPage0 />
     case getPathByPage0(pages0!, asPath): return <GridPage1 />
     case getPathByPage1(pages1!, asPath): return <GridPage2 />
     case getPathByPage2(pages2!, asPath): return <GridPage3 />
     case getPathByProduct(allProducts!, asPath): return <ProductOverviews/>
+    case getPathByFood(allFoods!, asPath): return <MealOverviews/>
     case '/dashboard/sites/6324d2d5132d462bc1c57b55/$products': return <GridProduct />
     case getPathBySiteProductsDB(sites!, asPath): return <GridProduct />
     default:
@@ -62,6 +66,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       await queryClient.prefetchQuery(["find-page1", pageId], async () => await findPage1(pageId))
       await queryClient.prefetchQuery(["find-pages2-by-parent", parentId], async () => await findPages2ByParent(parentId))
       await queryClient.prefetchQuery(["find-all-products-by-parent", parentId], async () => await findAllProductsByParent(parentId))
+      await queryClient.prefetchQuery(["find-all-foods-by-parent", parentId], async () => await findAllFoodsByParent(parentId))
 
     } else if(query[1]?.split('=')[0] === 'page2' ) {
       const pageId = query[1].split('=')[1]!; const parentId = pageId
@@ -73,10 +78,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
     const id = query[2]?.split('=')[1]!
     const type = query[2]?.split('=')[0]!
     await queryClient.prefetchQuery(["find-product", id, type], async () => await findProduct(id, type))
+    await queryClient.prefetchQuery(["find-food", id, type], async () => await findFood(id, type))
 
   }
 
   await queryClient.prefetchQuery(["find-all-products"], findAllProducts)
+  await queryClient.prefetchQuery(["find-all-foods"], findAllFoods)
   await queryClient.prefetchQuery(["find-sites"], findSites)
   await queryClient.prefetchQuery(["find-pages0"], findPages0)
   await queryClient.prefetchQuery(["find-pages1"], findPages1)

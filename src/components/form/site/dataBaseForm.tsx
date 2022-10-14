@@ -15,7 +15,7 @@ interface DataBaseForm {
   site?: Site
 }
 export const DataBaseForm: FC<DataBaseForm> = ({ toggle, setLeft, site }) => {
-  console.log(site?.data.type);
+  // console.log(site?.data.type);
   
   const { mutate: updateSiteDB } = useUpdateSiteDB()
   const { register, handleSubmit } = useForm<FormValues>({ defaultValues: { value: site?.data.dataBase.map(data => data.value) } });

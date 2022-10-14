@@ -21,7 +21,7 @@ function Page() {
   const { data: sites } = useSites();
   const { data: pages0 } = usePages0();
   const { data: pages1 } = usePages1();
-  console.log(getPathByProjects(sites!));
+  // console.log(getPathByProjects(sites!));
   
   switch (asPath) {
     case getPathByProject(sites!, asPath): return (

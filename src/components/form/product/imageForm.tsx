@@ -49,7 +49,7 @@ export const ImageForm: FC<ImageForm> = ({ toggle, setLeft, product, image }) =>
       for (const file of target.files) {
         const formData = new FormData();
         formData.append('file', file)
-        formData.append('parentId', query[2])
+        formData.append('parentId', product?._id!)
         formData.append('siteId', query[2])
         formData.append('type', `products-${product?.type}`)
 
@@ -61,7 +61,12 @@ export const ImageForm: FC<ImageForm> = ({ toggle, setLeft, product, image }) =>
     } catch (error) {
       const err = error as AxiosError
       const { message } = err.response?.data as {message: string}
-      console.log(message)
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: message,
+        footer: '<a href="">Why do I have this issue?</a>'
+      })
     }
   }
   const cancelButtonRef = useRef(null)
@@ -73,6 +78,39 @@ export const ImageForm: FC<ImageForm> = ({ toggle, setLeft, product, image }) =>
     const url = src.split('/').at(-1)?.split('.').at(-2)
         await axios.post(`${process.env.API_URL}/upload/delete`, {name: url, type: `products-${product?.type}`} )
   }
+
+  const uploadURL = async () => {
+
+    
+    const { value: url } = await Swal.fire({
+      input: 'url',
+      inputAutoTrim: true,
+      inputLabel: 'URL Image',
+      inputPlaceholder: 'Enter the URL',
+      inputAttributes: {
+        autocomplete: 'off',
+      },
+    })
+if (url) {
+  
+  try {
+    const { data } = await axios.post(`${process.env.API_URL}/upload/file-url`, {file: url, siteId: query[2], parentId: product?._id, type: `products-${product?.type}`})
+    setValue('data.image', [...getValues('data.image'), { uid: uuidv3(), src: data.url, alt: `description image of the ${product?.data.name}` }], { shouldValidate: true })
+    updateProductImage({ id: product?._id!, input: getValues('data.image'), type: product?.type!, uid: session?.user.sid! })
+  } catch (error) {
+    const err = error as AxiosError
+    const { message } = err.response?.data as { message: string }
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: message,
+      footer: '<a href="">Why do I have this issue?</a>'
+    })
+  }
+}
+
+
+  } 
   return (
     <div className="mt-5 md:col-span-2 md:mt-0">
       <form onSubmit={handleSubmit(onSubmit)} action="#" method="POST">
@@ -106,7 +144,7 @@ export const ImageForm: FC<ImageForm> = ({ toggle, setLeft, product, image }) =>
               }
 
               {/* <label className="label-form">Cover photo</label> */}
-              <div className="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 p-3">
+              <div className="flex flex-col justify-center rounded-md border-2 border-dashed border-gray-300 p-2">
                 
                 <div className="space-y-1 text-center">
                   <svg
@@ -136,6 +174,7 @@ export const ImageForm: FC<ImageForm> = ({ toggle, setLeft, product, image }) =>
                   </div>
                   <p className="text-xs text-gray-500">PNG, JPG, JPEG up to 5MB</p>
                 </div>
+                <button className="btn-primary py-1 text-center justify-center" type='button' onClick={() => uploadURL()}>url</button>
               </div>
 
 

@@ -1,10 +1,10 @@
 import { FC, useRef } from "react";
-import Image from "next/image";
 import { Page, Site } from "../../../interfaces";
 import { useClickAway, useLongPress, useSelections } from 'ahooks';
 import { useRouter } from "next/router";
 import { Card } from "./card";
 import Link from "next/link";
+import { Image } from "../utils";
 
 interface CardSite {
   site?: Site
@@ -32,11 +32,9 @@ export const CardSite: FC<CardSite> = ({ site, checked, partiallySelected,  togg
       />
       {/* <Card site={site!} ref={ref}/> */}
       <div ref={ref} className="">
-        <img
-          className="h-[12rem] w-full object-cover"
-          src={site?.data.seo.image.src!}
-          alt={site?.data.seo.image.alt!}
-        />
+        <Image img={site?.data.seo.image!} className="h-[12rem] w-full object-cover"/>
+
+       
         <Link href={`/dashboard/sites/${site?._id}`}>
           <a  className="flex items-center h-[3rem] mx-2 cursor-pointer"> 
             <h2 className=" text-sm tracking-wide truncate">{site?.data.seo.title}</h2>

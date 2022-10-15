@@ -1,10 +1,13 @@
 import { RadioGroup } from '@headlessui/react';
+import { DocumentTextIcon, TrashIcon } from '@heroicons/react/24/outline';
 import { useQueryClient } from '@tanstack/react-query';
+import { useToggle } from 'ahooks';
 import { useRouter } from 'next/router';
 import { createRef, FC, useRef, useState } from 'react';
 import { useForm, Resolver, SubmitHandler } from 'react-hook-form';
 
 import { classNames, getQuery } from '../../../../utils/function';
+import { SlideOvers0 } from '../../tailwindComponents';
 const product = {
   name: 'Basic Tee 6-Pack',
   price: '$192',
@@ -71,10 +74,12 @@ interface FormValues {
   inStock: number;
 };
 interface MoreFormFood {
-  setOpenMCD: React.Dispatch<React.SetStateAction<boolean>>
+  toggleMF: () => void
+  setLeftMF: () => void
 
 }
-export const MoreFormFood: FC<MoreFormFood> = ({ setOpenMCD }) => {
+export const MoreFormFood: FC<MoreFormFood> = ({ toggleMF, setLeftMF }) => {
+	const [state, { toggle, setLeft, setRight }] = useToggle();
 
   const { asPath, replace } = useRouter()
   const query = getQuery(asPath)
@@ -121,110 +126,51 @@ export const MoreFormFood: FC<MoreFormFood> = ({ setOpenMCD }) => {
   const [selectedColor, setSelectedColor] = useState(product.colors[0])
   const [selectedSize, setSelectedSize] = useState(product.sizes[2])
   return (
-    <div className="mt-5 md:col-span-2 md:mt-0">
+    <div className=" ">
+      <SlideOvers0  state={state} toggle={toggle} setLeft={setLeft} />
       <form onSubmit={handleSubmit(onSubmit)} action="#" method="POST">
         <div className="overflow-hidden shadow sm:rounded-md">
-          <div className="bg-white px-4 py-5 sm:p-6">
-            <div className="my-3 text-center sm:mt-0 sm:text-left">
-              <h3 className="text-lg font-medium leading-6 text-gray-900">
+          <div className="px-5 pb-5">
+            <div className="grid grid-cols-6 gap-6">
+              {/* <h3 className="text-lg font-medium leading-6 text-gray-900">
                 More Options
-              </h3>
-              <div>
-                <h3 className="text-sm font-medium text-gray-900">Color</h3>
-
-                <RadioGroup value={selectedColor} onChange={setSelectedColor} className="mt-4">
-                  <RadioGroup.Label className="sr-only"> Choose a color </RadioGroup.Label>
-                  <div className="flex items-center space-x-3">
-                    {product.colors.map((color) => (
-                      <RadioGroup.Option
-                        key={color.name}
-                        value={color}
-                        className={({ active, checked }) =>
-                          classNames(
-                            color.selectedClass,
-                            active && checked ? 'ring ring-offset-1' : '',
-                            !active && checked ? 'ring-2' : '',
-                            '-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none'
-                          )
-                        }
-                      >
-                        <RadioGroup.Label as="span" className="sr-only">
-                          {' '}
-                          {color.name}{' '}
-                        </RadioGroup.Label>
-                        <span
-                          aria-hidden="true"
-                          className={classNames(
-                            color.class,
-                            'h-8 w-8 border border-black border-opacity-10 rounded-full'
-                          )}
-                        />
-                      </RadioGroup.Option>
-                    ))}
-                  </div>
-                </RadioGroup>
-              </div>
-
-              <div className="mt-10">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-sm font-medium text-gray-900">Size</h3>
-                  <a href="#" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                    Size guide
-                  </a>
+              </h3> */}
+              <div className="col-span-6">
+                <label className="label-form flex">
+                  Prescription 
+                  <DocumentTextIcon className="h-5 w-5 ml-2" aria-hidden="true" 
+                  onClick={toggle}
+                  />
+                </label>
+                <button className="btn-default " onClick={() => console.log('click')}>
+                </button>
+                <div className="mt-1">
+                  <textarea
+                    rows={5}
+                    className="input-form"
+                    {...register("description", {
+                      required: "Description required!!"
+                    })}
+                  />
+                  {/* {errors.description && <p className='text-red-600 text-sm'>This is required!!</p>} */}
                 </div>
-
-                <RadioGroup value={selectedSize} onChange={setSelectedSize} className="mt-4">
-                  <RadioGroup.Label className="sr-only"> Choose a size </RadioGroup.Label>
-                  <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
-                    {product.sizes.map((size) => (
-                      <RadioGroup.Option
-                        key={size.name}
-                        value={size}
-                        disabled={!size.inStock}
-                        className={({ active }) =>
-                          classNames(
-                            size.inStock
-                              ? 'bg-white shadow-sm text-gray-900 cursor-pointer'
-                              : 'bg-gray-50 text-gray-200 cursor-not-allowed',
-                            active ? 'ring-2 ring-indigo-500' : '',
-                            'group relative border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6'
-                          )
-                        }
-                      >
-                        {({ active, checked }) => (
-                          <>
-                            <RadioGroup.Label as="span">{size.name}</RadioGroup.Label>
-                            {size.inStock ? (
-                              <span
-                                className={classNames(
-                                  active ? 'border' : 'border-2',
-                                  checked ? 'border-indigo-500' : 'border-transparent',
-                                  'pointer-events-none absolute -inset-px rounded-md'
-                                )}
-                                aria-hidden="true"
-                              />
-                            ) : (
-                              <span
-                                aria-hidden="true"
-                                className="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200"
-                              >
-                                <svg
-                                  className="absolute inset-0 h-full w-full stroke-2 text-gray-200"
-                                  viewBox="0 0 100 100"
-                                  preserveAspectRatio="none"
-                                  stroke="currentColor"
-                                >
-                                  <line x1={0} y1={100} x2={100} y2={0} vectorEffect="non-scaling-stroke" />
-                                </svg>
-                              </span>
-                            )}
-                          </>
-                        )}
-                      </RadioGroup.Option>
-                    ))}
-                  </div>
-                </RadioGroup>
               </div>
+              <div className="col-span-6">
+                <label className="label-form">
+                Preparation
+                </label>
+                <div className="mt-1">
+                  <textarea
+                    rows={5}
+                    className="input-form"
+                    {...register("description", {
+                      required: "Description required!!"
+                    })}
+                  />
+                  {/* {errors.description && <p className='text-red-600 text-sm'>This is required!!</p>} */}
+                </div>
+              </div>
+             
             </div>
             
           </div>
@@ -239,7 +185,7 @@ export const MoreFormFood: FC<MoreFormFood> = ({ setOpenMCD }) => {
           </button>
           <button
             className="btn-default"
-            onClick={() => setOpenMCD(false)}
+            onClick={setLeftMF}
             ref={cancelButtonRef}>
             Cancel
           </button>

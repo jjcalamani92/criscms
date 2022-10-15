@@ -80,8 +80,6 @@ export const ImageForm: FC<ImageForm> = ({ toggle, setLeft, product, image }) =>
   }
 
   const uploadURL = async () => {
-
-    
     const { value: url } = await Swal.fire({
       input: 'url',
       inputAutoTrim: true,

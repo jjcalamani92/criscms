@@ -86,35 +86,13 @@ export const ImageFormFood: FC<ImageFormFood> = ({ toggle, setLeft, meal, image 
   const uploadURL = async () => {
     const { value: url } = await Swal.fire({
       input: 'url',
-      inputAutoTrim: true,
+      // inputAutoTrim: true,
       inputLabel: 'URL Image',
       inputPlaceholder: 'Enter the URL',
       
       inputAttributes: {
         autocomplete: 'off',
       },
-      inputOptions: {
-        
-      }
-      // inputValidator: (value) => {
-      //   return new Promise((resolve) => {
-      //     if (!value ) {
-      //       resolve('You cannot copy the urls of images from this site, we suggest you download them. Thank you!! :)')
-      //     } else {
-      //       resolve
-      //     }
-      //   })
-      // }
-      // inputValidator: (value) => await {
-      //   if (value) {
-      //     return 'You need to choose something!'
-      //   }
-      // }
-      // inputValidator: (value) => {
-      //   if (value) {
-      //     return 'You need to write something!'
-      //   }
-      // }
     })
     if (url) {
       

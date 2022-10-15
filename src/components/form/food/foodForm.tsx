@@ -87,24 +87,6 @@ export const FoodForm: FC<FoodForm> = ({ toggle, setLeft, uid, type, meal }) => 
                 />
                 {errors.name && <p className='text-red-600 text-sm'>This is required!!</p>}
               </div>
-              {/* <div className="col-span-6 sm:col-span-3">
-                <label htmlFor="country" className="label-form">
-                  Mark
-                </label>
-                <select
-                  className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 text-sm"
-                  {...register("mark", {
-                    required: "Mark required!!"
-                  })}
-                >
-                  <option value="none" >None</option>
-                  <option value="cris" >Cris</option>
-                  <option value="terra" >Terra</option>
-                </select>
-                {errors.mark && <p className='text-red-600 text-sm'>This is required!!</p>}
-              </div> */}
-              
-
               <div className="col-span-6">
                 <label className="label-form">
                   Description

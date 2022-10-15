@@ -1,7 +1,7 @@
 import { FC, useState } from 'react'
 import { Tab } from '@headlessui/react'
 import { classNames } from '../../../utils/function'
-import { FoodForm, ImageForm, ImageFormFood, PageForm, ProductForm, SiteForm } from '../form'
+import { FoodForm, ImageForm, ImageFormFood, MoreFormFood, PageForm, ProductForm, SiteForm } from '../form'
 import { Food, Page, Product, Site } from '../../../interfaces'
 interface TabFormFood {
   toggle: () => void
@@ -86,7 +86,7 @@ export const TabFormFood:FC<TabFormFood> = ({toggle, setLeft, meal, type, uid}) 
               'rounded-xl bg-white'
             )}
           >
-            <h1>2</h1>
+            <MoreFormFood toggleMF={toggle} setLeftMF={setLeft} />
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>

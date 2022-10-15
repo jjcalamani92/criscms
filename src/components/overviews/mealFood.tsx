@@ -6,38 +6,16 @@ import { SwiperNavigation } from '../swiper'
 import { MarkdownComponent } from '../utils';
 import { Food, Product } from '../../../interfaces';
 
-const code0 = `### Características que aumentan la robustez de este motor:
-- El protector de escape y la cubierta del ventilador se han reforzado en los puntos de fijación
-- Arranque  construido en acero.
-- La varilla del regulador está provista de un casquillo.
-- La pipa de la bujía es de resina.
-### Otras características del motor:
-- Un simple pero novedoso sistema de lubricación, con dos cámaras de respiración, garantiza una correcta lubricación en cualquier posición.
-- Un carburador de membrana evita cualquier pérdida de combustible cuando se apoya la máquina de lado.
-- Soporte especial de montaje para pisón.
-`
-const code1 = `### Especificaciones técnicas
-- **Tipo de motor**: 
-  - Cilindro individual 
-  - 4 tiempos Motor gasolina OHV
-  - Eje horizontal
-- **Tipo de camisa de cilindro**: Camisa de acero
-- **Calibre x carrera**: 56 x 40 mm
-- **Cilindrada**: 98 cm³
-- **Relación de compresión**: 8.5 : 1
-- **Potencia neta**: 2.1 kW ( 2.8 HP ) / 3600 rpm
-- **Potencia nominal**: 1.7 kW ( 2.3 HP ) / 3600 rpm
-- **Par maximo neto**: 5.7 Nm ( 0.58 kgfm ) / 3600 rpm
-- **Sistema de Encendido**: Transistorizado
-- **Motor de arranque**: Tirador de arranque
-- **Consumo de combustible a potencia nominal**: 0.88 L/H - 3600 rpm
-- **Capacidad de aceite**: 0.3 Litro
-- **Dimensiones (L X A X A)**: 254 x 316 x 290 mm
-- **Peso en seco**: 
-  - Tipo de pisón 50 kg : 10.7 kg
-  - Tipo de pisón 60 kg : 10.8 kg
-`
+const code0 = `### El Combo Paceñicimo contiene...:
+- Un sándwich a elegir*
+- Patatas fritas o Deluxe o Ensalada de la Huerta.
+- Una botella de 50 cl de agua Nestlé Aquarel, un refresco de 40 cl (Coca-Cola, Coca-Cola Zero, Coca-Cola Light, Sprite, Lipton Ice Tea, Trina Limón), una cerveza Mahou de 30cl o una cerveza sin alcohol Mahou de 30cl
+- Por un suplemento añade las patatas Top Fries a tu menú.
 
+Menú también disponible en tamaño grande, con bebida y patatas grandes. Por solo 70 céntimos más.
+
+*El sándwich puede variar dependiendo de la oferta de cada restaurante
+`
 interface MealFood {
   meal: Food
 }
@@ -75,7 +53,7 @@ export const MealFood: FC<MealFood> = ({ meal }) => {
 
                 {/* Details */}
                 <MarkdownComponent code={code0} />
-                <MarkdownComponent code={code1} />
+                {/* <MarkdownComponent code={code1} /> */}
 
               </div>
             </div>
